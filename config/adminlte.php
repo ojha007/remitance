@@ -231,21 +231,37 @@ return [
         ],
         [
             'text' => 'Dashboard',
-            'url' => 'admin.dashboard',
+            'url' => 'dashboard',
             'icon' => 'fas fa-fw fa-tachometer-alt',
 //            'active' => true
         ],
         [
             'text' => 'Send Money',
-            'url' => 'admin.send-money',
+            'url' => 'send-money',
             'icon' => 'fas fa-fw fa-money-bill-alt',
 //            'can' => 'send-money-view'
         ],
         [
             'text' => 'Rates',
-            'url' => 'admin.rates',
+            'url' => 'rates',
             'icon' => 'fas fa-fw fa-dollar-sign',
 //            'can' => 'send-money-view'
+        ],
+        [
+            'text' => 'Manage Senders',
+            'icon' => 'fas fa-fw fa-user-plus',
+            'submenu' => [
+                [
+                    'text' => 'All Senders',
+                    'url' => 'senders',
+//                    'can' => 'user-view'
+                ],
+                [
+                    'text' => 'Add Senders',
+                    'url' => 'senders/create',
+//                    'can' => 'role-view'
+                ],
+            ],
         ],
         ['header' => 'PREFERENCES'],
 
@@ -256,12 +272,12 @@ return [
             'submenu' => [
                 [
                     'text' => 'Users',
-                    'url' => 'admin.users',
+                    'url' => 'users',
 //                    'can' => 'user-view'
                 ],
                 [
                     'text' => 'Roles',
-                    'url' => 'admin.roles',
+                    'url' => 'roles',
 //                    'can' => 'role-view'
                 ],
             ],
@@ -269,7 +285,7 @@ return [
         ['header' => 'SETTINGS'],
         [
             'text' => 'profile',
-            'url' => 'admin.settings',
+            'url' => 'settings',
             'icon' => 'fas fa-fw fa-user',
         ],
     ],

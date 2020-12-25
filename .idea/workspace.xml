@@ -4,16 +4,21 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="523ee367-c98f-4262-8fc6-638d4e88bc7d" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.env.example" beforeDir="false" afterPath="$PROJECT_DIR$/.env.example" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
+    <list default="true" id="523ee367-c98f-4262-8fc6-638d4e88bc7d" name="Default Changelist" comment="fixes">
+      <change afterPath="$PROJECT_DIR$/Modules/Backend/Entities/Sender.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Modules/Backend/Http/Controllers/SenderController.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Modules/Backend/Repositories/SenderRepository.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Modules/Backend/Resources/views/senders/create.blade.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Modules/Backend/Resources/views/senders/edit.blade.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Modules/Backend/Resources/views/senders/index.blade.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Modules/Backend/Resources/views/senders/partials/form.blade.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Modules/Backend/Resources/views/senders/show.blade.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Modules/Backend/Routes/subRoutes/senders.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/dataSources/da5bd556-7e7e-4d32-a8fb-df0bcdd1bff9.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/da5bd556-7e7e-4d32-a8fb-df0bcdd1bff9.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Modules/Backend/Http/Controllers/BackendController.php" beforeDir="false" afterPath="$PROJECT_DIR$/Modules/Backend/Http/Controllers/BackendController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Modules/Backend/Http/Controllers/RateController.php" beforeDir="false" afterPath="$PROJECT_DIR$/Modules/Backend/Http/Controllers/RateController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Modules/Backend/Routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/Modules/Backend/Routes/web.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/composer.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/config/adminlte.php" beforeDir="false" afterPath="$PROJECT_DIR$/config/adminlte.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2014_10_12_000000_create_users_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2014_10_12_000000_create_users_table.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -156,7 +161,7 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/Modules/Backend/Routes/subRoutes" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
@@ -169,8 +174,11 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\laragon\www\remitance\app" />
+      <recent name="C:\laragon\www\remitance\Modules\Backend\Routes\subRoutes" />
+      <recent name="C:\laragon\www\remitance\Modules\Backend\Repositories" />
       <recent name="C:\laragon\www\remitance\Modules\Backend\Http\Controllers" />
+      <recent name="C:\laragon\www\remitance\Modules\Backend\Entities" />
+      <recent name="C:\laragon\www\remitance\app" />
     </key>
   </component>
   <component name="RunManager">
@@ -190,11 +198,34 @@
       <workItem from="1608659223608" duration="1959000" />
       <workItem from="1608726262128" duration="8890000" />
       <workItem from="1608817826726" duration="12110000" />
-      <workItem from="1608877991179" duration="3092000" />
+      <workItem from="1608877991179" duration="6206000" />
     </task>
+    <task id="LOCAL-00001" summary="fixes">
+      <created>1608882814791</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1608882814791</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="fixes" />
+    <option name="LAST_COMMIT_MESSAGE" value="fixes" />
   </component>
 </project>
