@@ -33,7 +33,7 @@ class BackendServiceProvider extends ServiceProvider
         $this->registerTranslations();
         $this->registerConfig();
         $this->registerViews();
-        $this->registerAppMenus();
+//        $this->registerAppMenus();
         $this->registerSystemConfiguration();
         $this->loadMigrationsFrom(module_path($this->moduleName, 'Database/Migrations'));
     }

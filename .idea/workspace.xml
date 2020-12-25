@@ -128,6 +128,8 @@
       <path value="$PROJECT_DIR$/vendor/laravel/ui" />
       <path value="$PROJECT_DIR$/vendor/yajra/laravel-datatables-oracle" />
       <path value="$PROJECT_DIR$/vendor/laravelcollective/html" />
+      <path value="$PROJECT_DIR$/vendor/spatie/laravel-permission" />
+      <path value="$PROJECT_DIR$/vendor/spatie/laravel-activitylog" />
     </include_path>
   </component>
   <component name="ProjectId" id="1m1RgaLkjxGB6oNeKDNPUY20Q1y" />
@@ -172,7 +174,7 @@
       <updated>1608659222515</updated>
       <workItem from="1608659223608" duration="1959000" />
       <workItem from="1608726262128" duration="8890000" />
-      <workItem from="1608817826726" duration="9580000" />
+      <workItem from="1608817826726" duration="12110000" />
     </task>
     <servers />
   </component>
@@ -228,9 +230,9 @@
       <screen x="0" y="0" width="1536" height="834" />
     </state>
     <state x="589" y="172" key="refactoring.ChangeSignatureDialog/0.0.1536.834@0.0.1536.834" timestamp="1608829219132" />
-    <state x="431" y="155" width="672" height="678" key="search.everywhere.popup" timestamp="1608831958637">
+    <state x="431" y="155" width="672" height="678" key="search.everywhere.popup" timestamp="1608834652604">
       <screen x="0" y="0" width="1536" height="834" />
     </state>
-    <state x="431" y="155" width="672" height="678" key="search.everywhere.popup/0.0.1536.834@0.0.1536.834" timestamp="1608831958637" />
+    <state x="431" y="155" width="672" height="678" key="search.everywhere.popup/0.0.1536.834@0.0.1536.834" timestamp="1608834652604" />
   </component>
 </project>

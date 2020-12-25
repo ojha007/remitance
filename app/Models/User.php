@@ -2,14 +2,15 @@
 
 namespace App\Models;
 
-use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Spatie\Activitylog\Traits\LogsActivity;
+use Spatie\Permission\Traits\HasRoles;
 
 class User extends Authenticatable
 {
-    use HasFactory, Notifiable;
+    use HasFactory, HasRoles, LogsActivity, Notifiable;
 
     /**
      * The attributes that are mass assignable.
@@ -20,6 +21,7 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'is_super'
     ];
 
     /**
@@ -40,4 +42,88 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function isSuper()
+    {
+        return $this->getAttribute('is_super') == 1;
+    }
+
+    public function assignRole($roles, string $guard = null)
+    {
+        $roles = is_string($roles) ? [$roles] : $roles;
+        $guard = $guard ?: $this->getDefaultGuardName();
+        $roles = collect($roles)
+            ->flatten()
+            ->map(function ($role) use ($guard) {
+                $role = Role::findByName($role, $guard);
+                return $this->getStoredRole($role);
+            })
+            ->each(function ($role) {
+                $this->ensureModelSharesGuard($role);
+            })
+            ->all();
+
+        $this->roles()->saveMany($roles);
+
+        $this->forgetCachedPermissions();
+
+        return $this;
+    }
+
+    protected function getStoredRole($role): Role
+    {
+        $roleClass = $this->getRoleClass();
+
+        if (is_numeric($role)) {
+            return $roleClass->findById($role, $this->getDefaultGuardName());
+        }
+
+        if (is_string($role)) {
+            return $roleClass->findByName($role, $this->getDefaultGuardName());
+        }
+
+        if (is_a($role, get_class($roleClass))) {
+            return $role;
+        }
+
+        return $role;
+    }
+
+    public function removeRole($role)
+    {
+        if (is_a($role, get_class($this->getRoleClass()))) {
+            $this->roles()->detach($this->getStoredRole($role));
+        } else {
+            $this->roles()->detach($this->getStoredRole($role));
+        }
+        $this->load('roles');
+    }
+
+    public function hasAnyPermission(...$permissions): bool
+    {
+        if (is_array($permissions[0])) {
+            $permissions = $permissions[0];
+        }
+        foreach ($permissions as $permission) {
+            if ($this->can($permission)) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+    public function adminlte_image()
+    {
+        return 'https://picsum.photos/300/300';
+    }
+
+    public function adminlte_desc()
+    {
+        return 'That\'s a nice guy';
+    }
+
+    public function adminlte_profile_url()
+    {
+        return 'profile/username';
+    }
 }

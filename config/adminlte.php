@@ -67,7 +67,7 @@ return [
     'usermenu_enabled' => true,
     'usermenu_header' => true,
     'usermenu_header_class' => 'bg-primary',
-    'usermenu_image' => false,
+    'usermenu_image' => true,
     'usermenu_desc' => false,
     'usermenu_profile_url' => false,
 
@@ -166,11 +166,11 @@ return [
     |
     */
 
-    'right_sidebar' => false,
+    'right_sidebar' => true,
     'right_sidebar_icon' => 'fas fa-cogs',
     'right_sidebar_theme' => 'dark',
     'right_sidebar_slide' => true,
-    'right_sidebar_push' => true,
+    'right_sidebar_push' => false,
     'right_sidebar_scrollbar_theme' => 'os-theme-light',
     'right_sidebar_scrollbar_auto_hide' => 'l',
 
@@ -187,13 +187,13 @@ return [
     */
 
     'use_route_url' => false,
-    'dashboard_url' => 'home',
+    'dashboard_url' => 'backend.dashboard',
     'logout_url' => 'logout',
     'login_url' => 'login',
     'register_url' => 'register',
-    'password_reset_url' => 'password/reset',
-    'password_email_url' => 'password/email',
-    'profile_url' => false,
+    'password_reset_url' => 'backend/password/reset',
+    'password_email_url' => 'backend/password/email',
+    'profile_url' => true,
 
     /*
     |--------------------------------------------------------------------------
@@ -231,7 +231,7 @@ return [
         ],
         [
             'text' => 'Dashboard',
-            'url' => 'admin/dashboard',
+            'url' => 'backend/dashboard',
             'icon' => 'fas fa-fw fa-tachometer-alt',
 //            'active' => true
         ],
@@ -269,7 +269,7 @@ return [
         ['header' => 'SETTINGS'],
         [
             'text' => 'profile',
-            'url' => 'admin/settings',
+            'url' => 'backend/settings',
             'icon' => 'fas fa-fw fa-user',
         ],
     ],

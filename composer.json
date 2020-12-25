@@ -18,6 +18,8 @@
         "laravel/ui": "^3.1",
         "laravelcollective/html": "^6.2",
         "nwidart/laravel-modules": "^8.2",
+        "spatie/laravel-activitylog": "^3.16",
+        "spatie/laravel-permission": "^3.18",
         "yajra/laravel-datatables-oracle": "^9.15"
     },
     "require-dev": {
