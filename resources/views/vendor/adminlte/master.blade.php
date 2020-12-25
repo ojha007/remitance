@@ -105,10 +105,22 @@
 {{-- Custom Scripts --}}
 <script>
     $(document).ready(function () {
-        $('.datePicker').datepicker({
+        $('.datepicker').datepicker({
             format: 'yyyy-mm-dd',
-            autoclose: true
+            todayHighlight: true,
+            orientation: "bottom auto",
+            autoclose: true,
         });
+        $('input').iCheck({
+            checkboxClass: 'icheckbox_square-blue',
+            radioClass: 'iradio_square-blue',
+            increaseArea: '20%' /* optional */
+        });
+        $('.modal').on('shown.bs.modal', function () {
+            $(this).find('[autofocus]').focus();
+        });
+
+        $('.select2').select2({dropdownAutoWidth: true});
     })
 </script>
 @yield('adminlte_js')

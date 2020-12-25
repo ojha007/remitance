@@ -233,7 +233,6 @@ return [
             'text' => 'Dashboard',
             'url' => 'dashboard',
             'icon' => 'fas fa-fw fa-tachometer-alt',
-//            'active' => true
         ],
         [
             'text' => 'Send Money',
@@ -245,7 +244,7 @@ return [
             'text' => 'Rates',
             'url' => 'rates',
             'icon' => 'fas fa-fw fa-dollar-sign',
-//            'can' => 'send-money-view'
+            'can' => 'rate-view'
         ],
         [
             'text' => 'Manage Senders',
@@ -254,12 +253,12 @@ return [
                 [
                     'text' => 'All Senders',
                     'url' => 'senders',
-//                    'can' => 'user-view'
+                    'can' => 'sender-view'
                 ],
                 [
                     'text' => 'Add Senders',
                     'url' => 'senders/create',
-//                    'can' => 'role-view'
+                    'can' => 'sender-create'
                 ],
             ],
         ],
@@ -372,6 +371,21 @@ return [
                     'type' => 'css',
                     'asset' => true,
                     'location' => '//cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker3.min.css',
+                ],
+            ],
+        ],
+        'Icheck' => [
+            'active' => true,
+            'files' => [
+                [
+                    'type' => 'js',
+                    'asset' => true,
+                    'location' => '//cdnjs.cloudflare.com/ajax/libs/iCheck/1.0.3/icheck.min.js',
+                ],
+                [
+                    'type' => 'css',
+                    'asset' => true,
+                    'location' => '//cdnjs.cloudflare.com/ajax/libs/iCheck/1.0.3/skins/all.min.css',
                 ],
             ],
         ],
