@@ -14,6 +14,7 @@
           <node kind="schema">
             <name qname="@" />
             <name qname="remitance" />
+            <name qname="r" />
           </node>
         </introspection-scope>
       </schema-mapping>

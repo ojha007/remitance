@@ -187,12 +187,12 @@ return [
     */
 
     'use_route_url' => false,
-    'dashboard_url' => 'backend.dashboard',
+    'dashboard_url' => 'admin.dashboard',
     'logout_url' => 'logout',
     'login_url' => 'login',
     'register_url' => 'register',
-    'password_reset_url' => 'backend/password/reset',
-    'password_email_url' => 'backend/password/email',
+    'password_reset_url' => 'admin/password/reset',
+    'password_email_url' => 'admin/password/email',
     'profile_url' => true,
 
     /*
@@ -231,19 +231,19 @@ return [
         ],
         [
             'text' => 'Dashboard',
-            'url' => 'backend/dashboard',
+            'url' => 'admin.dashboard',
             'icon' => 'fas fa-fw fa-tachometer-alt',
 //            'active' => true
         ],
         [
             'text' => 'Send Money',
-            'url' => 'backend/send-money',
+            'url' => 'admin.send-money',
             'icon' => 'fas fa-fw fa-money-bill-alt',
 //            'can' => 'send-money-view'
         ],
         [
             'text' => 'Rates',
-            'url' => 'backend/rates',
+            'url' => 'admin.rates',
             'icon' => 'fas fa-fw fa-dollar-sign',
 //            'can' => 'send-money-view'
         ],
@@ -256,12 +256,12 @@ return [
             'submenu' => [
                 [
                     'text' => 'Users',
-                    'url' => '/backend/users',
+                    'url' => 'admin.users',
 //                    'can' => 'user-view'
                 ],
                 [
                     'text' => 'Roles',
-                    'url' => '/backend/roles',
+                    'url' => 'admin.roles',
 //                    'can' => 'role-view'
                 ],
             ],
@@ -269,7 +269,7 @@ return [
         ['header' => 'SETTINGS'],
         [
             'text' => 'profile',
-            'url' => 'backend/settings',
+            'url' => 'admin.settings',
             'icon' => 'fas fa-fw fa-user',
         ],
     ],

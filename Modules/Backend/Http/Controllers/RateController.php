@@ -21,7 +21,7 @@ class RateController extends Controller
     protected $viewPath = 'backend::rates.';
 
     protected $modal = 'modal-rate';
-    protected $baseRoute = 'backend.rates.';
+    protected $baseRoute = 'admin.rates.';
     /**
      * @var Rate
      */
