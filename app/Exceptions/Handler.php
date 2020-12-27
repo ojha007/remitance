@@ -2,6 +2,7 @@
 
 namespace App\Exceptions;
 
+use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Throwable;
 
@@ -35,6 +36,20 @@ class Handler extends ExceptionHandler
     {
         $this->reportable(function (Throwable $e) {
             //
+
         });
     }
+
+    public function render($request, Throwable $e)
+    {
+
+//        dd($e);
+        if ($e instanceof AuthorizationException) {
+            $request->session()->flash('unauthorized', 'Access denied.');
+            return back();
+        }
+        return parent::render($request, $e);
+    }
+
 }
+

@@ -21,6 +21,7 @@ class RateController extends Controller
     protected $viewPath = 'backend::rates.';
 
     protected $modal = 'modal-rate';
+
     protected $baseRoute = 'admin.rates.';
     /**
      * @var Rate
@@ -36,6 +37,12 @@ class RateController extends Controller
     {
         $this->model = $rate;
         $this->repository = new RateRepository($rate);
+//        $this->middleware('auth:admin');
+        $this->middleware('permission:admin-permission');
+        $this->middleware(['permission:rate-view|rate-create|rate-edit|rate-delete'], ['only' => ['index', 'show']]);
+        $this->middleware(['permission:rate-create'], ['only' => ['create', 'store', 'show']]);
+        $this->middleware(['permission:rate-edit'], ['only' => ['edit', 'update', 'show']]);
+        $this->middleware(['permission:rate-delete'], ['only' => ['destroy']]);
     }
 
     /**

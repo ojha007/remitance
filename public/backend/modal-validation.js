@@ -3,6 +3,8 @@ $("document").ready(function () {
     function resetModalFormErrors() {
         let form_group = $(".form-group");
         form_group.removeClass("has-error");
+        form_group.find('input').removeClass('is-invalid');
+        form_group.find('select').removeClass('is-invalid');
         form_group.find(".help-block").remove();
     }
 
@@ -95,6 +97,7 @@ $("document").ready(function () {
                     var fieldElement = $('[name="' + field + '"]', form);
                     if (fieldElement.length > 0) {
                         var formGroup = fieldElement.closest('.form-group');
+                        fieldElement.addClass('is-invalid')
                         if (fieldElement.attr('type') === 'hidden') {
                             fieldElement.parent().append('<div class="col-md-12 col-md-offset-2">' +
                                 '<p class="help-block">' + message + '</p>' +

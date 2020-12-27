@@ -18,7 +18,8 @@
                     <i class="fas fa-times"></i>
                     Close
                 </button>
-                <button  class="btn btn-primary btn-flat float-right" type="submit">
+                <button  class="btn btn-primary btn-flat float-right"
+                         type="submit">
                     <i class="fas fa-save"></i>
                     {{$button ?? ''}}
                 </button>

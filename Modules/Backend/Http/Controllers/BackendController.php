@@ -14,7 +14,7 @@ class BackendController extends Controller
      */
     public function index()
     {
-        dd('gg');
+//        dd('gg');
         return view('backend::index');
     }
 

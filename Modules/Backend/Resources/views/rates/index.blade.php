@@ -3,17 +3,22 @@
 @section('title', 'Rates')
 
 @section('content_header')
-    <h1>Rates</h1>
+    <h1>
+        Rates
+    </h1>
 @stop
 @section('content')
     @php($button ='Save')
     <div class="card">
-        <div class="card-header">
-            <button data-toggle="modal" data-target="#{{$modal}}"
-                    class="btn btn-primary btn-flat float-right bootstrap-modal-form-open">
-                <i class="fas fa-plus"></i> Add Rates
-            </button>
-        </div>
+        @can('rate-create')
+            <div class="card-header">
+                <button data-toggle="modal" data-target="#{{$modal}}"
+                        class="btn btn-primary btn-flat float-right bootstrap-modal-form-open">
+                    <i class="fas fa-plus"></i>
+                    Add Rates
+                </button>
+            </div>
+        @endcan
         <div class="card-body">
             <table class="table dataTable table-bordered" id="dataTables">
                 <thead>
