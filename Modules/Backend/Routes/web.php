@@ -1,7 +1,7 @@
 <?php
 
 Route::group([
-    'domain' => env('ADMIN_DOMAIN'),
+    'domain' => config('app.admin_url'),
     'as' => 'admin.',
     'middleware' => 'auth',
     'routePrefix' => 'admin.'], function () {

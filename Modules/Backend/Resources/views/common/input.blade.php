@@ -1,4 +1,4 @@
-<div class="form-group row">
+<div class="form-group {{$divClass ?? '' }}  row">
     <label for="{{isset($id) ? $id : strtolower($name)}}"
            class="col-sm-{{isset($classPartition) ? $classPartition : 2 }}
                col-form-label
@@ -10,7 +10,8 @@
             <span style="color: #ea1a1a">*</span>
         @endisset
     </label>
-    <div class="col-sm-{{isset($classPartition) ? 12 - $classPartition : 10}} ">
+    <div class="col-sm-{{isset($classPartition) ? 12 - $classPartition : 10}}
+                    {{ $errors->has($name) ? ' is-invalid': '' }}">
         @if(isset($type) && $type==='checkbox')
             <input type="hidden" name="{{$name}}" value="0">
             <input name="{{$name}}" value="1"
@@ -18,8 +19,10 @@
                    type="checkbox" data-toggle="toggle"
                    data-on="Active" data-off="Inactive">
         @elseif(isset($type) && $type=='select')
+
             {!! Form::select($name,$options , $default ?? null,
-                array('placeholder' => 'Select Role',
+                array(
+                "placeholder"=> isset($placeHolder) ? $placeHolder : 'Select '. ucwords(str_replace('_',' ',$name)),
                 'class' => 'form-control select2',
                 'style'=>'width:100%;')) !!}
         @else
@@ -27,14 +30,18 @@
                    @isset( $autofocus)
                    autofocus
                    @endisset
-                   class="form-control {{$class ?? ''}} {{ $errors->has($name) ? ' is-invalid': '' }}"
+                   class="rounded-0
+                   {{isset($type) && $type === 'file'  ? '' : 'form-control'}}
+                   {{$class ?? ''}}
+                   {{ $errors->has($name) ? ' is-invalid': '' }}"
                    name="{{$name}}"
                    @if(isset($type) && $type==='number')
                    step="any"
                    @endif
+                   value="{{old($name) }}"
                    autocomplete="false"
                    id="{{isset($id) ? $id : strtolower($name)}}"
-                   placeholder="{{isset($placeHolder) ? $placeHolder : 'Enter '. ucwords(str_replace('_',' ',$name))}}">
+                   placeholder="{{isset($placeHolder) ? $placeHolder : 'Enter ' . ucwords(str_replace('_',' ',$name))}}">
         @endif
     </div>
 </div>

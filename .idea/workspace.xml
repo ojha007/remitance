@@ -3,9 +3,49 @@
   <component name="AutoImportSettings">
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
+  <component name="BranchesTreeState">
+    <expand>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+    </expand>
+    <select />
+  </component>
   <component name="ChangeListManager">
     <list default="true" id="523ee367-c98f-4262-8fc6-638d4e88bc7d" name="Default Changelist" comment="fixes">
+      <change afterPath="$PROJECT_DIR$/Modules/Backend/Database/Seeders/CountriesSeeder.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Modules/Backend/Database/Seeders/IdentityTypeSeeder.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Modules/Backend/Database/Seeders/StatesSeeder.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Modules/Backend/Http/Requests/SenderRequest.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/da5bd556-7e7e-4d32-a8fb-df0bcdd1bff9.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/da5bd556-7e7e-4d32-a8fb-df0bcdd1bff9.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_12_25_2020_6_05_PM__Default_Changelist_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_12_25_2020_6_05_PM__Default_Changelist_.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Modules/Backend/Database/Migrations/2020_12_25_081637_create_senders_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/Modules/Backend/Database/Migrations/2020_12_25_081637_create_senders_table.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Modules/Backend/Database/Seeders/BackendDatabaseSeeder.php" beforeDir="false" afterPath="$PROJECT_DIR$/Modules/Backend/Database/Seeders/BackendDatabaseSeeder.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Modules/Backend/Http/Controllers/SenderController.php" beforeDir="false" afterPath="$PROJECT_DIR$/Modules/Backend/Http/Controllers/SenderController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Modules/Backend/Repositories/SenderRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/Modules/Backend/Repositories/SenderRepository.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Modules/Backend/Resources/views/common/input.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/Modules/Backend/Resources/views/common/input.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Modules/Backend/Resources/views/senders/create.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/Modules/Backend/Resources/views/senders/create.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Modules/Backend/Resources/views/senders/partials/form.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/Modules/Backend/Resources/views/senders/partials/form.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Modules/Backend/Routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/Modules/Backend/Routes/web.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Auth/LoginController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Auth/LoginController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/HomeController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/HomeController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Providers/RouteServiceProvider.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Providers/RouteServiceProvider.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/adminlte.php" beforeDir="false" afterPath="$PROJECT_DIR$/config/adminlte.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/app.php" beforeDir="false" afterPath="$PROJECT_DIR$/config/app.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/migrations/2020_12_24_181922_create_activity_log_table.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/backend/modal-validation.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/backend/modal-validation.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/vendor/adminlte/master.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/vendor/adminlte/master.blade.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -135,9 +175,11 @@
       <path value="$PROJECT_DIR$/vendor/laravelcollective/html" />
       <path value="$PROJECT_DIR$/vendor/spatie/laravel-permission" />
       <path value="$PROJECT_DIR$/vendor/spatie/laravel-activitylog" />
+      <path value="$PROJECT_DIR$/vendor/owen-it/laravel-auditing" />
     </include_path>
   </component>
   <component name="ProjectId" id="1m1RgaLkjxGB6oNeKDNPUY20Q1y" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -147,7 +189,7 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/Modules/Backend/Routes/subRoutes" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/Modules/Backend/Http/Requests" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
@@ -160,11 +202,14 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\laragon\www\remitance\Modules\Backend\Routes\subRoutes" />
+      <recent name="C:\laragon\www\remitance\Modules\Backend\Http\Requests" />
+      <recent name="C:\laragon\www\remitance\Modules\Backend\Database\Seeders" />
       <recent name="C:\laragon\www\remitance\Modules\Backend\Repositories" />
-      <recent name="C:\laragon\www\remitance\Modules\Backend\Http\Controllers" />
-      <recent name="C:\laragon\www\remitance\Modules\Backend\Entities" />
-      <recent name="C:\laragon\www\remitance\app" />
+      <recent name="C:\laragon\www\remitance\Modules\Backend\Resources\views" />
+      <recent name="C:\laragon\www\remitance\Modules\Backend\Routes\subRoutes" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\laragon\www\remitance\Modules\Backend\Resources\views" />
     </key>
   </component>
   <component name="RunManager">
@@ -184,7 +229,11 @@
       <workItem from="1608659223608" duration="1959000" />
       <workItem from="1608726262128" duration="8890000" />
       <workItem from="1608817826726" duration="12110000" />
-      <workItem from="1608877991179" duration="6553000" />
+      <workItem from="1608877991179" duration="6206000" />
+      <workItem from="1608984236701" duration="1690000" />
+      <workItem from="1609000139209" duration="1188000" />
+      <workItem from="1609001427041" duration="1551000" />
+      <workItem from="1609074436645" duration="10243000" />
     </task>
     <task id="LOCAL-00001" summary="fixes">
       <created>1608882814791</created>
@@ -194,11 +243,11 @@
       <updated>1608882814791</updated>
     </task>
     <task id="LOCAL-00002" summary="fixes">
-      <created>1608886506068</created>
+      <created>1608915168676</created>
       <option name="number" value="00002" />
       <option name="presentableId" value="LOCAL-00002" />
       <option name="project" value="LOCAL" />
-      <updated>1608886506068</updated>
+      <updated>1608915168676</updated>
     </task>
     <option name="localTasksCounter" value="3" />
     <servers />
@@ -216,9 +265,64 @@
         </entry>
       </map>
     </option>
+    <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="fixes" />
     <option name="LAST_COMMIT_MESSAGE" value="fixes" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="499" y="172" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1609075324510">
+      <screen x="0" y="0" width="1536" height="834" />
+    </state>
+    <state x="499" y="172" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.0.1536.834@0.0.1536.834" timestamp="1609075324510" />
+    <state width="1025" height="211" key="GridCell.Tab.0.bottom" timestamp="1609076712689">
+      <screen x="0" y="0" width="1536" height="834" />
+    </state>
+    <state width="1025" height="211" key="GridCell.Tab.0.bottom/0.0.1536.834@0.0.1536.834" timestamp="1609076712689" />
+    <state width="1025" height="211" key="GridCell.Tab.0.center" timestamp="1609076712688">
+      <screen x="0" y="0" width="1536" height="834" />
+    </state>
+    <state width="1025" height="211" key="GridCell.Tab.0.center/0.0.1536.834@0.0.1536.834" timestamp="1609076712688" />
+    <state width="1025" height="211" key="GridCell.Tab.0.left" timestamp="1609076712688">
+      <screen x="0" y="0" width="1536" height="834" />
+    </state>
+    <state width="1025" height="211" key="GridCell.Tab.0.left/0.0.1536.834@0.0.1536.834" timestamp="1609076712688" />
+    <state width="1025" height="211" key="GridCell.Tab.0.right" timestamp="1609076712688">
+      <screen x="0" y="0" width="1536" height="834" />
+    </state>
+    <state width="1025" height="211" key="GridCell.Tab.0.right/0.0.1536.834@0.0.1536.834" timestamp="1609076712688" />
+    <state x="147" y="66" key="MergeDialog" timestamp="1609076021761">
+      <screen x="0" y="0" width="1536" height="834" />
+    </state>
+    <state x="147" y="66" key="MergeDialog/0.0.1536.834@0.0.1536.834" timestamp="1609076021761" />
+    <state x="558" y="128" key="NewPhpClassDialog" timestamp="1608910473974">
+      <screen x="0" y="0" width="1536" height="834" />
+    </state>
+    <state x="558" y="128" key="NewPhpClassDialog/0.0.1536.834@0.0.1536.834" timestamp="1608910473974" />
+    <state x="361" y="146" key="Vcs.Push.Dialog.v2" timestamp="1608984294265">
+      <screen x="0" y="0" width="1536" height="834" />
+    </state>
+    <state x="361" y="146" key="Vcs.Push.Dialog.v2/0.0.1536.834@0.0.1536.834" timestamp="1608984294265" />
+    <state x="627" y="145" width="308" height="544" key="com.intellij.database.actions.DdlActions$DeleteProvider2$1" timestamp="1609076111386">
+      <screen x="0" y="0" width="1536" height="834" />
+    </state>
+    <state x="627" y="145" width="308" height="544" key="com.intellij.database.actions.DdlActions$DeleteProvider2$1/0.0.1536.834@0.0.1536.834" timestamp="1609076111386" />
+    <state x="585" y="327" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1609076003792">
+      <screen x="0" y="0" width="1536" height="834" />
+    </state>
+    <state x="585" y="327" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1536.834@0.0.1536.834" timestamp="1609076003792" />
+    <state x="473" y="141" width="589" height="552" key="find.popup" timestamp="1608904864942">
+      <screen x="0" y="0" width="1536" height="834" />
+    </state>
+    <state x="473" y="141" width="589" height="552" key="find.popup/0.0.1536.834@0.0.1536.834" timestamp="1608904864942" />
+    <state x="425" y="189" key="run.anything.popup" timestamp="1609088767278">
+      <screen x="0" y="0" width="1536" height="834" />
+    </state>
+    <state x="425" y="189" key="run.anything.popup/0.0.1536.834@0.0.1536.834" timestamp="1609088767278" />
+    <state x="431" y="155" width="672" height="678" key="search.everywhere.popup" timestamp="1609087542578">
+      <screen x="0" y="0" width="1536" height="834" />
+    </state>
+    <state x="431" y="155" width="672" height="678" key="search.everywhere.popup/0.0.1536.834@0.0.1536.834" timestamp="1609087542578" />
   </component>
 </project>

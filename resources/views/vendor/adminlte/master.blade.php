@@ -48,6 +48,11 @@
 
     {{-- Custom Stylesheets (post AdminLTE) --}}
     @yield('adminlte_css')
+    <style>
+        .card .card-header {
+            background-color: #f0f3f5;
+        }
+    </style>
 
     {{-- Favicon --}}
     @if(config('adminlte.use_ico_only'))
@@ -105,10 +110,10 @@
 {{-- Custom Scripts --}}
 <script>
     $(document).ready(function () {
-        $('.datepicker').datepicker({
+        $('.datePicker').datepicker({
             format: 'yyyy-mm-dd',
             todayHighlight: true,
-            orientation: "bottom auto",
+            orientation: "auto",
             autoclose: true,
         });
         $('input').iCheck({

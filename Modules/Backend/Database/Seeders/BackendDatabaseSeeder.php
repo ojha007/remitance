@@ -16,7 +16,8 @@ class BackendDatabaseSeeder extends Seeder
     {
         Model::unguard();
         $this->call([
-            ApplicationMenuSeederTableSeeder::class
+            CountriesSeeder::class,
+            StatesSeeder::class,
         ]);
     }
 }

@@ -120,8 +120,11 @@ $("document").ready(function () {
                     var currentForm = modal.find(".has-error");
                     if (currentForm.length > 0) {
                         let a = $(".bootstrap-modal-form").find(".has-error:first").find("input");
-                        a.focus();
-                        currentForm.animate({scrollTop: 0}, "slow");
+                        if (!a.hasClass('datePicker')) {
+                            a.focus();
+                            currentForm.animate({scrollTop: 0}, "slow");
+                        }
+
                     }
                 });
 

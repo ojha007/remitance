@@ -13,25 +13,27 @@ class CreateSendersTable extends Migration
      */
     public function up()
     {
-        Schema::create('suburbs', function (Blueprint $table) {
+
+        Schema::create('countries', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->timestamps();
+
         });
         Schema::create('states', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->timestamps();
+            $this->setForeignKey($table, 'countries', 'country_id');
         });
-        Schema::create('countries', function (Blueprint $table) {
+        Schema::create('suburbs', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->timestamps();
+            $table->integer('post_code');
+            $this->setForeignKey($table, 'states', 'state_id');
         });
+
         Schema::create('identity_types', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->timestamps();
         });
         Schema::create('senders', function (Blueprint $table) {
             $table->id();
@@ -39,8 +41,6 @@ class CreateSendersTable extends Migration
             $table->string('last_name');
             $table->string('phone_number');
             $table->string('email');
-            $table->string('street');
-            $table->string('post_code');
             $table->string('code')->unique();
             $table->boolean('is_active')->default(0);
             $table->string('id_number')->unique();
@@ -48,14 +48,20 @@ class CreateSendersTable extends Migration
             $table->date('date_of_birth');
             $table->longText('file');
             $this->setForeignKey($table, 'identity_types', 'identity_type_id');
-            $this->setForeignKey($table, 'countries', 'country_id');
-            $this->setForeignKey($table, 'states', 'state_id');
             $this->setForeignKey($table, 'suburbs', 'suburb_id');
             $this->setForeignKey($table, 'users', 'created_by');
             $this->setForeignKey($table, 'users', 'updated_by');
             $table->timestamps();
             $table->softDeletes();
         });
+    }
+
+    private function setForeignKey($table, $tableName, $column)
+    {
+        $table->unsignedBigInteger($column);
+        $table->foreign($column)
+            ->references('id')
+            ->on($tableName);
     }
 
     /**
@@ -65,18 +71,10 @@ class CreateSendersTable extends Migration
      */
     public function down()
     {
+        Schema::dropIfExists('senders');
         Schema::dropIfExists('suburbs');
         Schema::dropIfExists('states');
         Schema::dropIfExists('countries');
         Schema::dropIfExists('identity_types');
-        Schema::dropIfExists('senders');
-    }
-
-    private function setForeignKey($table, $tableName, $column)
-    {
-        $table->unsignedBigInteger($column);
-        $table->foreign($column)
-            ->references('id')
-            ->on($tableName);
     }
 }
