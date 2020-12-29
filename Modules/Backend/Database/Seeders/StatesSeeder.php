@@ -510,5 +510,17 @@ class StatesSeeder extends Seeder
                     ]
                 );
         }
+        $id_types = [
+            'Photo ID',
+            'Passport',
+            'CitizenShip',
+            'Driving License',
+        ];
+        foreach ($id_types as $id) {
+            DB::table('identity_types')
+                ->updateOrInsert([
+                    'name' => $id
+                ], ['name' => $id]);
+        }
     }
 }

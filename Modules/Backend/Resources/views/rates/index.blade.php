@@ -23,8 +23,8 @@
             <table class="table dataTable table-bordered" id="dataTables">
                 <thead>
                 <tr>
-                    <th>S.No</th>
-                    <th>Dates</th>
+{{--                    <th>S.No</th>--}}
+                    <th>Date</th>
                     <th>Customer Rate</th>
                     <th>Agent Rate</th>
                     <th>Action</th>
@@ -52,7 +52,7 @@
                     method: 'GET'
                 },
                 columns: [
-                    {data: "id", name: 'id'},
+                    // {data: "id", name: 'id'},
                     {data: "date", name: 'date'},
                     {data: "customer_rate", name: 'customer_rate'},
                     {data: "agent_rate", name: 'agent_rate'},

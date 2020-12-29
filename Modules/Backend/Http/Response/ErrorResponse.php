@@ -71,11 +71,13 @@ class ErrorResponse
         }
         if ($this->redirectPath) {
             return redirect($this->redirectPath)
-                ->with($message);
+                ->with($message)
+                ->withInput();
         } else {
             return redirect()
                 ->back()
-                ->with($message);
+                ->with($message)
+                ->withInput();
         }
     }
 

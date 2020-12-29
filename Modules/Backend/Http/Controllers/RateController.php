@@ -37,7 +37,7 @@ class RateController extends Controller
     {
         $this->model = $rate;
         $this->repository = new RateRepository($rate);
-//        $this->middleware('auth:admin');
+        $this->middleware('auth');
         $this->middleware('permission:admin-permission');
         $this->middleware(['permission:rate-view|rate-create|rate-edit|rate-delete'], ['only' => ['index', 'show']]);
         $this->middleware(['permission:rate-create'], ['only' => ['create', 'store', 'show']]);

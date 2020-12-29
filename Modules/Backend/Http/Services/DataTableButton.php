@@ -17,7 +17,7 @@ class DataTableButton
     {
         return '<a class="btn btn-default btn-sm btn-flat" data-container="body"
                    title="View"   href="' . route($route, $value) . '">
-                   <i class="fa fa-search "></i></a>&nbsp;';
+                   <i class="fa fa-eye "></i></a>&nbsp;';
     }
 
     public function deleteButton($route, $value)

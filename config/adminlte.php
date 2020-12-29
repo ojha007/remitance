@@ -15,7 +15,7 @@ return [
     */
 
     'title' => '',
-    'title_prefix' => 'Remittance |',
+    'title_prefix' => 'Registered Remit |',
     'title_postfix' => '',
 
     /*
@@ -238,7 +238,7 @@ return [
             'text' => 'Send Money',
             'url' => 'send-money',
             'icon' => 'fas fa-fw fa-money-bill-alt',
-//            'can' => 'send-money-view'
+            'can' => 'send-money-view'
         ],
         [
             'text' => 'Rates',
@@ -262,6 +262,17 @@ return [
                 ],
             ],
         ],
+        [
+            'text' => 'Manage Receivers',
+            'icon' => 'fas fa-fw fa-user-plus',
+            'submenu' => [
+                [
+                    'text' => 'All Receivers',
+                    'url' => 'receivers',
+                    'can' => 'receiver-view'
+                ],
+            ],
+        ],
         ['header' => 'PREFERENCES'],
 
 
@@ -272,12 +283,12 @@ return [
                 [
                     'text' => 'Users',
                     'url' => 'users',
-//                    'can' => 'user-view'
+                    'can' => 'user-view'
                 ],
                 [
                     'text' => 'Roles',
                     'url' => 'roles',
-//                    'can' => 'role-view'
+                    'can' => 'role-view'
                 ],
             ],
         ],

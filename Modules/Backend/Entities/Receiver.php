@@ -6,11 +6,11 @@ namespace Modules\Backend\Entities;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Sender extends Model
+class Receiver extends Model
 {
 
 
-    const CODE = 'SE';
+    const CODE = 'RE';
     protected $appends = ['name', 'address'];
     protected $fillable = ['first_name', 'last_name', 'email', 'code', 'is_active',
         'phone_number', 'street', 'suburb_id', 'identity_type_id', 'issued_by', 'id_number',

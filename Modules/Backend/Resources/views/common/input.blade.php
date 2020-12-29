@@ -5,13 +5,13 @@
                text-right
                {{isset($labelClass) ?$labelClass : ''}}
                ">
-        {{isset($label) ? $label : ucwords(str_replace('_',' ',$name))}}
+        {{isset($label) ? $label : ucwords(str_replace('_',' ',str_replace('_id',' ',$name)))}}
         @isset($is_required)
             <span style="color: #ea1a1a">*</span>
         @endisset
     </label>
     <div class="col-sm-{{isset($classPartition) ? 12 - $classPartition : 10}}
-                    {{ $errors->has($name) ? ' is-invalid': '' }}">
+    {{ $errors->has($name) ? ' is-invalid': '' }}">
         @if(isset($type) && $type==='checkbox')
             <input type="hidden" name="{{$name}}" value="0">
             <input name="{{$name}}" value="1"
@@ -22,7 +22,7 @@
 
             {!! Form::select($name,$options , $default ?? null,
                 array(
-                "placeholder"=> isset($placeHolder) ? $placeHolder : 'Select '. ucwords(str_replace('_',' ',$name)),
+                "placeholder"=> isset($placeHolder) ? $placeHolder : 'Select '. ucwords(str_replace('id','',str_replace('_',' ',$name))),
                 'class' => 'form-control select2',
                 'style'=>'width:100%;')) !!}
         @else
@@ -38,7 +38,7 @@
                    @if(isset($type) && $type==='number')
                    step="any"
                    @endif
-                   value="{{old($name) }}"
+                   value="{{old($name) ?? isset($model) ? $model->{$name} : ''}}"
                    autocomplete="false"
                    id="{{isset($id) ? $id : strtolower($name)}}"
                    placeholder="{{isset($placeHolder) ? $placeHolder : 'Enter ' . ucwords(str_replace('_',' ',$name))}}">

@@ -3,6 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use Modules\Backend\Entities\Receiver;
 
 class CreateSendersTable extends Migration
 {
@@ -46,19 +47,26 @@ class CreateSendersTable extends Migration
             $table->string('id_number')->unique();
             $table->date('expiry_date');
             $table->date('date_of_birth');
-            $table->longText('file');
+            $table->longText('file')->nullable();
+            $table->mediumText('street');
+            $table->enum('issued_by', array_keys(Receiver::getIssuedByArray()));
             $this->setForeignKey($table, 'identity_types', 'identity_type_id');
             $this->setForeignKey($table, 'suburbs', 'suburb_id');
             $this->setForeignKey($table, 'users', 'created_by');
-            $this->setForeignKey($table, 'users', 'updated_by');
+            $this->setForeignKey($table, 'users', 'updated_by', true);
             $table->timestamps();
             $table->softDeletes();
         });
     }
 
-    private function setForeignKey($table, $tableName, $column)
+    private function setForeignKey($table, $tableName, $column, $is_nullable = false)
     {
-        $table->unsignedBigInteger($column);
+
+        if ($is_nullable) {
+            $table->unsignedBigInteger($column)->nullable();
+        } else {
+            $table->unsignedBigInteger($column);
+        }
         $table->foreign($column)
             ->references('id')
             ->on($tableName);
