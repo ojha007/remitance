@@ -87,9 +87,10 @@ class SenderController extends Controller
             $code = $max_id + 1;
             $attributes['code'] = Receiver::CODE . '-' . str_pad($code, 4, 0, STR_PAD_LEFT);
             $attributes['created_by'] = auth()->id();
-            $this->repository->create($attributes);
+            $sender = $this->repository->create($attributes);
+            $path = route($this->baseRoute . 'show', $sender->id);
             DB::commit();
-            return (new SuccessResponse($this->model, $request, 'created', $this->baseRoute . 'index'))
+            return (new SuccessResponse($this->model, $request, 'created', $path))
                 ->responseOk();
         } catch (\Exception $exception) {
             DB::rollBack();

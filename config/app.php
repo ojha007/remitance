@@ -56,7 +56,8 @@ return [
 
     'asset_url' => env('ASSET_URL', null),
 
-    'admin_url' => env('ADMIN_DOMAIN'),
+    'admin_domain' => env('ADMIN_DOMAIN'),
+    'domain' => env('APP_DOMAIN'),
 
     /*
     |--------------------------------------------------------------------------

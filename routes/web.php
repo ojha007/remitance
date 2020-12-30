@@ -13,9 +13,13 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::group([
+    'domain' => config('app.domain'),
+], function () {
+    Route::get('/', function () {
+        return view('welcome');
+    });
 
+});
 
 Auth::routes();
