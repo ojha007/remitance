@@ -24,6 +24,7 @@
                 array(
                 "placeholder"=> isset($placeHolder) ? $placeHolder : 'Select '. ucwords(str_replace('id','',str_replace('_',' ',$name))),
                 'class' => 'form-control select2',
+                'id'=> isset($id) ? $id : strtolower($name),
                 'style'=>'width:100%;')) !!}
         @else
             <input type="{{isset($type) ? $type : 'text'}}"
@@ -38,7 +39,11 @@
                    @if(isset($type) && $type==='number')
                    step="any"
                    @endif
-                   value="{{old($name) ?? isset($model) ? $model->{$name} : ''}}"
+                   @if(old($name))
+                   value="{{old($name)}}"
+                   @elseif(isset($model))
+                   value="{{$model->{$name} }}"
+                   @endif
                    autocomplete="false"
                    id="{{isset($id) ? $id : strtolower($name)}}"
                    placeholder="{{isset($placeHolder) ? $placeHolder : 'Enter ' . ucwords(str_replace('_',' ',$name))}}">

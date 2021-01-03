@@ -4,11 +4,14 @@ namespace Modules\Backend\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
+use Illuminate\Support\Facades\DB;
 use Modules\Backend\Entities\Receiver;
-use Modules\Backend\Http\Services\DataTableButton;
+use Modules\Backend\Entities\Sender;
+use Modules\Backend\Http\Requests\ReceiverRequest;
+use Modules\Backend\Http\Response\ErrorResponse;
+use Modules\Backend\Http\Response\SuccessResponse;
 use Modules\Backend\Repositories\ReceiverRepository;
 use Modules\Backend\Repositories\SenderRepository;
-use Yajra\DataTables\DataTables;
 
 class ReceiverController extends Controller
 {
@@ -19,7 +22,7 @@ class ReceiverController extends Controller
 
     private $model;
     /**
-     * @var SenderRepository
+     * @var ReceiverRepository
      */
     private $repository;
 
@@ -38,13 +41,79 @@ class ReceiverController extends Controller
 
     public function index(Request $request)
     {
+        $receivers = $this->repository->getAllReceivers($request);
 
-//        if ($request->ajax()) {
-//            $attributes['limit'] = $request->query('limit');
-//            $receivers = $this->repository->getIndexPageData($attributes);
-//            return $this->dataTableLists($receivers);
-//        }
-        return view($this->viewPath . 'index');
+        return view($this->viewPath . 'index', compact('receivers'));
+    }
+
+    public function create()
+    {
+        $view = view($this->viewPath . 'create');
+        $selectSenders = (new SenderRepository(new Sender()))->selectSenders();
+        return $this->repository->getCreateOrEditPage($view)
+            ->with(['selectSenders' => $selectSenders]);
+
+    }
+
+    public function show(int $id)
+    {
+        $receiver = $this->repository->getReceiverById($id);
+//        dd($receiver);
+        return view($this->viewPath . 'show', compact('receiver'));
+    }
+
+    public function store(ReceiverRequest $request)
+    {
+
+        $attributes = $request->except('bank_id', 'account_name',
+            'account_number', 'branch', 'is_default', 'district_id',
+            'country_id');
+        try {
+//            dd($request->all());
+            DB::beginTransaction();
+            $max_id = DB::table('receivers')->max('id');
+            $attributes['code'] = Receiver::CODE . '-' . str_pad($max_id + 1, 4, 0, STR_PAD_LEFT);
+            $attributes['created_by'] = auth()->id();
+            $receiver = $this->repository->create($attributes);
+            foreach ($request->get('bank_id') as $i => $bank_id) {
+                DB::table('receiver_banks')
+                    ->insert([
+                        'receiver_id' => $receiver->id,
+                        'bank_id' => $bank_id,
+                        'branch' => $request->get('branch')[$i],
+                        'account_name' => $request->get('account_name')[$i],
+                        'account_number' => $request->get('account_number')[$i],
+                        'is_default' => $request->get('is_default')[$i],
+                    ]);
+            }
+            DB::table('receiver_address')
+                ->insert([
+                    'district_id' => $request->get('district_id'),
+                    'receiver_id' => $receiver->id,
+                    'ward_number' => $request->get('ward_number'),
+                    'tole_number' => $request->get('tole_number'),
+                    'street' => $request->get('street'),
+                ]);
+            $redirectRoute = route($this->baseRoute . 'show', $receiver->id);
+            DB::commit();
+            return (new SuccessResponse($this->model, $request, 'created', $redirectRoute))
+                ->responseOk();
+        } catch (\Exception $exception) {
+            DB::rollBack();
+            dd($exception);
+            return (new ErrorResponse($this->model, $request, $exception))
+                ->responseError();
+        }
+
+    }
+
+    public function edit(int $id)
+    {
+        $receiver = $this->repository->getAllDetailById($id);
+        $view = view($this->viewPath . 'edit');
+        return $this->repository->getCreateOrEditPage($view)
+            ->with(['receiver' => $receiver]);
+
     }
 
     protected function dataTableLists($collection)
@@ -66,51 +135,6 @@ class ReceiverController extends Controller
 //            })
 //            ->rawColumns(['is_active', 'action'])
 //            ->toJson();
-    }
-
-
-    public function create()
-    {
-        $view = view($this->viewPath . 'create');
-        return $this->repository->getCreateOrEditPage($view);
-    }
-
-//    public function store(receiverRequest $request)
-//    {
-////        $attributes = $request->except('state_id', 'country_id', 'post_code');
-////        try {
-////            DB::beginTransaction();
-////            $max_id = DB::table('senders')->max('id');
-////            $code = $max_id + 1;
-////            $attributes['code'] = Receiver::CODE . '-' . str_pad($code, 4, 0, STR_PAD_LEFT);
-////            $attributes['created_by'] = auth()->id();
-////            $this->repository->create($attributes);
-////            DB::commit();
-////            return (new SuccessResponse($this->model, $request, 'created', $this->baseRoute . 'index'))
-////                ->responseOk();
-////        } catch (\Exception $exception) {
-////            DB::rollBack();
-////            return (new ErrorResponse($this->model, $request, $exception))
-////                ->responseError();
-////        }
-//
-//    }
-
-
-    public function show(int $id)
-    {
-        $receiver = $this->repository->getAllDetailById($id);
-        return view($this->viewPath . 'show', compact('receiver'));
-    }
-
-
-    public function edit(int $id)
-    {
-        $receiver = $this->repository->getAllDetailById($id);
-        $view = view($this->viewPath . 'edit');
-        return $this->repository->getCreateOrEditPage($view)
-            ->with(['receiver' => $receiver]);
-
     }
 
 

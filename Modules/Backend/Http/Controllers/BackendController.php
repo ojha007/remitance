@@ -2,82 +2,57 @@
 
 namespace Modules\Backend\Http\Controllers;
 
-use Illuminate\Contracts\Support\Renderable;
-use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
+use Illuminate\Support\Facades\DB;
 
 class BackendController extends Controller
 {
 
     public function __construct()
     {
-//        dd('gg');
+
         $this->middleware(['auth']);
     }
 
     public function index()
     {
-//        dd('gg');
         return view('backend::index');
     }
 
-    /**
-     * Show the form for creating a new resource.
-     * @return Renderable
-     */
-    public function create()
+    public function getStates($country_id): array
     {
-        return view('backend::create');
+
+        $states['states'] = DB::table('states')
+            ->when($country_id, function ($q) use ($country_id) {
+                $q->where('country_id', '=', $country_id);
+            })->pluck('name', 'id')
+            ->toArray();
+        return $states;
+
     }
 
-    /**
-     * Store a newly created resource in storage.
-     * @param Request $request
-     * @return Renderable
-     */
-    public function store(Request $request)
+    public function getDistricts($state_id): array
     {
-        //
+        $states = [];
+        $states['districts'] = DB::table('districts')
+            ->when($state_id, function ($q) use ($state_id) {
+                $q->where('state_id', '=', $state_id);
+            })->pluck('name', 'id')
+            ->toArray();
+        return $states;
+
+
     }
 
-    /**
-     * Show the specified resource.
-     * @param int $id
-     * @return Renderable
-     */
-    public function show($id)
+    public function getMunicipalities($district_id): array
     {
-        return view('backend::show');
+        $municipalities = [];
+        $municipalities['municipalities'] = DB::table('municipalities')
+            ->when($district_id, function ($q) use ($district_id) {
+                $q->where('district_id', '=', $district_id);
+            })->pluck('name', 'id')
+            ->toArray();
+        return $municipalities;
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     * @param int $id
-     * @return Renderable
-     */
-    public function edit($id)
-    {
-        return view('backend::edit');
-    }
-
-    /**
-     * Update the specified resource in storage.
-     * @param Request $request
-     * @param int $id
-     * @return Renderable
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     * @param int $id
-     * @return Renderable
-     */
-    public function destroy($id)
-    {
-        //
-    }
 }

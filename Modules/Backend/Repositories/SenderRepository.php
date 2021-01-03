@@ -22,7 +22,7 @@ class SenderRepository extends Repository
         $this->model = $sender;
     }
 
-    public function getIndexPageData($attributes)
+    public function getIndexPageData($attributes): \Illuminate\Support\Collection
     {
         return DB::table('senders')
             ->select('id', 'code', 'is_active')
@@ -33,13 +33,24 @@ class SenderRepository extends Repository
 
     public function getCreateOrEditPage($view)
     {
-        $countries = Cache::rememberForever('countries', function () {
-            return DB::table('countries')
+        $suburbs = Cache::rememberForever('suburbs', function () {
+            return DB::table('suburbs')
                 ->pluck('name', 'id')
                 ->toArray();
         });
-        $states = Cache::rememberForever('states', function () {
-            return DB::table('states')
+        $issuedBy = Receiver::getIssuedByArray();
+        return $view->with([
+            'selectSuburbs' => $suburbs,
+            'selectIssuedBy' => $issuedBy
+        ])->with(
+            $this->getCommonViewPageData()
+        );
+    }
+
+    public function getCommonViewPageData($country = 'Nepal'): array
+    {
+        $countries = Cache::rememberForever('countries', function () {
+            return DB::table('countries')
                 ->pluck('name', 'id')
                 ->toArray();
         });
@@ -48,20 +59,18 @@ class SenderRepository extends Repository
                 ->pluck('name', 'id')
                 ->toArray();
         });
-        $suburbs = Cache::rememberForever('suburbs', function () {
-            return DB::table('suburbs')
-                ->pluck('name', 'id')
+        $selectStates = Cache::rememberForever('states_' . $country, function () use ($country) {
+            return DB::table('states')
+                ->join('countries', 'states.country_id', '=', 'countries.id')
+                ->where('countries.name', '=', $country)
+                ->pluck('states.name', 'states.id')
                 ->toArray();
         });
-        $issuedBy = Receiver::getIssuedByArray();
-
-        return $view->with([
+        return [
             'selectCountries' => $countries,
-            'selectStates' => $states,
-            'selectSuburbs' => $suburbs,
+            'selectStates' => $selectStates,
             'selectIdentityTypes' => $idTypes,
-            'selectIssuedBy' => $issuedBy
-        ]);
+        ];
     }
 
     public function getAllDetailById($id)
@@ -79,5 +88,20 @@ class SenderRepository extends Repository
             ->where('se.id', '=', $id)
             ->whereNull('deleted_at')
             ->first();
+    }
+
+    public function selectSenders(): array
+    {
+        return DB::table('senders as se')
+            ->select('se.id', 'code')
+            ->selectRaw('CONCAT(first_name," " ,last_name) as name')
+            ->selectRaw('CONCAT(su.name," ," ,st.name) as address')
+            ->join('suburbs as su', 'su.id', '=', 'se.suburb_id')
+            ->join('states as st', 'st.id', '=', 'su.state_id')
+            ->whereNull('deleted_at')
+            ->get()->mapWithKeys(function ($sender) {
+                return [$sender->id => ucwords($sender->name) . ' (' . ucwords($sender->address) . ')'];
+            })->toArray();
+
     }
 }

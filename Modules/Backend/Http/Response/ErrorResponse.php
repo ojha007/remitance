@@ -63,7 +63,7 @@ class ErrorResponse
         Log::error($this->exception->getMessage() . '-' . $this->exception->getTraceAsString());
         $model = $this->model instanceof Model ? $this->getName($this->model) : ucwords($this->model);
         $message = [
-            'failed' => 'Whoops!' . $model . ' failed to ' . $this->event . ' .'
+            'failed' => 'Whoops ! ' . $model . ' failed to ' . $this->event . ' .'
         ];
         if ($this->request->ajax()) {
             $this->request->session()->flash('failed', $message['failed']);

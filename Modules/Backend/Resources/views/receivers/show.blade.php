@@ -12,31 +12,20 @@
                 <div class="card-body box-profile">
                     <div class="text-center">
                         <img class="profile-user-img img-fluid img-circle"
-                             src="{{$sender->file ??  asset('backend/images/user-128x128.png')}}"
+                             src="{{$receiver[0]->file ??  asset('backend/images/user-128x128.png')}}"
                              alt="User profile picture">
                     </div>
-                    {{--                    @dd($sender)--}}
                     <h3 class="profile-username text-center">
-                        {{ucwords($sender->first_name)}} {{ucwords($sender->last_name)}}
+                        {{ucwords($receiver[0]->first_name)}}
+                        {{ucwords($receiver[0]->middle_name)}}
+                        {{ucwords($receiver[0]->last_name)}}
                     </h3>
-                    <p class="text-muted text-center">{{$sender->code}}</p>
+                    <p class="text-muted text-center">{{$receiver[0]->code}}</p>
                     <div class="text-center">
-                        {!! spanByStatus($sender->is_active) !!}
+                        {!! spanByStatus($receiver[0]->is_active) !!}
                     </div>
-                    <p class="text-muted text-center">{{$sender->email}}</p>
+                    <p class="text-muted text-center">{{$receiver[0]->email}}</p>
 
-                    @if(auth()->user()->isSuper())
-                        {!! Form::open(['route'=> [$routePrefix.'senders.changeStatus',$sender->id]])!!}
-
-                        <input type="hidden" name="is_active" value="{{$sender->is_active}}">
-                        <button
-                            class="btn btn-primary btn-flat btn-block"
-                            type="submit">
-                            Change Status
-                        </button>
-                        {!! Form::close() !!}
-
-                    @endif
                 </div>
                 <!-- /.card-body -->
             </div>
@@ -45,18 +34,18 @@
             <!-- About Me Box -->
             <div class="card ">
                 <div class="card-header">
-                    <h3 class="card-title">About {{$sender->first_name}}</h3>
+                    <h3 class="card-title">About {{ucwords($receiver[0]->first_name)}}</h3>
                 </div>
                 <!-- /.card-header -->
                 <div class="card-body">
                     <strong><i class="fas fa-user mr-1"></i>Personal Information</strong>
                     <br>
                     <span class="text-muted">
-                        Number: {{$sender->phone_number  }}
+                        Number: {{$receiver[0]->phone_number1  }}  {{$receiver[0]->phone_number2  ? '/'.$receiver[0]->phone_number2 : ''}}
                     </span>
                     <br>
                     <span class="text-muted">
-                        DOB: {{$sender->date_of_birth  }}
+                        DOB: {{$receiver[0]->date_of_birth  }}
                     </span>
 
                     <hr>
@@ -64,8 +53,12 @@
                     <strong><i class="fas fa-map-marker-alt mr-1"></i> Location</strong>
 
                     <p class="text-muted">
-                        {{$sender->street}}, {{$sender->suburb}}, {{$sender->state}}
-                        ,{{$sender->country}}
+                        Ward NO: {{ucwords($receiver[0]->ward_number)}}<br>
+                        Street : {{ucwords($receiver[0]->street)}}<br>
+                        District : {{ucwords($receiver[0]->district)}}<br>
+                        State : {{ucwords($receiver[0]->state)}}<br>
+                        Country : {{ucwords($receiver[0]->country)}}
+
                     </p>
 
                     <hr>
@@ -75,42 +68,38 @@
                     </strong>
                     <br>
                     <span class="text-muted">
-                        Identity Type : {{$sender->identity_type}}
+                        Identity Type : {{ucwords($receiver[0]->identity_type)}}
                     </span>
                     <br>
                     <span class="text-muted">
-                        Identity Number : {{$sender->id_number}}
+                        Identity Number : {{$receiver[0]->id_number}}
                     </span>
                     <br>
                     <span class="text-muted">
-                        Issued By : {{\Modules\Backend\Entities\Receiver::getIssuedByArray()[$sender->issued_by]}}
+                        Issued By : {{\Modules\Backend\Entities\Receiver::getIssuedByArray()[$receiver[0]->issued_by]}}
                     </span>
                     <br>
                     <span class="text-muted">
-                        Expiry date : {{$sender->expiry_date}}
+                        Expiry date : {{$receiver[0]->expiry_date}}
                     </span>
-                    {{--                    <span class="text-muted">--}}
-                    {{--                        Issued By :{{ucwords($sender->issued_by)}}--}}
-                    {{--                    </span>--}}
-                    {{--                    @dd($sender)--}}
                 </div>
                 <!-- /.card-body -->
 
 
                 <div class="card-footer">
 
-                    @can('sender-delete')
-                        {!! Form::open(['route'=>[$routePrefix.'senders.destroy',$sender->id]]) !!}
+                    @can('receiver-delete')
+                        {!! Form::open(['route'=>[$routePrefix.'receivers.destroy',$receiver[0]->id]]) !!}
                         @method('DELETE')
                         <button type="submit"
-                                onclick="confirm('Are You sure to delete the sender ?')"
+                                onclick="confirm('Are You sure to delete the receiver ?')"
                                 class="btn btn-flat btn-danger float-right">
                             <i class="fa fa-trash"></i> Delete
                         </button>
                         {!! Form::close() !!}
                     @endcan
-                    @can('sender-edit')
-                        <a href="{{route($routePrefix.'senders.edit',$sender->id)}}"
+                    @can('receiver-edit')
+                        <a href="{{route($routePrefix.'receivers.edit',$receiver[0]->id)}}"
                            class="btn btn-primary  float-left btn-flat"
                            type="submit">
                             <i class="fa fa-edit"></i> Edit
@@ -130,7 +119,7 @@
                         <li class="nav-item">
                             <a class="nav-link" href="#activity" data-toggle="tab">Activity</a></li>
                         <li class="nav-item">
-                            <a class="nav-link active" href="#timeline" data-toggle="tab">Timeline</a>
+                            <a class="nav-link active" href="#banks" data-toggle="tab">Banks Details</a>
                         </li>
                     </ul>
                 </div><!-- /.card-header -->
@@ -255,101 +244,36 @@
                             <!-- /.post -->
                         </div>
                         <!-- /.tab-pane -->
-                        <div class="tab-pane active" id="timeline">
+                        <div class="tab-pane active" id="banks">
                             <!-- The timeline -->
-                            <div class="timeline timeline-inverse">
-                                <!-- timeline time label -->
-                                <div class="time-label">
-                                    <span class="bg-danger">
-                                      10 Feb. 2014
-                                    </span>
-                                </div>
-                                <!-- /.timeline-label -->
-                                <!-- timeline item -->
-                                <div>
-                                    <i class="fas fa-envelope bg-primary"></i>
+                            <table class="table table-bordered ">
+                                <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Bank Name</th>
+                                    <th>Account Name</th>
+                                    <th>Account Number</th>
+                                    <th>Branch</th>
+                                    <th>Default</th>
+                                </tr>
+                                </thead>
+                                <tbody>
 
-                                    <div class="timeline-item">
-                                        <span class="time"><i class="far fa-clock"></i> 12:05</span>
+                                @foreach($receiver as $r)
+                                    <tr>
+                                        <td>{{$loop->index +1}}</td>
+                                        <td>{{$r->bank_name}}</td>
+                                        <td>{{$r->account_name}}</td>
+                                        <td>{{$r->account_number}}</td>
+                                        <td>{{$r->branch}}</td>
+                                        <td>
+                                            {{$r->is_default === 1 ? 'Yes' : 'No'}}
+                                        </td>
+                                    </tr>
+                                @endforeach
 
-                                        <h3 class="timeline-header"><a href="#">Support Team</a> sent you an email</h3>
-
-                                        <div class="timeline-body">
-                                            Etsy doostang zoodles disqus groupon greplin oooj voxy zoodles,
-                                            weebly ning heekya handango imeem plugg dopplr jibjab, movity
-                                            jajah plickers sifteo edmodo ifttt zimbra. Babblely odeo kaboodle
-                                            quora plaxo ideeli hulu weebly balihoo...
-                                        </div>
-                                        <div class="timeline-footer">
-                                            <a href="#" class="btn btn-primary btn-sm">Read more</a>
-                                            <a href="#" class="btn btn-danger btn-sm">Delete</a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- END timeline item -->
-                                <!-- timeline item -->
-                                <div>
-                                    <i class="fas fa-user bg-info"></i>
-
-                                    <div class="timeline-item">
-                                        <span class="time"><i class="far fa-clock"></i> 5 mins ago</span>
-
-                                        <h3 class="timeline-header border-0"><a href="#">Sarah Young</a> accepted your
-                                            friend request
-                                        </h3>
-                                    </div>
-                                </div>
-                                <!-- END timeline item -->
-                                <!-- timeline item -->
-                                <div>
-                                    <i class="fas fa-comments bg-warning"></i>
-
-                                    <div class="timeline-item">
-                                        <span class="time"><i class="far fa-clock"></i> 27 mins ago</span>
-
-                                        <h3 class="timeline-header"><a href="#">Jay White</a> commented on your post
-                                        </h3>
-
-                                        <div class="timeline-body">
-                                            Take me to your leader!
-                                            Switzerland is small and neutral!
-                                            We are more like Germany, ambitious and misunderstood!
-                                        </div>
-                                        <div class="timeline-footer">
-                                            <a href="#" class="btn btn-warning btn-flat btn-sm">View comment</a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- END timeline item -->
-                                <!-- timeline time label -->
-                                <div class="time-label">
-                                    <span class="bg-success">
-                                      3 Jan. 2014
-                                    </span>
-                                </div>
-                                <!-- /.timeline-label -->
-                                <!-- timeline item -->
-                                <div>
-                                    <i class="fas fa-camera bg-purple"></i>
-
-                                    <div class="timeline-item">
-                                        <span class="time"><i class="far fa-clock"></i> 2 days ago</span>
-
-                                        <h3 class="timeline-header"><a href="#">Mina Lee</a> uploaded new photos</h3>
-
-                                        <div class="timeline-body">
-                                            <img src="http://placehold.it/150x100" alt="...">
-                                            <img src="http://placehold.it/150x100" alt="...">
-                                            <img src="http://placehold.it/150x100" alt="...">
-                                            <img src="http://placehold.it/150x100" alt="...">
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- END timeline item -->
-                                <div>
-                                    <i class="far fa-clock bg-gray"></i>
-                                </div>
-                            </div>
+                                </tbody>
+                            </table>
                         </div>
                         <!-- /.tab-pane -->
                         <!-- /.tab-pane -->

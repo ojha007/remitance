@@ -59,7 +59,7 @@ class CreateSendersTable extends Migration
         });
     }
 
-    private function setForeignKey($table, $tableName, $column, $is_nullable = false)
+    public function setForeignKey($table, $tableName, $column, $is_nullable = false)
     {
 
         if ($is_nullable) {

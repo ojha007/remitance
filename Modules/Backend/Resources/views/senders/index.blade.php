@@ -6,30 +6,12 @@
     <h1>Senders</h1>
 @stop
 @section('content')
-    <div class="card">
-        <div class="card-header">
-            <h3 class="card-title">Advanced Search</h3>
-            <div class="card-tools">
-                <button type="button" class="btn btn-tool"
-                        data-card-widget="collapse" title="Collapse">
-                    <i class="fas fa-minus"></i>
-                </button>
+    @include('backend::common.filterBox',
+        ['filterBy'=>[
+                ['name'=>'name'],
 
-            </div>
-        </div>
-        <div class="card-body" style="display: block;">
-            <div class="row">
-           <input class="form-control col-md-3 rounded-0" >
-            </div>
-        </div>
-        <div class="card-footer">
-            <button type="button" class="btn  float-left btn-flat btn-primary">
-                <i class="fa fa-search"></i>
-                Search
-            </button>
-        </div>
-        <!-- /.card-body -->
-    </div>
+            ]
+          ])
     <div class="card">
         <div class="card-header">
             <a href="{{route($routePrefix.'senders.create')}}"

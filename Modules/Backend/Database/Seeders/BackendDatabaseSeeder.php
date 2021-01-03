@@ -17,7 +17,8 @@ class BackendDatabaseSeeder extends Seeder
         Model::unguard();
         $this->call([
             CountriesSeeder::class,
-            StatesSeeder::class,
+            BanksSeeder::class,
+            StatesSeeder::class
         ]);
     }
 }
