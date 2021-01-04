@@ -3,6 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use Modules\Backend\Database\Migrations\MigrationHelpers;
 use Modules\Backend\Entities\Receiver;
 
 class CreateReceiversTable extends Migration
@@ -26,8 +27,8 @@ class CreateReceiversTable extends Migration
             $table->string('last_name');
             $table->string('email')->nullable();
             $table->string('phone_number1');
-            $this->setForeignKey($table, 'identity_types', 'identity_type_id');
-            $this->setForeignKey($table, 'senders', 'sender_id');
+            (new MigrationHelpers())->setForeignKey($table, 'identity_types', 'identity_type_id');
+            (new MigrationHelpers())->setForeignKey($table, 'senders', 'sender_id');
             $table->string('code')->unique();
             $table->boolean('is_active')->default(0);
             $table->string('id_number')->unique();
@@ -36,8 +37,8 @@ class CreateReceiversTable extends Migration
             $table->date('expiry_date')->nullable();
             $table->date('date_of_birth')->nullable();
             $table->string('file')->nullable();
-            $this->setForeignKey($table, 'users', 'created_by');
-            $this->setForeignKey($table, 'users', 'updated_by', true);
+            (new MigrationHelpers())->setForeignKey($table, 'users', 'created_by');
+            (new MigrationHelpers())->setForeignKey($table, 'users', 'updated_by', true);
             $table->timestamps();
             $table->softDeletes();
 
@@ -45,8 +46,8 @@ class CreateReceiversTable extends Migration
 
         Schema::create('receiver_banks', function (Blueprint $table) {
             $table->id();
-            $this->setForeignKey($table, 'banks', 'bank_id');
-            $this->setForeignKey($table, 'receivers', 'receiver_id');
+            (new MigrationHelpers())->setForeignKey($table, 'banks', 'bank_id');
+            (new MigrationHelpers())->setForeignKey($table, 'receivers', 'receiver_id');
             $table->string('branch');
             $table->string('account_number');
             $table->string('account_name');
@@ -55,38 +56,25 @@ class CreateReceiversTable extends Migration
 
         Schema::create('districts', function (Blueprint $table) {
             $table->id();
-            $this->setForeignKey($table, 'states', 'state_id');
+            (new MigrationHelpers())->setForeignKey($table, 'states', 'state_id');
             $table->string('name');
 //            $table->integer('post_code');
         });
         Schema::create('municipalities', function (Blueprint $table) {
             $table->id();
-            $this->setForeignKey($table, 'districts', 'district_id');
+            (new MigrationHelpers())->setForeignKey($table, 'districts', 'district_id');
             $table->string('name');
         });
         Schema::create('receiver_address', function (Blueprint $table) {
             $table->id();
-            $this->setForeignKey($table, 'districts', 'district_id');
-            $this->setForeignKey($table, 'receivers', 'receiver_id');
+            (new MigrationHelpers())->setForeignKey($table, 'districts', 'district_id');
+            (new MigrationHelpers())->setForeignKey($table, 'receivers', 'receiver_id');
             $table->integer('ward_number');
             $table->string('street')->nullable();
             $table->integer('tole_number')->nullable();
 
         });
 
-    }
-
-    public function setForeignKey($table, $tableName, $column, $is_nullable = false)
-    {
-
-        if ($is_nullable) {
-            $table->unsignedBigInteger($column)->nullable();
-        } else {
-            $table->unsignedBigInteger($column);
-        }
-        $table->foreign($column)
-            ->references('id')
-            ->on($tableName);
     }
 
     /**

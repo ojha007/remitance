@@ -18,7 +18,9 @@ class BackendDatabaseSeeder extends Seeder
         $this->call([
             CountriesSeeder::class,
             BanksSeeder::class,
-            StatesSeeder::class
+            StatesSeeder::class,
+            CurrenciesSeeder::class,
+            PaymentTypeSeeder::class,
         ]);
     }
 }

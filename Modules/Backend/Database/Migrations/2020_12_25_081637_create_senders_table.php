@@ -3,6 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use Modules\Backend\Database\Migrations\MigrationHelpers;
 use Modules\Backend\Entities\Receiver;
 
 class CreateSendersTable extends Migration
@@ -23,13 +24,13 @@ class CreateSendersTable extends Migration
         Schema::create('states', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $this->setForeignKey($table, 'countries', 'country_id');
+            (new MigrationHelpers())->setForeignKey($table, 'countries', 'country_id');
         });
         Schema::create('suburbs', function (Blueprint $table) {
             $table->id();
             $table->string('name');
             $table->integer('post_code');
-            $this->setForeignKey($table, 'states', 'state_id');
+            (new MigrationHelpers())->setForeignKey($table, 'states', 'state_id');
         });
 
         Schema::create('identity_types', function (Blueprint $table) {
@@ -50,10 +51,10 @@ class CreateSendersTable extends Migration
             $table->longText('file')->nullable();
             $table->mediumText('street');
             $table->enum('issued_by', array_keys(Receiver::getIssuedByArray()));
-            $this->setForeignKey($table, 'identity_types', 'identity_type_id');
-            $this->setForeignKey($table, 'suburbs', 'suburb_id');
-            $this->setForeignKey($table, 'users', 'created_by');
-            $this->setForeignKey($table, 'users', 'updated_by', true);
+            (new MigrationHelpers())->setForeignKey($table, 'identity_types', 'identity_type_id');
+            (new MigrationHelpers())->setForeignKey($table, 'suburbs', 'suburb_id');
+            (new MigrationHelpers())->setForeignKey($table, 'users', 'created_by');
+            (new MigrationHelpers())->setForeignKey($table, 'users', 'updated_by', true);
             $table->timestamps();
             $table->softDeletes();
         });

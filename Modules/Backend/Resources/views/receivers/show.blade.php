@@ -117,15 +117,15 @@
                 <div class="card-header p-2">
                     <ul class="nav nav-pills">
                         <li class="nav-item">
-                            <a class="nav-link" href="#activity" data-toggle="tab">Activity</a></li>
+                            <a class="nav-link active" href="#activity" data-toggle="tab">Activity</a></li>
                         <li class="nav-item">
-                            <a class="nav-link active" href="#banks" data-toggle="tab">Banks Details</a>
+                            <a class="nav-link " href="#banks" data-toggle="tab">Banks Details</a>
                         </li>
                     </ul>
                 </div><!-- /.card-header -->
                 <div class="card-body">
                     <div class="tab-content">
-                        <div class="tab-pane" id="activity">
+                        <div class="tab-pane active" id="activity">
                             <!-- Post -->
                             <div class="post">
                                 <div class="user-block">
@@ -238,13 +238,12 @@
                           </a>
                         </span>
                                 </p>
-
                                 <input class="form-control form-control-sm" type="text" placeholder="Type a comment">
                             </div>
                             <!-- /.post -->
                         </div>
                         <!-- /.tab-pane -->
-                        <div class="tab-pane active" id="banks">
+                        <div class="tab-pane " id="banks">
                             <!-- The timeline -->
                             <table class="table table-bordered ">
                                 <thead>

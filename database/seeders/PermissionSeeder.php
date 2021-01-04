@@ -18,6 +18,7 @@ class PermissionSeeder extends Seeder
     {
         $guard = 'admin';
         $permissions = (new GlobalServices())->getAllPermissions();
+        Permission::findOrCreate('admin-permission', 'web');
         foreach ($permissions as $permission) {
             Permission::findOrCreate($permission['name'], $guard);
 

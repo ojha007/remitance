@@ -10,7 +10,7 @@ use RegexIterator;
 
 class GlobalServices
 {
-    public function getAllPermissions()
+    public function getAllPermissions(): array
     {
 
         $array = [];
@@ -25,7 +25,7 @@ class GlobalServices
         return $array;
     }
 
-    public function getAllModal()
+    public function getAllModal(): array
     {
         $path = module_path('Backend') . DIRECTORY_SEPARATOR . 'Entities';
         $array = [];
@@ -47,7 +47,7 @@ class GlobalServices
                 }
                 if (T_CLASS === $tokens[$index][0] && T_WHITESPACE === $tokens[$index + 1][0] && T_STRING === $tokens[$index + 2][0]) {
                     $index += 2; // Skip class keyword and whitespace
-                    $array[] = strtolower($tokens[$index][1]);
+                    $array[] = strtolower(preg_replace('/([a-zA-Z])(?=[A-Z])/', '$1-', $tokens[$index][1]));
 
                     # break if you have one class per file (psr-4 compliant)
                     # otherwise you'll need to handle class constants (Foo::class)
