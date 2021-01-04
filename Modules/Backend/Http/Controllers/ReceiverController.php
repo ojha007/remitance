@@ -61,10 +61,12 @@ class ReceiverController extends Controller
 
     }
 
-    public function show(int $id)
+    public function show(Request $request, int $id)
     {
         $receiver = $this->repository->getReceiverById($id);
-//        dd($receiver);
+        if ($request->ajax()) {
+            return response()->json($receiver[0]);
+        }
         return view($this->viewPath . 'show', compact('receiver'));
     }
 
@@ -75,7 +77,6 @@ class ReceiverController extends Controller
             'account_number', 'branch', 'is_default', 'district_id',
             'country_id');
         try {
-//            dd($request->all());
             DB::beginTransaction();
             $max_id = DB::table('receivers')->max('id');
             $attributes['code'] = Receiver::CODE . '-' . str_pad($max_id + 1, 4, 0, STR_PAD_LEFT);
@@ -115,8 +116,8 @@ class ReceiverController extends Controller
     public function edit(int $id)
     {
         $receiver = $this->repository->getAllDetailById($id);
-        $banks =DB::table('receiver_banks')
-            ->select('bank_id','branch','account_name','account_number','is_default')
+        $banks = DB::table('receiver_banks')
+            ->select('bank_id', 'branch', 'account_name', 'account_number', 'is_default')
             ->get()->toArray();
         $view = view($this->viewPath . 'edit');
         return $this->repository->getCreateOrEditPage($view)
@@ -124,60 +125,24 @@ class ReceiverController extends Controller
 
     }
 
-    protected function dataTableLists($collection)
+    public function receiverBySender($sender_id): \Illuminate\Support\Collection
     {
-//        $dataTableButton = new DataTableButton();
-//        return DataTables::make($collection)
-//            ->editColumn('is_active', function ($receiver) {
-//                return spanByStatus($receiver->is_active);
-//            })
-//            ->addColumn('action', function ($receiver) use ($dataTableButton) {
-//                $button = '';
-//                if (auth()->user()->can('receiver-view'))
-//                    $button .= $dataTableButton->viewButton($this->baseRoute . 'show', $receiver->id);
-//                if (auth()->user()->can('receiver-edit'))
-//                    $button .= $dataTableButton->editButton($this->baseRoute . 'edit', $receiver->id);
-//                if (auth()->user()->can('receiver-delete'))
-//                    $button .= $dataTableButton->deleteButton($this->baseRoute . 'destroy', $receiver->id);
-//                return $button;
-//            })
-//            ->rawColumns(['is_active', 'action'])
-//            ->toJson();
+        return DB::table('receivers as r')
+            ->select('r.id', 'first_name', 'last_name', 'middle_name',
+                'email', 'phone_number1')
+            ->join('receiver_address as ra', 'ra.receiver_id', '=', 'r.id')
+            ->join('districts as d', 'd.id', '=', 'ra.district_id')
+            ->where('r.sender_id', '=', $sender_id)
+            ->whereNull('r.deleted_at')
+            ->get()->mapWithKeys(function ($receiver) {
+                return [
+                    $receiver->id => ucwords($receiver->first_name) . ' ' .
+                        ucwords($receiver->middle_name) . ' ' .
+                        ucwords($receiver->last_name) . ' ' .
+                        '[' . $receiver->phone_number1 . ' | ' . $receiver->email . ']'
+                ];
+            });
     }
-
-
-//    public function update(SenderRequest $request, int $id)
-//    {
-//        $attributes = $request->except('state_id', 'country_id', 'post_code');
-//        try {
-//            DB::beginTransaction();
-//            $attributes['updated_by'] = auth()->id();
-//            $this->repository->update($id, $attributes);
-//            DB::commit();
-//            $path = route($this->baseRoute . 'show', $id);
-//            return (new SuccessResponse($this->model, $request, 'updated', $path))
-//                ->responseOk();
-//        } catch (\Exception $exception) {
-//            DB::rollBack();
-//            return (new ErrorResponse($this->model, $request, $exception))
-//                ->responseError();
-//        }
-//    }
-//
-
-//    public function destroy(Request $request, $id)
-//    {
-//        try {
-//            DB::beginTransaction();
-//            $this->repository->delete($id);
-//            DB::commit();
-//            $redirectPath = $this->baseRoute . 'index';
-//            return (new SuccessResponse($this->model, $request, 'delete', $redirectPath))->responseOk();
-//        } catch (\Exception $exception) {
-//            DB::rollBack();
-//            return (new ErrorResponse($this->model, $request, $exception, 'delete'))->responseError();
-//        }
-//    }
 
 
 }

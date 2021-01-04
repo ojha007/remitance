@@ -7,7 +7,6 @@ namespace Modules\Backend\Repositories;
 use App\Repositories\Repository;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
-use Modules\Backend\Entities\Receiver;
 use Modules\Backend\Entities\Sender;
 
 class SenderRepository extends Repository
@@ -97,12 +96,15 @@ class SenderRepository extends Repository
         return DB::table('senders as se')
             ->select('se.id', 'code')
             ->selectRaw('CONCAT(first_name," " ,last_name) as name')
-            ->selectRaw('CONCAT(su.name," ," ,st.name) as address')
+            ->selectRaw('CONCAT(phone_number," | " ,email) as contact')
+            ->selectRaw('CONCAT(su.name," | " ,st.name) as address')
             ->join('suburbs as su', 'su.id', '=', 'se.suburb_id')
             ->join('states as st', 'st.id', '=', 'su.state_id')
             ->whereNull('deleted_at')
             ->get()->mapWithKeys(function ($sender) {
-                return [$sender->id => ucwords($sender->name) . ' (' . ucwords($sender->address) . ')'];
+                return [
+                    $sender->id => ucwords($sender->name) . ' [' . $sender->contact . '|' . ucwords($sender->address) . ']'
+                ];
             })->toArray();
 
     }

@@ -42,6 +42,7 @@ class CreateTransactionsTable extends Migration
             (new MigrationHelpers())->setForeignKey($table, 'receivers', 'receiver_id');
             (new MigrationHelpers())->setForeignKey($table, 'senders', 'sender_id');
             (new MigrationHelpers())->setForeignKey($table, 'users', 'updated_by', true);
+            (new MigrationHelpers())->setForeignKey($table, 'receiver_banks', 'receiver_bank_id');
             (new MigrationHelpers())->setForeignKey($table, 'users', 'created_by');
             $table->timestamps();
         });

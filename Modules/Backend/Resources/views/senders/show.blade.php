@@ -83,7 +83,7 @@
                     </span>
                     <br>
                     <span class="text-muted">
-                        Issued By : {{\Modules\Backend\Entities\Receiver::getIssuedByArray()[$sender->issued_by]}}
+                        Issued By : {{\Modules\Backend\Entities\Sender::getIssuedByArray()[$sender->issued_by]}}
                     </span>
                     <br>
                     <span class="text-muted">

@@ -1,2 +1,3 @@
 <?php
-Route::resource('send-money', 'TransactionController');
+Route::GET('send-money', 'SendMoneyController@create');
+Route::POST('send-money', 'SendMoneyController@store');

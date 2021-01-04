@@ -3,7 +3,7 @@
            class="col-sm-{{isset($classPartition) ? $classPartition : 2 }}
                col-form-label
                text-right
-               {{isset($labelClass) ?$labelClass : ''}}
+               {{isset($labelClass) ? $labelClass : ''}}
                ">
         {{isset($label) ? $label : ucwords(str_replace('_',' ',str_replace('_id',' ',$name)))}}
         @isset($is_required)
@@ -26,28 +26,54 @@
                 'class' => 'form-control select2',
                 'id'=> isset($id) ? $id : strtolower($name),
                 'style'=>'width:100%;')) !!}
-        @else
-            <input type="{{isset($type) ? $type : 'text'}}"
-                   @isset( $autofocus)
-                   autofocus
-                   @endisset
-                   class="rounded-0
-                   {{isset($type) && $type === 'file'  ? '' : 'form-control'}}
+        @elseif(isset($type) && $type=='textarea')
+            <textarea
+                class="rounded-0 form-control
                    {{$class ?? ''}}
-                   {{ $errors->has($name) ? ' is-invalid': '' }}"
-                   name="{{$name}}"
-                   @if(isset($type) && $type==='number')
-                   step="any"
-                   @endif
-                   @if(old($name))
-                   value="{{old($name)}}"
-                   @elseif(isset($model))
-                   value="{{$model->{$name} }}"
-                   @endif
-                   autocomplete="false"
-                   id="{{isset($id) ? $id : strtolower($name)}}"
-                   placeholder="{{isset($placeHolder) ? $placeHolder : 'Enter ' . ucwords(str_replace('_',' ',$name))}}">
+                {{ $errors->has($name) ? ' is-invalid': '' }}"
+                name="{{$name}}"
+                @if(old($name))
+                value="{{old($name)}}"
+                @elseif(isset($model))
+                value="{{$model->{$name} }}"
+                @endif
+                    rows="5"
+                id="{{isset($id) ? $id : strtolower($name)}}"
+                placeholder="{{isset($placeHolder) ? $placeHolder : 'Enter ' . ucwords(str_replace('_',' ',$name))}}">
+            </textarea>
+        @else
+            @isset($addOn)
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                    <span class="input-group-text">
+                        {!! $addOn !!}
+                        {{--                        <i class="fas fa-envelope"></i>--}}
+                    </span>
+                    </div>
+                    @endisset
+                    <input type="{{isset($type) ? $type : 'text'}}"
+                           @isset( $autofocus)
+                           autofocus
+                           @endisset
+                           class="rounded-0
+                          {{isset($type) && $type === 'file'  ? '' : 'form-control'}}
+                           {{$class ?? ''}}
+                           {{ $errors->has($name) ? ' is-invalid': '' }}"
+                           name="{{$name}}"
+                           @if(isset($type) && $type==='number')
+                           step="any"
+                           @endif
+                           @if(old($name))
+                           value="{{old($name)}}"
+                           @elseif(isset($model))
+                           value="{{$model->{$name} }}"
+                           @endif
+                           autocomplete="false"
+                           id="{{isset($id) ? $id : strtolower($name)}}"
+                           placeholder="{{isset($placeHolder) ? $placeHolder : 'Enter ' . ucwords(str_replace('_',' ',$name))}}">
+                    @isset($addOn)
+                </div>
+            @endisset
         @endif
     </div>
 </div>
-

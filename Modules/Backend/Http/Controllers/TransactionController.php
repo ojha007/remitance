@@ -43,8 +43,6 @@ class TransactionController extends Controller
         $this->middleware('permission:admin-permission');
         $this->middleware(['permission:send-money-view|send-money-create|send-money-edit|send-money-delete'], ['only' => ['index', 'show']]);
         $this->middleware(['permission:send-money-create'], ['only' => ['create', 'store', 'show']]);
-        $this->middleware(['permission:send-money-edit'], ['only' => ['edit', 'update', 'show']]);
-        $this->middleware(['permission:send-money-delete'], ['only' => ['destroy']]);
     }
 
     /**

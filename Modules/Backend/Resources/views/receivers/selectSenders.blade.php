@@ -5,7 +5,7 @@
 @stop
 @section('content')
     @php($classPartition =3)
-    @php($divClass='col-md-8')
+    @php($divClass='col-md-10')
     <div class="card">
         <div class="card-header">
             <h2 class="card-title">

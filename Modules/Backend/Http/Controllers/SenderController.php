@@ -101,9 +101,12 @@ class SenderController extends Controller
     }
 
 
-    public function show(int $id)
+    public function show(Request $request, int $id)
     {
         $sender = $this->repository->getAllDetailById($id);
+        if ($request->ajax()) {
+            return response()->json($sender);
+        }
         return view($this->viewPath . 'show', compact('sender'));
     }
 
