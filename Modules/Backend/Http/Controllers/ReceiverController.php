@@ -50,8 +50,10 @@ class ReceiverController extends Controller
     {
         $view = view($this->viewPath . 'create');
         $sender_id = $request->route('sender_id');
+        $banks = null;
         if ($sender_id)
-            return $this->repository->getCreateOrEditPage($view);
+            return $this->repository->getCreateOrEditPage($view)
+                ->with(['banks' => $banks]);
         else {
             $selectSenders = (new SenderRepository(new Sender()))->selectSenders();
             return view($this->viewPath . 'selectSenders', compact('selectSenders'));
@@ -113,10 +115,12 @@ class ReceiverController extends Controller
     public function edit(int $id)
     {
         $receiver = $this->repository->getAllDetailById($id);
-//        dd($receiver);
+        $banks =DB::table('receiver_banks')
+            ->select('bank_id','branch','account_name','account_number','is_default')
+            ->get()->toArray();
         $view = view($this->viewPath . 'edit');
         return $this->repository->getCreateOrEditPage($view)
-            ->with(['receiver' => $receiver]);
+            ->with(['receiver' => $receiver, 'banks' => $banks]);
 
     }
 
