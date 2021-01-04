@@ -14,4 +14,5 @@ Route::group([
     Route::get('/states/country/{country_id}', 'BackendController@getStates');
     Route::get('/districts/state/{state_id}', 'BackendController@getDistricts');
     Route::get('/municipalities/district/{district_id}', 'BackendController@getMunicipalities');
+    Route::get('/suburbs/state/{state_id}', 'BackendController@getSuburbs');
 });

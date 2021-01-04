@@ -20,27 +20,28 @@
             Address Information
         </h2>
     </div>
-{{--    @dd($sender)--}}
+    {{--    @dd($sender)--}}
     <div class="card-body">
         <div class="row">
-            @include('backend::common.input',['name'=>'street','is_required'=>true])
-            @include('backend::common.input',['name'=>'suburb_id','is_required'=>true,
-                    'type'=>'select',
-                    'options'=>$selectSuburbs,
-                    'default'=>$modal->suburb_id ??  null
-                    ])
+            @include('backend::common.input',['name'=>'country_id','is_required'=>true,
+               'type'=>'select',
+               'options'=>$selectCountries,
+               'default'=>$modal->country_id ??  null
+               ])
             @include('backend::common.input',['name'=>'state_id',
                 'is_required'=>true,
                 'type'=>'select',
                 'options'=>$selectStates,
                 'default'=>$modal->state_id ??  null
                 ])
+            @include('backend::common.input',['name'=>'suburb_id','is_required'=>true,
+                    'type'=>'select',
+                    'options'=>$selectSuburbs,
+                    'default'=>$modal->suburb_id ??  null
+                    ])
+
+            @include('backend::common.input',['name'=>'street','is_required'=>true])
             @include('backend::common.input',['name'=>'post_code','is_required'=>true,'type'=>'number'])
-            @include('backend::common.input',['name'=>'country_id','is_required'=>true,
-                'type'=>'select',
-                'options'=>$selectCountries,
-                'default'=>$modal->country_id ??  null
-                ])
 
 
         </div>
@@ -78,5 +79,12 @@
         </a>
     </div>
 </div>
+@section('js')
+    <script>
+        let state_id = $('#state_id')
+        handleOnSelect2Change($('#country_id'), state_id, '{{url('/states/country')}}');
+        handleOnSelect2Change(state_id, $('#suburb_id'), '{{url('/suburbs/state')}}');
+    </script>
+@endsection
 
 

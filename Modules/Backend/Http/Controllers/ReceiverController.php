@@ -46,12 +46,16 @@ class ReceiverController extends Controller
         return view($this->viewPath . 'index', compact('receivers'));
     }
 
-    public function create()
+    public function create(Request $request)
     {
         $view = view($this->viewPath . 'create');
-        $selectSenders = (new SenderRepository(new Sender()))->selectSenders();
-        return $this->repository->getCreateOrEditPage($view)
-            ->with(['selectSenders' => $selectSenders]);
+        $sender_id = $request->route('sender_id');
+        if ($sender_id)
+            return $this->repository->getCreateOrEditPage($view);
+        else {
+            $selectSenders = (new SenderRepository(new Sender()))->selectSenders();
+            return view($this->viewPath . 'selectSenders', compact('selectSenders'));
+        }
 
     }
 
@@ -100,7 +104,6 @@ class ReceiverController extends Controller
                 ->responseOk();
         } catch (\Exception $exception) {
             DB::rollBack();
-            dd($exception);
             return (new ErrorResponse($this->model, $request, $exception))
                 ->responseError();
         }
@@ -110,6 +113,7 @@ class ReceiverController extends Controller
     public function edit(int $id)
     {
         $receiver = $this->repository->getAllDetailById($id);
+//        dd($receiver);
         $view = view($this->viewPath . 'edit');
         return $this->repository->getCreateOrEditPage($view)
             ->with(['receiver' => $receiver]);

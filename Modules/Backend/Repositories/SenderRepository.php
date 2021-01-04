@@ -33,22 +33,24 @@ class SenderRepository extends Repository
 
     public function getCreateOrEditPage($view)
     {
+
         $suburbs = Cache::rememberForever('suburbs', function () {
             return DB::table('suburbs')
                 ->pluck('name', 'id')
                 ->toArray();
         });
-        $issuedBy = Receiver::getIssuedByArray();
+        $issuedBy = Sender::getIssuedByArray();
         return $view->with([
             'selectSuburbs' => $suburbs,
             'selectIssuedBy' => $issuedBy
         ])->with(
-            $this->getCommonViewPageData()
+            $this->getCommonViewPageData('Australia')
         );
     }
 
     public function getCommonViewPageData($country = 'Nepal'): array
     {
+//        dd($country);
         $countries = Cache::rememberForever('countries', function () {
             return DB::table('countries')
                 ->pluck('name', 'id')

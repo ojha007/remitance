@@ -6,8 +6,8 @@
 @stop
 @section('content')
     @php($classPartition =3)
-    {!! Form::model($sender,['route'=>[$routePrefix.'senders.update',$sender->id],"enctype"=>"multipart/form-data"]) !!}
+    {!! Form::model($receiver,['route'=>[$routePrefix.'receivers.update',$receiver->id],"enctype"=>"multipart/form-data"]) !!}
     @method('patch')
-    @include('backend::senders.partials.form',['divClass'=>'col-md-6','model'=>$sender])
+    @include('backend::receivers.partials.form',['divClass'=>'col-md-6','model'=>$receiver])
     {!! Form::close() !!}
 @endsection

@@ -8,6 +8,5 @@
     {!! Form::open(['route'=>$routePrefix.'receivers.store',"enctype"=>"multipart/form-data"]) !!}
     @include('backend::receivers.partials.form',['divClass'=>'col-md-6'])
     {!! Form::close() !!}
-
 @endsection
 

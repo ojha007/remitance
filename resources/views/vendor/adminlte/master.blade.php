@@ -109,6 +109,25 @@
 
 {{-- Custom Scripts --}}
 <script>
+    function handleOnSelect2Change(primary, secondary, url) {
+        primary.on('change', function () {
+            secondary.find('option').not(':first').remove();
+            $.ajax({
+                url: url + '/' + $(this).val(),
+                method: 'GET',
+                success: function (response) {
+                    $.each(response, function (value, text) {
+                        secondary.append($('<option/>', {
+                            value: value,
+                            text: text
+                        }));
+                    })
+
+                }
+            });
+        });
+    }
+
     $(document).ready(function () {
         $('.datePicker').datepicker({
             format: 'yyyy-mm-dd',
@@ -124,6 +143,7 @@
         $('.modal').on('shown.bs.modal', function () {
             $(this).find('[autofocus]').focus();
         });
+
 
         $('.select2').select2({dropdownAutoWidth: true});
     })
