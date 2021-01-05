@@ -7,13 +7,17 @@
 @stop
 
 @section('content')
-    <p>Welcome to this beautiful admin panel.</p>
+    <div class="row">
+        @foreach($widgets as $key=>$widget)
+            @include('backend::dashboard.countWidgetTemplate',['widget'=>$widget])
+        @endforeach
+    </div>
 @stop
 
-@section('css')
-{{--    <link rel="stylesheet" href="/css/admin_custom.css" >--}}
-@stop
+{{--@section('css')--}}
+{{--    --}}{{--    <link rel="stylesheet" href="/css/admin_custom.css" >--}}
+{{--@stop--}}
 
-@section('js')
-    <script> console.log('Hi!'); </script>
-@stop
+{{--@section('js')--}}
+{{--    <script> console.log('Hi!'); </script>--}}
+{{--@stop--}}

@@ -49,17 +49,22 @@ class ReceiverRepository extends Repository
                 ->pluck('name', 'id')
                 ->toArray();
         });
-        $selectDistricts = Cache::rememberForever('districts', function () {
-            return DB::table('districts')
-                ->pluck('name', 'id')
-                ->toArray();
-        });
+        $selectDistricts = $this->selectDistricts();
         return $view->with([
             'selectIssuedBy' => $issuedBy,
             'selectDistricts' => $selectDistricts,
             'selectBanks' => $selectBanks,
             'selectMps' => [],
         ])->with($attributes);
+    }
+
+    public function selectDistricts()
+    {
+        return Cache::rememberForever('districts', function () {
+            return DB::table('districts')
+                ->pluck('name', 'id')
+                ->toArray();
+        });
     }
 
     public function getReceiverById($id): \Illuminate\Support\Collection
@@ -89,9 +94,9 @@ class ReceiverRepository extends Repository
         return DB::table('receivers as re')
             ->select('re.id', 'email', 'phone_number1', 'phone_number2', 'id_number',
                 'street', 'date_of_birth', 'issued_by', 're.first_name', 're.last_name', 're.middle_name',
-                'state_id', 'country_id','ward_number','tole_number','file',
+                'state_id', 'country_id', 'ward_number', 'tole_number', 'file',
                 'district_id', 'identity_type_id',
-                 'expiry_date', 'is_active', 'it.name as identity_type')
+                'expiry_date', 'is_active', 'it.name as identity_type')
             ->join('receiver_address as ra', 're.id', '=', 'ra.receiver_id')
             ->join('districts as dt', 'dt.id', '=', 'ra.district_id')
             ->join('states as st', 'st.id', '=', 'dt.state_id')

@@ -4,6 +4,7 @@ namespace Modules\Backend\Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
+use Modules\Backend\Entities\SendMoney;
 
 class PaymentTypeSeeder extends Seeder
 {
@@ -19,6 +20,13 @@ class PaymentTypeSeeder extends Seeder
             DB::table('payment_types')
                 ->updateOrInsert(
                     ['name' => $paymentType], ['name' => $paymentType]);
+        }
+        $statues = SendMoney::getAllTransactionStatues();
+        foreach ($statues as $status) {
+            DB::table('statuses')
+                ->updateOrInsert([
+                    'name' => $status,
+                ], ['name' => $status]);
         }
     }
 }

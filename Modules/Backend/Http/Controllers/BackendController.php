@@ -16,7 +16,36 @@ class BackendController extends Controller
 
     public function index()
     {
-        return view('backend::index');
+        $widgets = [];
+        $widgets['Total Senders'] = [
+            'total' => DB::table('senders')->count('id'),
+            'icon' => 'fa fa-info',
+            'bg' => 'bg-info',
+            'url' => route('admin.senders.index')
+        ];
+        $widgets['Total Receivers'] = [
+            'total' => DB::table('receivers')->count('id'),
+            'icon' => 'fa fa-user-plus',
+            'bg' => 'bg-success',
+            'url' => route('admin.receivers.index')
+        ];
+        $widgets['Today Transactions'] = [
+            'total' => DB::table('transactions')->count('id'),
+            'icon' => 'fas  fa-paper-plane',
+            'bg' => 'bg-primary',
+            'url' => '#'
+        ];
+        $widgets['Today Customer Rate'] = [
+            'total' => DB::table('rates')
+                ->latest()->first()
+                ->customer_rate,
+            'icon' => 'fas  fa-dollar',
+            'bg' => 'bg-danger',
+            'url' => route('admin.rates.index')
+        ];
+//        dd($widgets);
+//        dd($widgets);
+        return view('backend::index', compact('widgets'));
     }
 
     public function getStates($country_id): array

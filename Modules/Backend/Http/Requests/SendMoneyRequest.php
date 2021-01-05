@@ -16,8 +16,9 @@ class SendMoneyRequest extends FormRequest
 
         return [
             'receiver_id' => 'required|exists:receivers,id',
-            'sender_id' => 'required|exists:senders_id',
+            'sender_id' => 'required|exists:senders,id',
             'sending_amount' => 'required|numeric',
+            'date' => 'required|date:format,Y-m-d',
             'rate' => 'required|numeric',
             'receiving_amount' => 'required|numeric',
             'payment_type_id' => 'required|exists:payment_types,id',

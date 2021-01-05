@@ -32,14 +32,13 @@
                    {{$class ?? ''}}
                 {{ $errors->has($name) ? ' is-invalid': '' }}"
                 name="{{$name}}"
+                rows="5"
+                id="{{isset($id) ? $id : strtolower($name)}}">
                 @if(old($name))
-                value="{{old($name)}}"
+                    {{old($name)}}
                 @elseif(isset($model))
-                value="{{$model->{$name} }}"
+                    {{$model->{$name} }}
                 @endif
-                    rows="5"
-                id="{{isset($id) ? $id : strtolower($name)}}"
-                placeholder="{{isset($placeHolder) ? $placeHolder : 'Enter ' . ucwords(str_replace('_',' ',$name))}}">
             </textarea>
         @else
             @isset($addOn)

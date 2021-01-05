@@ -11,13 +11,22 @@ class SendMoney extends Model
 
 
     const CODE = 'TR';
-
+    const AWAITING = 'Awaiting';
+    const PENDING = 'Pending';
     protected $table = 'transactions';
 
     protected $fillable = ['sending_amount', 'receiver_bank_id', 'receiving_amount',
-        'sender_id', 'receiving_id', 'code', 'date',
-        'rate', 'charge', 'currency_id', 'payment_type_id', 'notes', 'file',
+        'sender_id', 'receiver_id', 'code', 'date',
+        'rate', 'charge', 'currency_id',
+        'payment_type_id', 'notes', 'file',
         'created_by', 'updated_by'];
 
+    public static function getAllTransactionStatues(): array
+    {
+        return [
+            self::AWAITING,
+            self::PENDING,
+        ];
+    }
 
 }
