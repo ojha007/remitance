@@ -33,7 +33,6 @@ class BackendServiceProvider extends ServiceProvider
         $this->registerTranslations();
         $this->registerConfig();
         $this->registerViews();
-//        $this->registerAppMenus();
         $this->registerSystemConfiguration();
         $this->loadMigrationsFrom(module_path($this->moduleName, 'Database/Migrations'));
     }
@@ -98,6 +97,37 @@ class BackendServiceProvider extends ServiceProvider
         return $paths;
     }
 
+
+    protected function registerSystemConfiguration()
+    {
+        View::composer('backend::*', function ($view) {
+            $routePrefix = Request::route()->getAction('routePrefix');
+            $view->with([
+                'routePrefix' => $routePrefix,
+            ]);
+        });
+    }
+
+    /**
+     * Register the service provider.
+     *
+     * @return void
+     */
+    public function register()
+    {
+        $this->app->register(RouteServiceProvider::class);
+    }
+
+    /**
+     * Get the services provided by the provider.
+     *
+     * @return array
+     */
+    public function provides()
+    {
+        return [];
+    }
+
     private function registerAppMenus()
     {
         $appMenus = new Collection();
@@ -155,35 +185,5 @@ class BackendServiceProvider extends ServiceProvider
             from menu_items
 
         ";
-    }
-
-    protected function registerSystemConfiguration()
-    {
-        View::composer('backend::*', function ($view) {
-            $routePrefix = Request::route()->getAction('routePrefix');
-            $view->with([
-                'routePrefix' => $routePrefix,
-            ]);
-        });
-    }
-
-    /**
-     * Register the service provider.
-     *
-     * @return void
-     */
-    public function register()
-    {
-        $this->app->register(RouteServiceProvider::class);
-    }
-
-    /**
-     * Get the services provided by the provider.
-     *
-     * @return array
-     */
-    public function provides()
-    {
-        return [];
     }
 }

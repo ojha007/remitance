@@ -1,17 +1,18 @@
 @isset($filterBy)
     {{Form::open(['url'=>request()->url(),'method'=>'GET'])}}
-    <div class="card">
-        <div class="card-header">
-            <h3 class="card-title">Advanced Search</h3>
-            <div class="card-tools">
-                <button type="button" class="btn btn-tool"
-                        data-card-widget="collapse" title="Collapse">
-                    <i class="fas fa-minus"></i>
-                </button>
-
+    <div class="box">
+        <div class="box-header with-border">
+            <h3 class="box-title">Advanced Search</h3>
+            <div class="box-tools pull-right">
+                <button type="button" class="btn btn-box-tool" data-widget="collapse"
+                        data-toggle="tooltip" title="" data-original-title="Collapse">
+                    <i class="fa fa-minus"></i></button>
+                <button type="button" class="btn btn-box-tool" data-widget="remove"
+                        data-toggle="tooltip" title="" data-original-title="Remove">
+                    <i class="fa fa-times"></i></button>
             </div>
         </div>
-        <div class="card-body" style="display: block;">
+        <div class="box-body" style="display: block;">
             <div class="row">
                 @foreach($filterBy as $filter)
                     <div class="col-md-3">
@@ -27,7 +28,7 @@
                 @endforeach
             </div>
         </div>
-        <div class="card-footer">
+        <div class="box-footer">
             <button type="submit" class="btn  float-left btn-flat btn-primary">
                 <i class="fa fa-search"></i>
                 Search

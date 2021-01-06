@@ -207,9 +207,9 @@ return [
     |
     */
 
-    'enabled_laravel_mix' => false,
-    'laravel_mix_css_path' => 'css/app.css',
-    'laravel_mix_js_path' => 'js/app.js',
+    'enabled_laravel_mix' => true,
+    'laravel_mix_css_path' => '/css/backend.css',
+    'laravel_mix_js_path' => '/js/backend.js',
 
     /*
     |--------------------------------------------------------------------------
@@ -232,23 +232,23 @@ return [
         [
             'text' => 'Dashboard',
             'url' => 'dashboard',
-            'icon' => 'fas fa-fw fa-tachometer-alt',
+            'icon' => 'fa fa-dashboard',
         ],
         [
             'text' => 'Send Money',
             'url' => 'send-money',
-            'icon' => 'fas fa-fw fa-money-bill-alt',
+            'icon' => 'fa fa-paper-plane',
             'can' => 'send-money-view'
         ],
         [
             'text' => 'Rates',
             'url' => 'rates',
-            'icon' => 'fas fa-fw fa-dollar-sign',
+            'icon' => 'fa fa-dollar',
             'can' => 'rate-view'
         ],
         [
             'text' => 'Manage Senders',
-            'icon' => 'fas fa-fw fa-user-plus',
+            'icon' => 'fa fa-user-plus',
             'submenu' => [
                 [
                     'text' => 'All Senders',
@@ -264,7 +264,7 @@ return [
         ],
         [
             'text' => 'Manage Receivers',
-            'icon' => 'fas fa-fw fa-user-plus',
+            'icon' => 'fa fa-user-plus',
             'submenu' => [
                 [
                     'text' => 'All Receivers',
@@ -274,11 +274,9 @@ return [
             ],
         ],
         ['header' => 'PREFERENCES'],
-
-
         [
             'text' => 'Users And Roles',
-            'icon' => 'fas fa-fw fa-users',
+            'icon' => 'fa fa-users',
             'submenu' => [
                 [
                     'text' => 'Users',
@@ -296,8 +294,9 @@ return [
         [
             'text' => 'profile',
             'url' => 'settings',
-            'icon' => 'fas fa-fw fa-user',
+            'icon' => 'fa fa-user',
         ],
+
     ],
 
     /*
@@ -434,6 +433,7 @@ return [
                     'location' => '//cdnjs.cloudflare.com/ajax/libs/pace/1.0.2/pace.min.js',
                 ],
             ],
+//            <script src=""></script>
         ],
         'ModalValidation' => [
             'active' => true,
@@ -442,6 +442,16 @@ return [
                     'type' => 'js',
                     'asset' => false,
                     'location' => '/backend/modal-validation.js',
+                ],
+            ],
+        ],
+        'App' => [
+            'active' => true,
+            'files' => [
+                [
+                    'type' => 'js',
+                    'asset' => true,
+                    'location' => '/js/app.js',
                 ],
             ],
         ],

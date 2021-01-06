@@ -1,10 +1,15 @@
-@extends('adminlte::page')
+@extends('backend::master')
 
-@section('title', 'Senders')
+@section('title_postfix', ' | Receivers')
 
-@section('content_header')
-    <h1>Receiver List</h1>
+@section('header')
+    Receivers
 @stop
+@section('subHeader')
+    List of Receivers
+@endsection
+@section('breadcrumb')
+@endsection
 @section('content')
     @include('backend::common.filterBox',
            ['filterBy'=>
@@ -12,15 +17,18 @@
                    ['name'=>'name'],
                ]
              ])
-    <div class="card">
-        <div class="card-header">
-            <a href="{{route($routePrefix.'receivers.create')}}"
-               class="btn btn-primary btn-flat float-right">
-                <i class="fas fa-plus"></i>
-                Add Receivers
-            </a>
-        </div>
-        <div class="card-body">
+
+    <div class="box-header">
+        <a href="{{route($routePrefix.'receivers.create')}}"
+           class="btn btn-primary btn-flat pull-right">
+            <i class="fa fa-plus"></i>
+            Add Receivers
+        </a>
+    </div>
+
+    <div class="box box-default">
+
+        <div class="box-body">
             <table class="table dataTable table-bordered" id="dataTables">
                 <thead>
                 <tr>

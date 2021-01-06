@@ -1,11 +1,11 @@
-@extends('adminlte::page')
+@extends('backend::master')
 
-@section('title', 'Role')
+@section('title_postfix', 'Role')
 
 @section('content_header')
-   <h1>
-       Create Role
-   </h1>
+    <h1>
+        Create Role
+    </h1>
 @endsection
 @section('breadcrumb')
     {{--    {{ Breadcrumbs::render('roles.index',$routePrefix) }}--}}

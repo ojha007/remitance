@@ -1,23 +1,22 @@
-@extends('adminlte::page')
+@extends('backend::master')
 
-@section('title', 'Dashboard')
-
-@section('content_header')
-    <h1>Dashboard</h1>
+{{--@section('title', 'Rates')--}}
+@section('title_postfix', '| Dashboard')
+@section('header')
+    Dashboard
 @stop
-
+@section('subHeader')
+    Dashboard
+@endsection
+@section('breadcrumb')
+    {{--    {{ Breadcrumbs::render('roles.index',$routePrefix) }}--}}
+@stop
 @section('content')
     <div class="row">
-        @foreach($widgets as $key=>$widget)
-            @include('backend::dashboard.countWidgetTemplate',['widget'=>$widget])
-        @endforeach
+        <div class="col-md-12">
+            @foreach($widgets as $key=>$widget)
+                @include('backend::dashboard.countWidgetTemplate',['widget'=>$widget])
+            @endforeach
+        </div>
     </div>
 @stop
-
-{{--@section('css')--}}
-{{--    --}}{{--    <link rel="stylesheet" href="/css/admin_custom.css" >--}}
-{{--@stop--}}
-
-{{--@section('js')--}}
-{{--    <script> console.log('Hi!'); </script>--}}
-{{--@stop--}}

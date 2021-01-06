@@ -1,16 +1,16 @@
-<div class="form-group {{$divClass ?? '' }}  row">
+<div class="form-group col-md-{{$divClass ?? '' }}  ">
     <label for="{{isset($id) ? $id : strtolower($name)}}"
-           class="col-sm-{{isset($classPartition) ? $classPartition : 2 }}
-               col-form-label
-               text-right
+           class="col-md-{{isset($classPartition) ? $classPartition : 4 }}
+               control-label
                {{isset($labelClass) ? $labelClass : ''}}
                ">
         {{isset($label) ? $label : ucwords(str_replace('_',' ',str_replace('_id',' ',$name)))}}
         @isset($is_required)
             <span style="color: #ea1a1a">*</span>
         @endisset
+        &nbsp;:
     </label>
-    <div class="col-sm-{{isset($classPartition) ? 12 - $classPartition : 10}}
+    <div class="col-sm-{{isset($classPartition) ? 12 - $classPartition : 8}}
     {{ $errors->has($name) ? ' is-invalid': '' }}">
         @if(isset($type) && $type==='checkbox')
             <input type="hidden" name="{{$name}}" value="0">

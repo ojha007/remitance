@@ -12,19 +12,30 @@
     "devDependencies": {
         "@tailwindcss/postcss7-compat": "^2.0.2",
         "autoprefixer": "^9.8.6",
-        "axios": "^0.19",
+        "axios": "^0.21.1",
         "bootstrap": "^4.0.0",
         "cross-env": "^7.0",
         "jquery": "^3.2",
+        "laravel-echo": "^1.10.0",
         "laravel-mix": "^5.0.1",
         "lodash": "^4.17.19",
         "popper.js": "^1.12",
         "postcss": "^7.0.35",
+        "pusher-js": "^7.0.2",
         "resolve-url-loader": "^2.3.1",
         "sass": "^1.20.1",
         "sass-loader": "^8.0.0",
         "tailwindcss": "npm:@tailwindcss/postcss7-compat@^2.0.2",
         "vue": "^2.5.17",
         "vue-template-compiler": "^2.6.10"
+    },
+    "dependencies": {
+        "admin-lte": "^3.0.5",
+        "bootstrap-datepicker": "^1.9.0",
+        "datatables.net": "^1.10.23",
+        "datatables.net-bs": "^1.10.23",
+        "datatables.net-bs4": "^1.10.23",
+        "icheck": "^1.0.2",
+        "select2": "^4.0.13"
     }
 }

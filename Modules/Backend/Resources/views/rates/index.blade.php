@@ -1,41 +1,54 @@
-@extends('adminlte::page')
+@extends('backend::master')
 
-@section('title', 'Rates')
+@section('title_postfix', ' | Rates')
 
-@section('content_header')
-    <h1>
-        Rates
-    </h1>
+@section('header')
+    Rates
 @stop
+@section('subHeader')
+    List of Rates
+@endsection
+
+@section('breadcrumb')
+@endsection
 @section('content')
     @php($button ='Save')
-    <div class="card">
-        @can('rate-create')
-            <div class="card-header">
-                <button data-toggle="modal" data-target="#{{$modal}}"
-                        class="btn btn-primary btn-flat float-right bootstrap-modal-form-open">
-                    <i class="fas fa-plus"></i>
-                    Add Rates
-                </button>
-            </div>
-        @endcan
-        <div class="card-body">
-            <table class="table dataTable table-bordered" id="dataTables">
-                <thead>
-                <tr>
-{{--                    <th>S.No</th>--}}
-                    <th>Date</th>
-                    <th>Customer Rate</th>
-                    <th>Agent Rate</th>
-                    <th>Action</th>
-                </tr>
-                </thead>
-                <tbody>
+    <div class="row">
+        <div class="col-md-12">
+            @can('rate-create')
+                <div class="box-header">
+                    <button data-toggle="modal" data-target="#{{$modal}}"
+                            class="btn btn-primary btn-flat pull-right bootstrap-modal-form-open">
+                        <i class="fa fa-plus"></i>
+                        Add Rates
+                    </button>
+                </div>
+            @endcan
+            <div class="box box-default">
+{{--                <div class="box-header with-border">--}}
+{{--                    <h3 class="box-title">--}}
+{{--                        Rates--}}
+{{--                    </h3>--}}
+{{--                </div>--}}
+                <div class="box-body">
+                    <table class="table dataTable table-bordered" id="dataTables">
+                        <thead>
+                        <tr>
+                            <th>Date</th>
+                            <th>Customer Rate</th>
+                            <th>Agent Rate</th>
+                            <th>Action</th>
+                        </tr>
+                        </thead>
+                        <tbody>
 
-                </tbody>
-            </table>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
         </div>
     </div>
+
     @include('backend::rates.partials.modal')
 @stop
 {{--@section('adminlte_js')--}}

@@ -19,20 +19,20 @@ class BackendController extends Controller
         $widgets = [];
         $widgets['Total Senders'] = [
             'total' => DB::table('senders')->count('id'),
-            'icon' => 'fa fa-info',
-            'bg' => 'bg-info',
+            'icon' => 'fa fa-user',
+            'bg' => 'bg-aqua',
             'url' => route('admin.senders.index')
         ];
         $widgets['Total Receivers'] = [
             'total' => DB::table('receivers')->count('id'),
             'icon' => 'fa fa-user-plus',
-            'bg' => 'bg-success',
+            'bg' => 'bg-green',
             'url' => route('admin.receivers.index')
         ];
         $widgets['Today Transactions'] = [
             'total' => DB::table('transactions')->count('id'),
-            'icon' => 'fas  fa-paper-plane',
-            'bg' => 'bg-primary',
+            'icon' => 'fa fa-paper-plane',
+            'bg' => 'bg-blue',
             'url' => '#'
         ];
         $widgets['Today Customer Rate'] = [
@@ -40,11 +40,9 @@ class BackendController extends Controller
                 ->latest()->first()
                 ->customer_rate,
             'icon' => 'fas  fa-dollar',
-            'bg' => 'bg-danger',
+            'bg' => 'bg-yellow',
             'url' => route('admin.rates.index')
         ];
-//        dd($widgets);
-//        dd($widgets);
         return view('backend::index', compact('widgets'));
     }
 

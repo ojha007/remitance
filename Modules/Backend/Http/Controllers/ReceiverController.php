@@ -42,7 +42,6 @@ class ReceiverController extends Controller
     public function index(Request $request)
     {
         $receivers = $this->repository->getAllReceivers($request);
-
         return view($this->viewPath . 'index', compact('receivers'));
     }
 

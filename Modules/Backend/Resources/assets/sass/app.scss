@@ -1,0 +1,24 @@
+@import url('https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic');
+
+@import "~bootstrap/dist/css/bootstrap.min.css";
+@import "../css/all-skins.css";
+@import "../css/AdminLTE.css";
+@import "~icheck-bootstrap/icheck-bootstrap.min.css";
+@import "~bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css";
+@import "~select2/dist/css/select2.min.css";
+@import "~ionicons/dist/css/ionicons.min.css";
+@import "~font-awesome/css/font-awesome.css";
+@import "~datatables.net-bs/css/dataTables.bootstrap.min.css";
+@import "~bootstrap-toggle/css/bootstrap-toggle.css";
+
+.select2-selection__rendered {
+    line-height: 31px !important;
+}
+
+.select2-container .select2-selection--single {
+    height: 37px !important;
+}
+
+.select2-selection__arrow {
+    height: 34px !important;
+}

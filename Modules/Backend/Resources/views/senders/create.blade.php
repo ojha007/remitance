@@ -1,9 +1,7 @@
-@extends('adminlte::page')
-@section('title', 'Senders')
-
-@section('content_header')
-    <h1>Add Sender</h1>
-@stop
+@extends('backend::master')
+@section('title_postfix', ' |Senders')
+@section('header') Senders @stop
+@section('subHeader') Create Sender @endsection
 @section('content')
     @php($classPartition =3)
     {!! Form::open(['route'=>$routePrefix.'senders.store',"enctype"=>"multipart/form-data"]) !!}

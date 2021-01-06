@@ -1,10 +1,13 @@
-@extends('adminlte::page')
-
-@section('title', 'Senders')
-
-@section('content_header')
-    <h1>Senders</h1>
+@extends('backend::master')
+@section('title_postfix', ' | Senders')
+@section('header')
+    Senders
 @stop
+@section('subHeader')
+    List of Senders
+@endsection
+@section('breadcrumb')
+@endsection
 @section('content')
     @include('backend::common.filterBox',
         ['filterBy'=>[
@@ -12,15 +15,15 @@
 
             ]
           ])
-    <div class="card">
-        <div class="card-header">
-            <a href="{{route($routePrefix.'senders.create')}}"
-               class="btn btn-primary btn-flat float-right">
-                <i class="fas fa-plus"></i>
-                Add Senders
-            </a>
-        </div>
-        <div class="card-body">
+    <div class="box-header">
+        <a href="{{route($routePrefix.'senders.create')}}"
+           class="btn btn-primary btn-flat pull-right">
+            <i class="fas fa-plus"></i>
+            Add Senders
+        </a>
+    </div>
+    <div class="box">
+        <div class="box-body">
             <table class="table dataTable table-bordered" id="dataTables">
                 <thead>
                 <tr>

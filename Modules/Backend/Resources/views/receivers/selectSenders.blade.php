@@ -1,18 +1,17 @@
-@extends('adminlte::page')
-@section('title', 'Receivers')
-@section('content_header')
-    <h1>Add Receiver</h1>
-@stop
+@extends('backend::master')
+@section('title_postfix', ' | Senders')
+@section('header') Senders @stop
+@section('subHeader') Select Senders @endsection
 @section('content')
     @php($classPartition =3)
     @php($divClass='col-md-10')
-    <div class="card">
-        <div class="card-header">
-            <h2 class="card-title">
+    <div class="box">
+        <div class="box-header">
+            <h2 class="box-title">
                 Senders
             </h2>
         </div>
-        <div class="card-body">
+        <div class="box-body">
             <div class="row">
                 @include('backend::common.input',[
                     'name'=>'sender_id',

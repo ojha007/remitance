@@ -47,6 +47,7 @@ class SenderController extends Controller
             $senders = $this->repository->getIndexPageData($attributes);
             return $this->dataTableLists($senders);
         }
+//        dd('g');
         return view($this->viewPath . 'index');
     }
 

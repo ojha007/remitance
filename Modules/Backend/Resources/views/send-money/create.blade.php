@@ -1,84 +1,70 @@
-@extends('adminlte::page')
+@extends('backend::master')
 
-@section('title', 'Send Money')
-
-@section('content_header')
-    <h1>Send Money</h1>
+{{--@section('title', 'Rates')--}}
+@section('title_postfix', '| Send Money')
+@section('header')
+    Send Money
+@stop
+@section('subHeader')
+    Send Money
 @endsection
 @section('breadcrumb')
     {{--    {{ Breadcrumbs::render('roles.index',$routePrefix) }}--}}
 @stop
 @section('content')
 
-    {!! Form::open(['url'=>request()->url()]) !!}
-    <div class="card">
-        <div class="card-body">
-            <div class="row">
-                @php($divClass ='col-md-6')
-                @include('backend::common.input',
-                ['name'=>'sender_id',
-                'is_required'=>true,'type'=>'select',
-                'options'=>$selectSenders,'default'=>null])
+    {!! Form::open(['url'=>request()->url(),'class'=>'form-horizontal' ,'enctype'=>"multipart/form-data"]) !!}
+    <div class="row">
+        <div class="col-md-12">
+            <div class="box box-default">
+                <div class="box-header with-border">
+                    <h3 class="box-title">
+                        Send Money
+                    </h3>
+                </div>
+                <div class="box-body">
+                    <div class="row">
+                        @php($divClass ='6')
+                        @include('backend::common.input',
+                        ['name'=>'sender_id',
+                        'is_required'=>true,'type'=>'select',
+                        'options'=>$selectSenders,'default'=>null])
 
-                @include('backend::common.input',['name'=>'receiver_id',
-               'is_required'=>true,'type'=>'select',
-               'options'=>[],'default'=>null])
+                        @include('backend::common.input',['name'=>'receiver_id',
+                       'is_required'=>true,'type'=>'select',
+                       'options'=>[],'default'=>null])
 
-                <div class="col-md-6 row form-group" id="sender-detail"></div>
-                <div class="col-md-6 row form-group" id="receiver-detail"></div>
-                @include('backend::common.input',['name'=>'date','is_required'=>true,'class'=>'datePicker'])
-                @include('backend::common.input',['name'=>'sending_amount','type'=>'number','is_required'=>true,'addOn'=>'AUD'])
-                @include('backend::common.input',['name'=>'rate','type'=>'number','is_required'=>true])
-                @include('backend::common.input',['name'=>'receiving_amount','type'=>'number','is_required'=>true,'addOn'=>'NPR'])
-                @include('backend::common.input',['name'=>'charge','type'=>'number','is_required'=>true,'addOn'=>'AUD'])
-                @include('backend::common.input',
-                ['name'=>'payment_type_id','is_required'=>true,'type'=>'select',
-                'options'=>$selectPaymentTypes,'default'=>null      ])
-                @include('backend::common.input',
-                ['name'=>'pickup_address','is_required'=>true,
-                'type'=>'select', 'options'=>$selectDistricts,'default'=>null])
-                @include('backend::common.input',['name'=>'notes','type'=>'textarea'])
-                @include('backend::common.input',['name'=>'file','type'=>'file','label'=>'Upload File'])
+                        <div class="col-md-6 row form-group" id="sender-detail"></div>
+                        <div class="col-md-6 row form-group" id="receiver-detail"></div>
+                        @include('backend::common.input',['name'=>'date','is_required'=>true,'class'=>'datePicker'])
+                        @include('backend::common.input',['name'=>'sending_amount','type'=>'number','is_required'=>true,'addOn'=>'AUD'])
+                        @include('backend::common.input',['name'=>'rate','type'=>'number','is_required'=>true])
+                        @include('backend::common.input',['name'=>'receiving_amount','type'=>'number','is_required'=>true,'addOn'=>'NPR'])
+                        @include('backend::common.input',['name'=>'charge','type'=>'number','is_required'=>true,'addOn'=>'AUD'])
+                        @include('backend::common.input',
+                        ['name'=>'payment_type_id','is_required'=>true,'type'=>'select',
+                        'options'=>$selectPaymentTypes,'default'=>null      ])
+                        @include('backend::common.input',
+                        ['name'=>'pickup_address','is_required'=>true,
+                        'type'=>'select', 'options'=>$selectDistricts,'default'=>null])
+                        @include('backend::common.input',['name'=>'notes','type'=>'textarea'])
+                        @include('backend::common.input',['name'=>'file','type'=>'file','label'=>'Upload File'])
 
+                    </div>
+
+
+                </div>
+                {{--        <div class="roe"></div>--}}
+                <div class="box-footer">
+                    <button type="button" class="btn btn-default btn-flat pull-left">
+                        <i class="fa fa-times"></i>
+                        Close
+                    </button>
+                    <button type="submit" class="btn-primary btn-flat btn pull-right">
+                        <i class="fa  fa-paper-plane"></i> Send Money
+                    </button>
+                </div>
             </div>
-
-            <div class="col-md-6 col-md-offset-6 top-buffer" style="float: right;">
-                <table class="table table-bordered">
-                    <tr id="tr_total_charge">
-                        <td class="text-right">
-                            <div>
-                                {{ Form::label('total_charge', 'Total Charge Amount(AUD):', ['class'=>'control-label'])}}
-                            </div>
-                        </td>
-                        <td colspan="2">
-                            {!! Form::text('total_charge_amount', null,
-                        array('placeholder' => 'Charge Amount','class' => 'form-control',
-                        'id'=>'total_charge', 'step'=>'0.01', 'readonly')) !!}
-                        </td>
-                    </tr>
-                    <tr id="is_bill_grand_total">
-                        <td class="text-right">
-                            <div>
-                                {{ Form::label('grand_total', 'Total Payable(NPR):', ['class'=>'control-label'])}}
-                            </div>
-                        </td>
-                        <td colspan="2"> {!! Form::text('grand_total', null,
-                            array('placeholder' => 'Grand Total','class' => 'form-control',
-                             'readonly'=>'true','id' => 'total', 'step'=>'0.01')) !!} </td>
-                    </tr>
-                </table>
-            </div>
-
-        </div>
-        {{--        <div class="roe"></div>--}}
-        <div class="card-footer">
-            <button type="button" class="btn btn-default btn-flat float-left">
-                <i class="fas fa-times"></i>
-                Close
-            </button>
-            <button type="submit" class="btn-primary btn-flat btn float-right">
-                <i class="fas  fa-paper-plane"></i> Send Money
-            </button>
         </div>
     </div>
     {!! Form::close() !!}

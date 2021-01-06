@@ -2,6 +2,7 @@
 
 namespace Modules\Backend\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\DB;
 use Modules\Backend\Entities\Rate;
@@ -11,10 +12,12 @@ use Modules\Backend\Entities\SendMoney;
 use Modules\Backend\Http\Requests\SendMoneyRequest;
 use Modules\Backend\Http\Response\ErrorResponse;
 use Modules\Backend\Http\Response\SuccessResponse;
+use Modules\Backend\Notifications\TransactionWasCreated;
 use Modules\Backend\Repositories\RateRepository;
 use Modules\Backend\Repositories\ReceiverRepository;
 use Modules\Backend\Repositories\SenderRepository;
 use Modules\Backend\Repositories\TransactionRepository;
+use Spatie\Permission\Models\Permission;
 
 class SendMoneyController extends Controller
 {
@@ -82,15 +85,30 @@ class SendMoneyController extends Controller
                     'notes' => null,
                 ]);
             DB::commit();
+            $users = Permission::findByName('send-money-create', 'admin')->users;
+            if (count($users) == 0)
+                $users = User::where('is_super', true)->get();
+            $url = route($this->baseRoute . 'show', $transaction->id);
+            $message = 'Transaction With Code <b>' . $transaction['code'] . '</b> was created';
+            foreach ($users as $user) {
+                $user->notify((new TransactionWasCreated($transaction, $url, $message)));
+            }
             return (new SuccessResponse($this->model, $request, 'created'))
                 ->responseOk();
         } catch (\Exception $exception) {
-            dd($exception);
             DB::rollBack();
+            dd($exception);
             return (new ErrorResponse($this->model, $request, $exception))
                 ->responseError();
         }
     }
 
+    /**
+     * @param int $id
+     */
+    public function show(int $id)
+    {
+
+    }
 
 }

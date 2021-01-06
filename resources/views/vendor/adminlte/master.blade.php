@@ -78,11 +78,13 @@
 
 </head>
 
-<body class="@yield('classes_body')" @yield('body_data')>
+<body class="@yield('classes_body')" @yield('body_data') >
+<div id="app">
 
-{{-- Body Content --}}
-@yield('body')
 
+    {{-- Body Content --}}
+    @yield('body')
+</div>
 {{-- Base Scripts --}}
 @if(!config('adminlte.enabled_laravel_mix'))
     <script src="{{ asset('vendor/jquery/jquery.min.js') }}"></script>
@@ -91,7 +93,6 @@
 
     {{-- Configured Scripts --}}
     @include('adminlte::plugins', ['type' => 'js'])
-
     <script src="{{ asset('vendor/adminlte/dist/js/adminlte.min.js') }}"></script>
 @else
     <script src="{{ mix(config('adminlte.laravel_mix_js_path', 'js/app.js')) }}"></script>
@@ -107,6 +108,17 @@
 @endif
 
 {{-- Custom Scripts --}}
+<script>
+    var pusher = new Pusher('2a143b33c6eaa5154772', {
+        cluster: 'ap2'
+    });
+
+    var channel = pusher.subscribe('my-channel');
+    channel.bind('my-event', function (data) {
+        alert(JSON.stringify(data));
+    });
+</script>
+
 <script>
     function handleOnSelect2Change(primary, secondary, url) {
         primary.on('change', function () {
@@ -144,7 +156,9 @@
         });
 
 
-        $('.select2').select2({dropdownAutoWidth: true});
+        $('.select2').select2({
+            theme: "classic"
+        });
     })
 </script>
 @yield('adminlte_js')
