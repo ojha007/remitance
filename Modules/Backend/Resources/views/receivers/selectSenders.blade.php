@@ -5,11 +5,11 @@
 @section('content')
     @php($classPartition =3)
     @php($divClass='col-md-10')
-    <div class="box">
-        <div class="box-header">
-            <h2 class="box-title">
+    <div class="box box-default">
+        <div class="box-header with-border">
+            <h3 class="box-title">
                 Senders
-            </h2>
+            </h3>
         </div>
         <div class="box-body">
             <div class="row">
@@ -23,7 +23,7 @@
             </div>
         </div>
     </div>
-    @push('js')
+    @push('scripts')
         <script>
             $(document).ready(function () {
                 $("#sender_id").on('change', function () {

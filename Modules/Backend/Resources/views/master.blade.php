@@ -8,7 +8,6 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <link rel="shortcut icon" type="image/png" href="{{ asset('images/favicon.png') }}">
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>
         @yield('title_prefix')
         @yield('title','Registered Remit')
@@ -42,6 +41,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <![endif]-->
     <link rel="stylesheet" href="{{ mix('/css/backend.css') }}">
     <link type="text/css" rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="https://cdn.datatables.net/1.10.23/css/dataTables.bootstrap.min.css">
     @stack('styles')
 </head>
 
@@ -71,11 +71,14 @@ desired effect
     <header class="main-header">
         @include('backend::partial.header')
     </header>
+
     <!-- Left side column. contains the logo and sidebar -->
     <aside class="main-sidebar">
-        @include('backend::partial.sidebar.index')
+        @include('backend::partial.sidebar')
     </aside>
-    {{--    <!-- Content Wrapper. Contains page content -->--}}
+
+    <!-- Content Wrapper. Contains page content -->
+
     <div class="content-wrapper">
         <section class="content-header">
             <h1>
@@ -87,17 +90,21 @@ desired effect
             @yield('breadcrumb')
         </section>
         <!-- Main content -->
-        <section class="content container-fluid" id="app">
+        <section class="content" id="app">
             @yield('content')
         </section>
         <!-- /.content -->
     </div>
     <!-- /.content-wrapper -->
-    {{--    @include('backend::partial.footer')--}}
-</div>
 
+    {{--    @include('backend::partial.footer')--}}
+    <div class="control-sidebar-bg"></div>
+</div>
 <script src="{{ mix('/js/backend.js') }}" rel="script"></script>
+<script src="https://cdn.datatables.net/1.10.23/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.23/js/dataTables.bootstrap.min.js"></script>
 @stack('scripts')
+
 <script>
     // var pusher = new Pusher('2a143b33c6eaa5154772', {
     //     cluster: 'ap2'
@@ -129,27 +136,27 @@ desired effect
         });
     }
 
-    $(document).ready(function () {
-        $('.datePicker').datepicker({
-            format: 'yyyy-mm-dd',
-            todayHighlight: true,
-            orientation: "auto",
-            autoclose: true,
-        });
-        $('input').iCheck({
-            checkboxClass: 'icheckbox_square-blue',
-            radioClass: 'iradio_square-blue',
-            increaseArea: '20%' /* optional */
-        });
-        $('.modal').on('shown.bs.modal', function () {
-            $(this).find('[autofocus]').focus();
-        });
+    // $(document).ready(function () {
+        // $('.datePicker').datepicker({
+        //     format: 'yyyy-mm-dd',
+        //     todayHighlight: true,
+        //     orientation: "auto",
+        //     autoclose: true,
+        // });
+        // $('input').iCheck({
+        //     checkboxClass: 'icheckbox_square-blue',
+        //     radioClass: 'iradio_square-blue',
+        //     increaseArea: '20%' /* optional */
+        // });
+        // $('.modal').on('shown.bs.modal', function () {
+        //     $(this).find('[autofocus]').focus();
+        // });
 
 
-        $('.select2').select2({
-            theme: "classic"
-        });
-    })
+        // $('.select2').select2({
+        //     theme: "classic"
+        // });
+    // })
 </script>
 </body>
 </html>

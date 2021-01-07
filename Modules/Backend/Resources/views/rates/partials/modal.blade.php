@@ -1,5 +1,4 @@
 @extends('backend::common.modal',[
-
             'id'=>$modal,
             'route'=>$routePrefix.'rates.store',
             'title'=>'Create Rate',

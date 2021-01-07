@@ -16,6 +16,7 @@
     },
     "dependencies": {
         "adminlte": "^2.4.1",
+        "bootstrap-datepicker": "^1.9.0",
         "bootstrap-toggle": "^2.2.2",
         "datatables.net": "^1.10.19",
         "datatables.net-bs": "^1.10.15",

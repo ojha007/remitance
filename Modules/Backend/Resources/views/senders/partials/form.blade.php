@@ -1,10 +1,10 @@
-<div class="card">
-    <div class="card-header">
-        <h2 class="card-title">
+<div class="box box-success">
+    <div class="box-header with-border">
+        <h2 class="box-title">
             General Information
         </h2>
     </div>
-    <div class="card-body">
+    <div class="box-body">
         <div class="row">
             @include('backend::common.input',['autofocus'=>true,'name'=>'first_name','is_required'=>true])
             @include('backend::common.input',['name'=>'last_name','is_required'=>true])
@@ -14,14 +14,14 @@
     </div>
 
 </div>
-<div class="card ">
-    <div class="card-header">
-        <h2 class="card-title">
+<div class="box box-primary">
+    <div class="box-header with-border">
+        <h2 class="box-title">
             Address Information
         </h2>
     </div>
     {{--    @dd($sender)--}}
-    <div class="card-body">
+    <div class="box-body">
         <div class="row">
             @include('backend::common.input',['name'=>'country_id','is_required'=>true,
                'type'=>'select',
@@ -49,13 +49,13 @@
 
 </div>
 
-<div class="card ">
-    <div class="card-header">
-        <h2 class="card-title">
+<div class="box box-warning">
+    <div class="box-header with-border">
+        <h2 class="box-title">
             Identification Details
         </h2>
     </div>
-    <div class="card-body">
+    <div class="box-body">
         <div class="row">
             @include('backend::common.input',['name'=>'identity_type_id','is_required'=>true,'type'=>'select',
                 'options'=>$selectIdentityTypes,'default'=>$modal->identity_type_id ?? null])
@@ -66,13 +66,13 @@
             @include('backend::common.input',['name'=>'expiry_date','label'=>'Upload File','class'=>'datePicker','type'=>'file','inputClass'=>null])
         </div>
     </div>
-    <div class="card-footer">
-        <button type="submit" class="btn btn-primary btn-flat float-right">
+    <div class="box-footer">
+        <button type="submit" class="btn btn-primary btn-flat pull-right">
             <i class="fa fa-save">
                 Submit
             </i>
         </button>
-        <a href="{{ route($routePrefix.'senders.index') }}" class="btn btn-default float-left btn-flat">
+        <a href="{{ route($routePrefix.'senders.index') }}" class="btn btn-default pull-left btn-flat">
             <i class="fa fa-arrow-left">
                 Cancel
             </i>

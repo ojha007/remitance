@@ -13,6 +13,8 @@
 @endsection
 @section('content')
     @php($button ='Save')
+    @php($divClass ='12')
+    @php($classPartition ='2')
     <div class="row">
         <div class="col-md-12">
             @can('rate-create')
@@ -25,11 +27,6 @@
                 </div>
             @endcan
             <div class="box box-default">
-{{--                <div class="box-header with-border">--}}
-{{--                    <h3 class="box-title">--}}
-{{--                        Rates--}}
-{{--                    </h3>--}}
-{{--                </div>--}}
                 <div class="box-body">
                     <table class="table dataTable table-bordered" id="dataTables">
                         <thead>
@@ -52,8 +49,8 @@
     @include('backend::rates.partials.modal')
 @stop
 {{--@section('adminlte_js')--}}
-@push('js')
-    <script>
+@push('scripts')
+    <script type="text/javascript">
         $(document).ready(function () {
             $('#dataTables').dataTable({
                 serverSide: true,

@@ -1,6 +1,5 @@
 @extends('backend::master')
 
-{{--@section('title', 'Rates')--}}
 @section('title_postfix', '| Send Money')
 @section('header')
     Send Money

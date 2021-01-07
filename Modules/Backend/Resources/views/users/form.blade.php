@@ -1,5 +1,3 @@
-
-
 <div class="modal-body">
     <div class="form-group">
         {{ Form::label('name', 'Name:', ['class'=>'col-sm-2 control-label required'])}}

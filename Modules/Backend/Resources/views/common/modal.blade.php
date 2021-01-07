@@ -11,16 +11,18 @@
                 </button>
             </div>
             <div class="modal-body">
-                @yield('modal_body')
+               <div class="row">
+                   @yield('modal_body')
+               </div>
             </div>
-            <div class="modal-footer justify-content-between">
-                <button type="button" class="btn btn-default btn-flat float-left" data-dismiss="modal">
-                    <i class="fas fa-times"></i>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default btn-flat pull-left" data-dismiss="modal">
+                    <i class="fa fa-times"></i>
                     Close
                 </button>
-                <button  class="btn btn-primary btn-flat float-right"
+                <button  class="btn btn-primary btn-flat pull-right"
                          type="submit">
-                    <i class="fas fa-save"></i>
+                    <i class="fa fa-save"></i>
                     {{$button ?? ''}}
                 </button>
             </div>

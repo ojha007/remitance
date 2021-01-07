@@ -1,22 +1,15 @@
 @extends('backend::master')
+@section('title_postfix', ' | Roles')
+@section('header') Roles @stop
+@section('subHeader') Edit @endsection
 
-@section('title', 'Role')
-
-@section('content_header')
-    <i class="fa fa-fw fa-key"></i>
-    Edit Role
-@endsection
-
-{{--@section('subHeader')--}}
-{{--    Edit role--}}
-{{--@endsection--}}
 {{--@section('breadcrumb')--}}
 {{--    {{ Breadcrumbs::render('roles.edit',$role, $routePrefix) }}--}}
 {{--@stop--}}
 @section('content')
     <div class="row">
         <div class="col-xs-12">
-            {{--            {!! Form::model($role,array('route' => [$routePrefix.'roles.update', $role->id], 'method' => 'PATCH','class'=>'form-horizontal')) !!}--}}
+            {!! Form::model($role,array('route' => [$routePrefix.'roles.update', $role->id], 'method' => 'PATCH','class'=>'form-horizontal')) !!}
             <div class="box">
                 <div class="box-body">
                     <div class="form-group {{ $errors->has('name') ? 'has-error':'' }}">
@@ -35,14 +28,14 @@
                             Submit
                         </i>
                     </button>
-                    {{--                    <a href="{{ route($routePrefix.'roles.index') }}" class="btn btn-default btn-flat">--}}
-                    <i class="fa fa-arrow-left">
-                    </i>
-                    Cancel
-                    {{--                    </a>--}}
+                    <a href="{{ route($routePrefix.'roles.index') }}" class="btn btn-default btn-flat pull-left">
+                        <i class="fa fa-arrow-left">
+                        </i>
+                        Cancel
+                    </a>
                 </div>
             </div>
-        {{--        {!! Form::close() !!}--}}
+        {!! Form::close() !!}
         <!-- /.box -->
         </div>
         <!-- /.col -->
