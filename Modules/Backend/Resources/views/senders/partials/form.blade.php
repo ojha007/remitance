@@ -1,4 +1,4 @@
-<div class="box box-success">
+<div class="box ">
     <div class="box-header with-border">
         <h2 class="box-title">
             General Information
@@ -66,6 +66,7 @@
             @include('backend::common.input',['name'=>'expiry_date','label'=>'Upload File','class'=>'datePicker','type'=>'file','inputClass'=>null])
         </div>
     </div>
+    @if($button)
     <div class="box-footer">
         <button type="submit" class="btn btn-primary btn-flat pull-right">
             <i class="fa fa-save">
@@ -78,6 +79,7 @@
             </i>
         </a>
     </div>
+    @endif
 </div>
 @section('js')
     <script>

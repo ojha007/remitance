@@ -1,4 +1,3 @@
-<input type="hidden" name="sender_id" value="{{request()->route()->parameter('sender_id')}}">
 <div class="box box-default">
     <div class="box-header with-border">
         <h2 class="box-title">
@@ -6,6 +5,8 @@
         </h2>
     </div>
     <div class="box-body">
+        <input type="hidden" name="sender_id" value="{{request()->route()->parameter('sender_id') ?? ''}}">
+
         @include('backend::common.input',['autofocus'=>true,'name'=>'first_name','is_required'=>true])
         @include('backend::common.input',['name'=>'middle_name'])
         @include('backend::common.input',['name'=>'last_name','is_required'=>true])
@@ -114,6 +115,7 @@
         @include('backend::common.input',['name'=>'expiry_date','is_required'=>true,'class'=>'datePicker'])
         @include('backend::common.input',['name'=>'file','label'=>'Upload File','type'=>'file','inputClass'=>null])
     </div>
+    @if($button)
     <div class="box-footer">
         <button type="submit" class="btn btn-primary btn-flat pull-right">
             <i class="fa fa-save">
@@ -126,6 +128,7 @@
             </i>
         </a>
     </div>
+    @endif
 </div>
 @push('scripts')
     <script>

@@ -53,8 +53,12 @@ class SendMoneyController extends Controller
         $selectPaymentTypes = DB::table('payment_types')
             ->pluck('name', 'id')
             ->toArray();
-        $selectDistricts = (new ReceiverRepository(new Receiver()))->selectDistricts();
-        return view($this->viewPath . 'create', compact('selectSenders', 'selectPaymentTypes', 'selectDistricts'));
+        $receiverAttributes['receivers'] = (new ReceiverRepository(new Receiver()))->getCreateOrEditPage();
+        $senderAttributes['senders'] = (new SenderRepository(new Sender()))->getCreateOrEditPage();
+        return view($this->viewPath . 'create', compact('selectSenders',
+            'selectPaymentTypes'))
+            ->with($senderAttributes)
+            ->with($receiverAttributes);
 
     }
 

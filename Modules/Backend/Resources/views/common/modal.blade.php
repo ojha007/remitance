@@ -11,17 +11,24 @@
                 </button>
             </div>
             <div class="modal-body">
-               <div class="row">
-                   @yield('modal_body')
-               </div>
+                <div class="row">
+                    @if(isset($senders))
+                        @yield('sender_form_body')
+                    @elseif($receivers)
+                        @yield('receiver_form_body')
+                    @else
+                        @yield('modal_body')
+                    @endif
+
+                </div>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default btn-flat pull-left" data-dismiss="modal">
                     <i class="fa fa-times"></i>
                     Close
                 </button>
-                <button  class="btn btn-primary btn-flat pull-right"
-                         type="submit">
+                <button class="btn btn-primary btn-flat pull-right"
+                        type="submit">
                     <i class="fa fa-save"></i>
                     {{$button ?? ''}}
                 </button>

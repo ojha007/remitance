@@ -21,6 +21,7 @@ class ReceiverRequest extends FormRequest
             'middle_name' => 'nullable|string:min:1|max:255',
             'last_name' => 'required|string:min:1|max:255',
             'email' => 'nullable|email',
+            'sender_id' => 'required|exists:senders,id',
             'phone_number1' => 'required',
             'phone_number2' => 'nullable',
             'street' => 'required|string|min:1',
@@ -29,7 +30,7 @@ class ReceiverRequest extends FormRequest
             'identity_type_id' => 'required|exists:identity_types,id',
             'issued_by' => 'required|in:' . implode(',', array_keys(Receiver::getIssuedByArray())),
             'id_number' => 'required|unique:senders,id_number,' . $id,
-            'expiry_date' => 'required|date',
+            'expiry_date' => 'required|date|gt:date_of_birth',
             'date_of_birth' => 'required|date',
             'file' => 'nullable'
         ];

@@ -30,26 +30,27 @@ class SenderRepository extends Repository
             ->get();
     }
 
-    public function getCreateOrEditPage($view)
+    public function getCreateOrEditPage($view = null)
     {
-
         $suburbs = Cache::rememberForever('suburbs', function () {
             return DB::table('suburbs')
                 ->pluck('name', 'id')
                 ->toArray();
         });
         $issuedBy = Sender::getIssuedByArray();
-        return $view->with([
-            'selectSuburbs' => $suburbs,
-            'selectIssuedBy' => $issuedBy
-        ])->with(
-            $this->getCommonViewPageData('Australia')
-        );
+        $senderAttributes = ['selectSuburbs' => $suburbs, 'selectIssuedBy' => $issuedBy];
+        $viewAttributes = array_merge($senderAttributes, $this->getCommonViewPageData('Australia'));
+        if ($view) {
+            return $view->with($viewAttributes)->with(['button'=>true]);
+        } else {
+            return $viewAttributes;
+        }
+
     }
 
     public function getCommonViewPageData($country = 'Nepal'): array
     {
-//        dd($country);
+
         $countries = Cache::rememberForever('countries', function () {
             return DB::table('countries')
                 ->pluck('name', 'id')

@@ -72,5 +72,26 @@
                 </div>
             @endisset
         @endif
+        @isset($buttonId)
+            <button type="button"
+                    data-toggle="modal"
+                    data-target="{{$buttonId}}"
+                    class="btn btn-flat btn-primary {{$buttonClass ?? ''}}"
+                    style="margin-top: 2px;">
+                <i class="fa fa-user-plus">
+                    Add {{ucwords(str_replace('_id',' ',$name))}}
+                </i>
+            </button>
+
+        @endisset
     </div>
+    @isset($buttonId)
+        @if($buttonId==='#sender_form')
+            <div class="float-left" id="sender-detail" style="margin-top: 2px"></div>
+        @else
+            <div class="float-right" id="receiver-detail" style="margin-top: 2px"></div>
+        @endif
+    @endisset
 </div>
+{{--@dd($name)--}}
+{{--@dd($template)--}}

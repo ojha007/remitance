@@ -40,7 +40,7 @@ class ReceiverRepository extends Repository
             ->get();
     }
 
-    public function getCreateOrEditPage($view)
+    public function getCreateOrEditPage($view = null)
     {
         $attributes = (new SenderRepository(new Sender()))->getCommonViewPageData('Nepal');
         $issuedBy = Receiver::getIssuedByArray();
@@ -50,12 +50,17 @@ class ReceiverRepository extends Repository
                 ->toArray();
         });
         $selectDistricts = $this->selectDistricts();
-        return $view->with([
-            'selectIssuedBy' => $issuedBy,
+        $data = array_merge(['selectIssuedBy' => $issuedBy,
             'selectDistricts' => $selectDistricts,
             'selectBanks' => $selectBanks,
             'selectMps' => [],
-        ])->with($attributes);
+            'banks' => null,
+        ], $attributes);
+
+        if ($view) {
+            return $view->with($data)->with(['button' => true]);
+        } else return $data;
+
     }
 
     public function selectDistricts()

@@ -8,7 +8,7 @@
     Send Money
 @endsection
 @section('breadcrumb')
-    {{--    {{ Breadcrumbs::render('roles.index',$routePrefix) }}--}}
+
 @stop
 @section('content')
     @php($divClass ='6')
@@ -25,15 +25,20 @@
                 <div class="box-body">
                     @include('backend::common.input',
                     ['name'=>'sender_id',
-                    'is_required'=>true,'type'=>'select',
-                    'options'=>$selectSenders,'default'=>null])
+                    'is_required'=>true,
+                    'type'=>'select',
+                    'options'=>$selectSenders,
+                    'default'=>null,
+                    'buttonId'=>'#sender_form'
+                    ])
 
-                    @include('backend::common.input',['name'=>'receiver_id',
-                   'is_required'=>true,'type'=>'select',
-                   'options'=>[],'default'=>null])
-
-                    <div class="col-md-6 form-group" id="sender-detail"></div>
-                    <div class="col-md-6 form-group" id="receiver-detail"></div>
+                    @include('backend::common.input',[
+                    'name'=>'receiver_id',
+                    'buttonId'=>'#receiver_form',
+                    'is_required'=>true,
+                    'type'=>'select',
+                    'options'=>[],
+                    'default'=>null])
                     @include('backend::common.input',['name'=>'date','is_required'=>true,'class'=>'datePicker'])
                     @include('backend::common.input',['name'=>'sending_amount','type'=>'number','is_required'=>true,'addOn'=>'AUD'])
                     @include('backend::common.input',['name'=>'rate','type'=>'number','is_required'=>true])
@@ -44,7 +49,7 @@
                     'options'=>$selectPaymentTypes,'default'=>null      ])
                     @include('backend::common.input',
                     ['name'=>'pickup_address','is_required'=>true,
-                    'type'=>'select', 'options'=>$selectDistricts,'default'=>null])
+                    'type'=>'select', 'options'=>[],'default'=>null])
                     @include('backend::common.input',['name'=>'file','type'=>'file','label'=>'Upload File'])
                     @include('backend::common.input',['name'=>'notes','type'=>'textarea'])
 
@@ -62,17 +67,43 @@
         </div>
     </div>
     {!! Form::close() !!}
+    @component('backend::send-money.modals.senders',[
+            'selectCountries'=>$senders['selectCountries'],
+            'selectStates'=>$senders['selectStates'],
+            'selectSuburbs'=>$senders['selectSuburbs'],
+            'senders'=>true,
+            'divClass'=>'12',
+            'classPartition'=>'2',
+            'selectIdentityTypes'=>$senders['selectIdentityTypes'],
+            'selectIssuedBy'=>$senders['selectIssuedBy']])
+    @endcomponent
+
+    @component('backend::send-money.modals.receivers',[
+            'selectCountries'=>$receivers['selectCountries'],
+            'selectStates'=>$receivers['selectStates'],
+            'selectDistricts'=>$receivers['selectDistricts'],
+            'selectMps'=>$receivers['selectMps'],
+            'selectBanks'=>$receivers['selectBanks'],
+            'receivers'=>true,
+            'selectIdentityTypes'=>$receivers['selectIdentityTypes'],
+            'selectIssuedBy'=>$receivers['selectIssuedBy'],
+            'banks'=>null,
+            'divClass'=>'12',
+            'classPartition'=>'2'
+
+        ])
+    @endcomponent
 @endsection
 @push('scripts')
     <script>
         let template = (detail) => `<div class="col-md-3"></div>
-                            <div class="col-md-9" style="background-color: #f0f3f5;padding-top: 5px">
-                            <div class="box box-primary">
+                            <div class="col-md-9" style="padding-top: 5px">
+                            <div class="box box-primary" style="border: 3px solid #d2d6de">
                                 <div class="box-header with-border">
                                     <h3 class="box-title">
                                              ${detail['first_name']}&nbsp;
                                                 ${detail['middle_name'] === 'string'
-                                         ? detail['middle_name'] : ''}
+            ? detail['middle_name'] : ''}
                                             ${detail['last_name']}&nbsp;
                                             |&nbsp;${detail['code']}
                                     </h3>
@@ -94,17 +125,23 @@
 
         function onSelect2Change(primary, secondary, url) {
             primary.on('change', function () {
-                if ($(this).val()) {
+                let val = $(this).val()
+                if (val) {
+                    if (primary.is('#sender_id')) {
+                        $('#receiver_form input[name="sender_id"]').val(val);
+                    }
                     $.ajax({
-                        url: url + '/' + $(this).val(),
+                        url: url + '/' + val,
                         method: 'GET',
                         success: function (response) {
                             secondary.html(template(response))
                         }
                     });
 
-                } else
-                    secondary.html('')
+                } else {
+                    secondary.html('');
+                    $('input[name="sender_id"]').val('');
+                }
             });
         }
 
@@ -137,6 +174,7 @@
             @if(old())
             $('#sender_id').val('{{old('sender_id')}}').trigger('change');
             @endif
-        })
-    </script>
+            handleOnSelect2Change($('#country_id'), $("#state_id"), '{{url('/states/country/')}}');
+            handleOnSelect2Change($('#sender_form #state_id'), $("#sender_form #suburb_id"), '{{url('/suburbs/state')}}');
+        })</script>
 @endpush
