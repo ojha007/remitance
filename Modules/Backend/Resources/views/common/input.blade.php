@@ -1,4 +1,4 @@
-<div class="form-group col-md-{{$divClass ?? '' }}  ">
+<div class="form-group col-md-{{$divClass ?? '' }}    {{ $errors->has($name) ? ' has-error': '' }}">
     <label for="{{isset($id) ? $id : strtolower($name)}}"
            class="col-md-{{isset($classPartition) ? $classPartition : 4 }}
                control-label
@@ -8,7 +8,7 @@
         @isset($is_required)
             <span style="color: #ea1a1a">*</span>
         @endisset
-        &nbsp;:
+
     </label>
     <div class="col-sm-{{isset($classPartition) ? 12 - $classPartition : 8}}
     {{ $errors->has($name) ? ' is-invalid': '' }}">
@@ -29,8 +29,7 @@
         @elseif(isset($type) && $type=='textarea')
             <textarea
                 class="rounded-0 form-control
-                   {{$class ?? ''}}
-                {{ $errors->has($name) ? ' is-invalid': '' }}"
+                   {{$class ?? ''}}"
                 name="{{$name}}"
                 rows="5"
                 id="{{isset($id) ? $id : strtolower($name)}}">
@@ -43,7 +42,7 @@
         @else
             @isset($addOn)
                 <div class="input-group">
-                    <div class="input-group-prepend">
+                    <div class="input-group-addon">
                     <span class="input-group-text">
                         {!! $addOn !!}
                         {{--                        <i class="fas fa-envelope"></i>--}}
@@ -56,8 +55,7 @@
                            @endisset
                            class="rounded-0
                           {{isset($type) && $type === 'file'  ? '' : 'form-control'}}
-                           {{$class ?? ''}}
-                           {{ $errors->has($name) ? ' is-invalid': '' }}"
+                           {{$class ?? ''}}"
                            name="{{$name}}"
                            @if(isset($type) && $type==='number')
                            step="any"

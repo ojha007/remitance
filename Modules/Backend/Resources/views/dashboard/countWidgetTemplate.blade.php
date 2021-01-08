@@ -1,18 +1,21 @@
-<div class="col-lg-3 col-6">
-    <div class="small-box {{$widget['bg']}}">
-        <div class="inner">
-            <h3>{{$widget['total']}}</h3>
-
-            <h4>{{ucwords($key)}}</h4>
+<div class="col-md-3 col-sm-6 col-xs-12">
+    <div class="info-box">
+        <span class="info-box-icon {{$widget['bg']}}">
+            <i class="{{$widget['icon']}}"></i>
+        </span>
+        <div class="info-box-content">
+            <span class="info-box-text text-center">{{ucwords($key)}}</span>
+            <span class="info-box-number text-center">{{$widget['total']}}</span>
+            <div class="btn btn-block">
+                <a href="{{$widget['url']}}" >
+                More info
+                <i class="fa fa-arrow-circle-right">
+                </i>
+            </a>
+            </div>
         </div>
-        <div class="icon">
-            <i class="ion {{$widget['icon']}}"></i>
-        </div>
-        <a href="{{$widget['url']}}" class="small-box-footer">
-            More info
-            <i class="fa fa-arrow-circle-right">
-            </i>
-        </a>
+        <!-- /.info-box-content -->
     </div>
+    <!-- /.info-box -->
 </div>
 

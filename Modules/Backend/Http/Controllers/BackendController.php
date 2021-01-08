@@ -39,11 +39,13 @@ class BackendController extends Controller
             'total' => DB::table('rates')
                 ->latest()->first()
                 ->customer_rate,
-            'icon' => 'fas  fa-dollar',
+            'icon' => 'fa fa-dollar',
             'bg' => 'bg-yellow',
             'url' => route('admin.rates.index')
         ];
-        return view('backend::index', compact('widgets'));
+        $allTransactions = $this->getAllTransactionsWithStatus();
+        $latestTransactions = [];
+        return view('backend::index', compact('widgets', 'allTransactions', 'latestTransactions'));
     }
 
     public function getStates($country_id): array
@@ -89,6 +91,11 @@ class BackendController extends Controller
             })->pluck('name', 'id')
             ->toArray();
 
+    }
+
+    protected function getAllTransactionsWithStatus(): array
+    {
+        return [];
     }
 
 }
