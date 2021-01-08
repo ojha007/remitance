@@ -1,13 +1,20 @@
-@extends('adminlte::page')
-@section('title', 'Senders')
-
-@section('content_header')
-    <h1>Edit Sender</h1>
+@extends('backend::master')
+@section('title_postfix', ' | Edit Sender')
+@section('header')
+    Sender
 @stop
+@section('subHeader')
+    Edit
+@endsection
+@section('breadcrumb')
+@endsection
+
 @section('content')
-    @php($classPartition =3)
-    {!! Form::model($sender,['route'=>[$routePrefix.'senders.update',$sender->id],"enctype"=>"multipart/form-data"]) !!}
+    @php($divClass = 6)
+    @php($classPartition = 4)
+    {!! Form::model($sender,['route'=>[$routePrefix.'senders.update',$sender->id],
+        "enctype"=>"multipart/form-data",'class'=>'form-horizontal']) !!}
     @method('patch')
-    @include('backend::senders.partials.form',['divClass'=>'col-md-6','model'=>$sender])
+    @include('backend::senders.partials.form',['model'=>$sender])
     {!! Form::close() !!}
 @endsection
