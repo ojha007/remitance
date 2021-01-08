@@ -14,7 +14,7 @@
                 <div class="row">
                     @if(isset($senders))
                         @yield('sender_form_body')
-                    @elseif($receivers)
+                    @elseif(isset($receivers))
                         @yield('receiver_form_body')
                     @else
                         @yield('modal_body')
