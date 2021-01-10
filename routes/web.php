@@ -16,9 +16,7 @@ use Illuminate\Support\Facades\Route;
 Route::group([
     'domain' => config('app.domain'),
 ], function () {
-    Route::get('/', function () {
-        return view('welcome');
-    });
+    Route::get('/', 'HomeController@index');
 
 });
 

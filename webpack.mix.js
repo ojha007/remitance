@@ -11,8 +11,6 @@ const mix = require('laravel-mix');
  |
  */
 
-mix.js('resources/js/app.js', 'public/js/frontend.js')
-    .postCss("resources/css/app.css", "public/css/frontend.css", [
-        require("tailwindcss"),
-    ])
+// mix.js('resources/js/main.js', 'public/js/frontend.js')
+//     .css('resources/css/style.css', 'public/css/frontend.css')
 
