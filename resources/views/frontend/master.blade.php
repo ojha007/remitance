@@ -87,7 +87,7 @@
             </ul>
         </nav><!-- .nav-menu -->
 
-        <a href="#about" class="get-started-btn scrollto">Get Started</a>
+        <a href="#" class="get-started-btn ">Login</a>
 
     </div>
 </header><!-- End Header -->
@@ -100,11 +100,12 @@
             <div class="col-lg-6 d-flex flex-column justify-content-center pt-4 pt-lg-0 order-2 order-lg-1"
                  data-aos="fade-up" data-aos-delay="200">
                 <h1>Better & secure way to send Money</h1>
-{{--                <h2>We are team of talanted designers making websites with Bootstrap</h2>--}}
+                <h2>Fast - Secure - Reliable </h2>
                 <div class="d-lg-flex">
-                    <a href="#" class="venobox btn-watch-video"
-                       data-vbtype="video" data-autoplay="true"> Send Money <i class="icofont-play-alt-2"></i></a>
-                </div>
+                    <a href="#" class="btn-get-started ">
+                       Send Money
+                    </a>
+         </div>
             </div>
             <div class="col-lg-6 order-1 order-lg-2 hero-img" data-aos="zoom-in" data-aos-delay="200">
                 <img src="{{asset('/images/hero-img.png')}}" class="img-fluid animated" alt="">
@@ -117,39 +118,39 @@
 <main id="main">
 
     <!-- ======= Cliens Section ======= -->
-    <section id="cliens" class="cliens section-bg">
-        <div class="container">
+{{--    <section id="cliens" class="cliens section-bg">--}}
+{{--        <div class="container">--}}
 
-            <div class="row" data-aos="zoom-in">
+{{--            <div class="row" data-aos="zoom-in">--}}
 
-                <div class="col-lg-2 col-md-4 col-6 d-flex align-items-center justify-content-center">
-                    <img src="{{asset('images/clients/client-1.png')}}" class="img-fluid" alt="">
-                </div>
+{{--                <div class="col-lg-2 col-md-4 col-6 d-flex align-items-center justify-content-center">--}}
+{{--                    <img src="{{asset('images/clients/client-1.png')}}" class="img-fluid" alt="">--}}
+{{--                </div>--}}
 
-                <div class="col-lg-2 col-md-4 col-6 d-flex align-items-center justify-content-center">
-                    <img src="{{asset('images/clients/client-2.png')}}" class="img-fluid" alt="">
-                </div>
+{{--                <div class="col-lg-2 col-md-4 col-6 d-flex align-items-center justify-content-center">--}}
+{{--                    <img src="{{asset('images/clients/client-2.png')}}" class="img-fluid" alt="">--}}
+{{--                </div>--}}
 
-                <div class="col-lg-2 col-md-4 col-6 d-flex align-items-center justify-content-center">
-                    <img src="{{asset('images/clients/client-3.png')}}" class="img-fluid" alt="">
-                </div>
+{{--                <div class="col-lg-2 col-md-4 col-6 d-flex align-items-center justify-content-center">--}}
+{{--                    <img src="{{asset('images/clients/client-3.png')}}" class="img-fluid" alt="">--}}
+{{--                </div>--}}
 
-                <div class="col-lg-2 col-md-4 col-6 d-flex align-items-center justify-content-center">
-                    <img src="{{asset('images/clients/client-4.png')}}" class="img-fluid" alt="">
-                </div>
+{{--                <div class="col-lg-2 col-md-4 col-6 d-flex align-items-center justify-content-center">--}}
+{{--                    <img src="{{asset('images/clients/client-4.png')}}" class="img-fluid" alt="">--}}
+{{--                </div>--}}
 
-                <div class="col-lg-2 col-md-4 col-6 d-flex align-items-center justify-content-center">
-                    <img src="{{asset('images/clients/client-5.png')}}" class="img-fluid" alt="">
-                </div>
+{{--                <div class="col-lg-2 col-md-4 col-6 d-flex align-items-center justify-content-center">--}}
+{{--                    <img src="{{asset('images/clients/client-5.png')}}" class="img-fluid" alt="">--}}
+{{--                </div>--}}
 
-                <div class="col-lg-2 col-md-4 col-6 d-flex align-items-center justify-content-center">
-                    <img src="{{asset('images/clients/client-6.png')}}" class="img-fluid" alt="">
-                </div>
+{{--                <div class="col-lg-2 col-md-4 col-6 d-flex align-items-center justify-content-center">--}}
+{{--                    <img src="{{asset('images/clients/client-6.png')}}" class="img-fluid" alt="">--}}
+{{--                </div>--}}
 
-            </div>
+{{--            </div>--}}
 
-        </div>
-    </section><!-- End Cliens Section -->
+{{--        </div>--}}
+{{--    </section><!-- End Cliens Section -->--}}
 
     <!-- ======= About Us Section ======= -->
     <section id="about" class="about">
@@ -200,58 +201,60 @@
                 <div class="col-lg-7 d-flex flex-column justify-content-center align-items-stretch  order-2 order-lg-1">
 
                     <div class="content">
-                        <h3>Eum ipsam laborum deleniti <strong>velit pariatur architecto aut nihil</strong></h3>
+                        <h3>Why <strong> Us ?</strong></h3>
                         <p>
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-                            labore et dolore magna aliqua. Duis aute irure dolor in reprehenderit
+                            Registered Remit makes it easier to send and receive money. Send your money, not your information.
+                            We respect your privacy.
                         </p>
                     </div>
 
                     <div class="accordion-list">
                         <ul>
                             <li>
-                                <a data-toggle="collapse" class="collapse" href="#accordion-list-1"><span>01</span> Non
-                                    consectetur a erat nam at lectus urna duis? <i
-                                        class="bx bx-chevron-down icon-show"></i><i
+                                <a data-toggle="collapse"
+                                   class="collapse" href="#accordion-list-1">
+                                    <span>01</span>
+                                    Low fees & excellent rates
+                                    <i class="bx bx-chevron-down icon-show"></i><i
                                         class="bx bx-chevron-up icon-close"></i></a>
                                 <div id="accordion-list-1" class="collapse show" data-parent=".accordion-list">
                                     <p>
-                                        Feugiat pretium nibh ipsum consequat. Tempus iaculis urna id volutpat lacus
-                                        laoreet non curabitur gravida. Venenatis lectus magna fringilla urna porttitor
-                                        rhoncus dolor purus non.
+
                                     </p>
                                 </div>
                             </li>
 
                             <li>
-                                <a data-toggle="collapse" href="#accordion-list-2" class="collapsed"><span>02</span>
-                                    Feugiat scelerisque varius morbi enim nunc? <i
+                                <a data-toggle="collapse" href="#accordion-list-2" class="collapsed">
+                                    <span>02</span>
+                                    Fast and easy to send Money <i
                                         class="bx bx-chevron-down icon-show"></i><i
                                         class="bx bx-chevron-up icon-close"></i></a>
                                 <div id="accordion-list-2" class="collapse" data-parent=".accordion-list">
-                                    <p>
-                                        Dolor sit amet consectetur adipiscing elit pellentesque habitant morbi. Id
-                                        interdum velit laoreet id donec ultrices. Fringilla phasellus faucibus
-                                        scelerisque eleifend donec pretium. Est pellentesque elit ullamcorper dignissim.
-                                        Mauris ultrices eros in cursus turpis massa tincidunt dui.
-                                    </p>
+{{--                                    <p>--}}
+{{--                                        Dolor sit amet consectetur adipiscing elit pellentesque habitant morbi. Id--}}
+{{--                                        interdum velit laoreet id donec ultrices. Fringilla phasellus faucibus--}}
+{{--                                        scelerisque eleifend donec pretium. Est pellentesque elit ullamcorper dignissim.--}}
+{{--                                        Mauris ultrices eros in cursus turpis massa tincidunt dui.--}}
+{{--                                    </p>--}}
                                 </div>
                             </li>
 
-                            <li>
-                                <a data-toggle="collapse" href="#accordion-list-3" class="collapsed"><span>03</span>
-                                    Dolor sit amet consectetur adipiscing elit? <i
-                                        class="bx bx-chevron-down icon-show"></i><i
-                                        class="bx bx-chevron-up icon-close"></i></a>
-                                <div id="accordion-list-3" class="collapse" data-parent=".accordion-list">
-                                    <p>
-                                        Eleifend mi in nulla posuere sollicitudin aliquam ultrices sagittis orci.
-                                        Faucibus pulvinar elementum integer enim. Sem nulla pharetra diam sit amet nisl
-                                        suscipit. Rutrum tellus pellentesque eu tincidunt. Lectus urna duis convallis
-                                        convallis tellus. Urna molestie at elementum eu facilisis sed odio morbi quis
-                                    </p>
-                                </div>
-                            </li>
+{{--                            <li>--}}
+{{--                                <a data-toggle="collapse" href="#accordion-list-3" class="collapsed">--}}
+{{--                                    <span>03</span>--}}
+{{--                                    <i--}}
+{{--                                        class="bx bx-chevron-down icon-show"></i><i--}}
+{{--                                        class="bx bx-chevron-up icon-close"></i></a>--}}
+{{--                                <div id="accordion-list-3" class="collapse" data-parent=".accordion-list">--}}
+{{--                                    <p>--}}
+{{--                                        Eleifend mi in nulla posuere sollicitudin aliquam ultrices sagittis orci.--}}
+{{--                                        Faucibus pulvinar elementum integer enim. Sem nulla pharetra diam sit amet nisl--}}
+{{--                                        suscipit. Rutrum tellus pellentesque eu tincidunt. Lectus urna duis convallis--}}
+{{--                                        convallis tellus. Urna molestie at elementum eu facilisis sed odio morbi quis--}}
+{{--                                    </p>--}}
+{{--                                </div>--}}
+{{--                            </li>--}}
 
                         </ul>
                     </div>
@@ -331,35 +334,36 @@
 
             <div class="section-title">
                 <h2>Services</h2>
-                <p>Magnam dolores commodi suscipit. Necessitatibus eius consequatur ex aliquid fuga eum quidem. Sit sint
-                    consectetur velit. Quisquam quos quisquam cupiditate. Et nemo qui impedit suscipit alias ea. Quia
-                    fugiat sit in iste officiis commodi quidem hic quas.</p>
+                <p>Registered Remit makes it easier to send and receive money wherever you are. Send your money, not your information.
+                    Registered Remit makes sure your personal details are always protected.</p>
             </div>
 
             <div class="row">
                 <div class="col-xl-3 col-md-6 d-flex align-items-stretch" data-aos="zoom-in" data-aos-delay="100">
                     <div class="icon-box">
-                        <div class="icon"><i class="bx bxl-dribbble"></i></div>
-                        <h4><a href="">Lorem Ipsum</a></h4>
-                        <p>Voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi</p>
+                        <div class="icon"><i class="icofont-ssl-security"></i></div>
+                        <h4><a href="">Secure Transactions</a></h4>
+                        <p>Your payment details fully protected and encrypted by 256-Bit SSL Security.</p>
                     </div>
                 </div>
 
                 <div class="col-xl-3 col-md-6 d-flex align-items-stretch mt-4 mt-md-0" data-aos="zoom-in"
                      data-aos-delay="200">
                     <div class="icon-box">
-                        <div class="icon"><i class="bx bx-file"></i></div>
-                        <h4><a href="">Sed ut perspici</a></h4>
-                        <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore</p>
+                        <div class="icon"><i class="icofont-email"></i></div>
+                        <h4><a href="">Email notifications</a></h4>
+                        <p>
+                            You can turn on notifications to receive alerts on your phone or computer when you send a money
+                        </p>
                     </div>
                 </div>
 
                 <div class="col-xl-3 col-md-6 d-flex align-items-stretch mt-4 mt-xl-0" data-aos="zoom-in"
                      data-aos-delay="300">
                     <div class="icon-box">
-                        <div class="icon"><i class="bx bx-tachometer"></i></div>
-                        <h4><a href="">Magni Dolores</a></h4>
-                        <p>Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia</p>
+                        <div class="icon"><i class="icofont-settings-alt"></i></div>
+                        <h4><a href="">100% money back guarantee</a></h4>
+                        <p>All transactions are protected by our 100% guarantee.</p>
                     </div>
                 </div>
 
@@ -367,8 +371,8 @@
                      data-aos-delay="400">
                     <div class="icon-box">
                         <div class="icon"><i class="bx bx-layer"></i></div>
-                        <h4><a href="">Nemo Enim</a></h4>
-                        <p>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis</p>
+                        <h4><a href="">Pay With Confidence</a></h4>
+                        <p>Registered remit customer support is here to help when you need us, where you need us.</p>
                     </div>
                 </div>
 
