@@ -23,6 +23,7 @@ class RateController extends Controller
     protected $modal = 'modal-rate';
 
     protected $baseRoute = 'admin.rates.';
+    protected $perPage = 20;
     /**
      * @var Rate
      */
@@ -50,34 +51,20 @@ class RateController extends Controller
      * @param Request $request
      * @return Renderable
      */
-    public function index(Request $request)
+    public function index(Request $request): Renderable
     {
 
-        if ($request->ajax()) {
-            $rates = $this->repository->select('id', 'date', 'customer_rate', 'agent_rate');
-            return $this->dataTableLists($rates);
-        }
-        return view($this->viewPath . 'index')->with(['modal' => $this->modal]);
+        $rates = $this->repository->paginate($this->perPage);
+        return view($this->viewPath . 'index', compact('rates'))
+            ->with(['modal' => $this->modal]);
     }
 
-    protected function dataTableLists(Collection $collection)
-    {
-        $dataTableButton = new DataTableButton();
-        return DataTables::make($collection)
-            ->addColumn('action', function ($rate) use ($dataTableButton) {
-                $button = '';
-                $button .= $dataTableButton->editButtonModal($rate->id, $this->modal);
-                $button .= $dataTableButton->deleteButton($this->baseRoute . 'destroy', $rate->id);
-                return $button;
-            })
-            ->toJson();
-    }
 
     /**
      * Show the form for creating a new resource.
      * @return Renderable
      */
-    public function create()
+    public function create(): Renderable
     {
 
         return view('backend::create');

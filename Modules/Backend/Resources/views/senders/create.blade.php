@@ -1,5 +1,5 @@
 @extends('backend::master')
-@section('title_postfix', ' | Edit Senders')
+@section('title_postfix', ' | Create Senders')
 @section('header') Senders @stop
 @section('subHeader') Create @endsection
 @section('content')

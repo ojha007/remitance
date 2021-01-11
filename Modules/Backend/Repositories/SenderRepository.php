@@ -21,13 +21,16 @@ class SenderRepository extends Repository
         $this->model = $sender;
     }
 
-    public function getIndexPageData($attributes): \Illuminate\Support\Collection
+    public function getIndexPageData($attributes, $limit): \Illuminate\Contracts\Pagination\LengthAwarePaginator
     {
-        return DB::table('senders')
-            ->select('id', 'code', 'is_active')
-            ->selectRaw('CONCAT(first_name," ",last_name) as name')
+        return DB::table('senders as se')
+            ->select('se.id', 'se.code', 'se.is_active', 'su.name as suburb', 'co.name as country', 'st.name as states', 'se.street')
+            ->selectRaw('CONCAT(se.first_name," ",se.last_name) as name')
+            ->join('suburbs as su', 'se.suburb_id', '=', 'su.id')
+            ->join('states as st', 'su.state_id', '=', 'st.id')
+            ->join('countries as co', 'co.id', '=', 'st.country_id')
             ->limit($attributes['limit'])
-            ->get();
+            ->paginate($limit);
     }
 
     public function getCreateOrEditPage($view = null)
@@ -40,11 +43,10 @@ class SenderRepository extends Repository
         $issuedBy = Sender::getIssuedByArray();
         $senderAttributes = ['selectSuburbs' => $suburbs, 'selectIssuedBy' => $issuedBy];
         $viewAttributes = array_merge($senderAttributes, $this->getCommonViewPageData('Australia'));
-        if ($view) {
-            return $view->with($viewAttributes)->with(['button'=>true]);
-        } else {
-            return $viewAttributes;
-        }
+        if ($view)
+            return $view->with($viewAttributes)->with(['button' => true]);
+        return $viewAttributes;
+
 
     }
 

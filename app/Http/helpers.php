@@ -1,24 +1,24 @@
 <?php
-function spanByStatus($status, $withPull = '')
+function spanByStatus($status, $withPull = ''): string
 {
-//    badge bg-primary btn btn-flat
+
     switch (strtolower($status)) {
         case 'yes':
         case '1':
-            $labelClass = 'bg-success';
+            $labelClass = 'bg-green';
             $labelName = 'Active';
             break;
         case 'no';
         case '0':
-            $labelClass = 'bg-warning';
+            $labelClass = 'bg-yellow';
             $labelName = 'Inactive';
             break;
         default:
-            $labelClass = 'bg-warning';
+            $labelClass = 'bg-blue';
             $labelName = 'Pending';
 
     }
     return '<span style="cursor: default;"
-        class="badge btn btn-flat  ' . $labelClass . ' ' . ($withPull) . '">'
+        class="label btn btn-flat  ' . $labelClass . ' ' . ($withPull) . '">'
         . ucfirst($labelName) . '</span>';
 }

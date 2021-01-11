@@ -27,6 +27,18 @@
                 </div>
             @endcan
             <div class="box box-default">
+                <div class="box-header">
+                    <h3 class="box-title"></h3>
+                    <div class="box-tools pull-right">
+                        <div class="form-group">
+                            <input type="text"
+                                   placeholder="Search......"
+                                   name="q"
+                                   value="{{request()->get('q')}}"
+                                   class="form-control select2-search">
+                        </div>
+                    </div>
+                </div>
                 <div class="box-body">
                     <table class="table dataTable table-bordered" id="dataTables">
                         <thead>
@@ -38,6 +50,28 @@
                         </tr>
                         </thead>
                         <tbody>
+                        @forelse($rates as $rate)
+                            <tr>
+                                <td>{{$rate->date}}</td>
+                                <td>{{$rate->customer_rate}}</td>
+                                <td>{{$rate->agent_rate}}</td>
+                                <td>
+                                    @inject('dataTableButton','\Modules\Backend\Http\Services\DataTableButton')
+                                    @can('rate-edit')
+                                        {!! $dataTableButton->editButton($routePrefix.'rates.edit',$rate->id) !!}
+                                    @endcan
+                                    @can('rate-delete')
+                                        {!! $dataTableButton->deleteButton($routePrefix.'rates.destroy',$rate->id) !!}
+                                    @endcan
+                                </td>
+                            </tr>
+                        @empty
+                            <tr>
+                                <td colspan="4">
+                                    No rates is recorded
+                                </td>
+                            </tr>
+                        @endforelse
 
                         </tbody>
                     </table>
@@ -48,31 +82,4 @@
 
     @include('backend::rates.partials.modal')
 @stop
-{{--@section('adminlte_js')--}}
-@push('scripts')
-    <script type="text/javascript">
-        $(document).ready(function () {
-            $('#dataTables').dataTable({
-                serverSide: true,
-                "language": {
-                    "processing": '<i class="fas fa-spinner fa-spin"><i>',
-                },
-                ajax: {
-                    url: '{{request()->getBaseUrl()}}',
-                    method: 'GET'
-                },
-                columns: [
-                    // {data: "id", name: 'id'},
-                    {data: "date", name: 'date'},
-                    {data: "customer_rate", name: 'customer_rate'},
-                    {data: "agent_rate", name: 'agent_rate'},
-                    {data: "action", searchable: false, oderable: false},
 
-
-                ],
-                order: [0],
-            });
-        })
-    </script>
-@endpush
-{{--@endsection--}}

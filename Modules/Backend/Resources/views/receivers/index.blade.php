@@ -27,7 +27,18 @@
     </div>
 
     <div class="box box-default">
-
+        <div class="box-header">
+            <h3 class="box-title"></h3>
+            <div class="box-tools pull-right">
+                <div class="form-group">
+                    <input type="text"
+                           placeholder="Search......"
+                           name="q"
+                           value="{{request()->get('q')}}"
+                           class="form-control select2-search">
+                </div>
+            </div>
+        </div>
         <div class="box-body">
             <table class="table dataTable table-bordered" id="dataTables">
                 <thead>
@@ -45,37 +56,24 @@
                     <tr>
                         <td>{{$receiver->code}}</td>
                         <td>{{ucwords($receiver->first_name)}} {{ucwords($receiver->middle_name)}} {{ ucwords($receiver->last_name) }}</td>
+
                         <td>{{$receiver->phone_number1}} {{ $receiver->phone_number2 ? ' ,'.$receiver->phone_number2 : '' }}</td>
                         <td>
                             {{ucwords($receiver->district)}}
                             -{{$receiver->ward_number}}, {{ucwords($receiver->street)}}
 
                         </td>
-
                         <td>
-                            {!! Form::open(['route'=>[$routePrefix.'receivers.destroy',$receiver->id]]) !!}
+                            @inject('dataTableButton','\Modules\Backend\Http\Services\DataTableButton')
                             @can('receiver-view')
-                                <a href="{{route($routePrefix.'receivers.show',$receiver->id)}}"
-                                   class="btn btn-default btn-sm btn-flat">
-                                    <i class="fa fa-eye"></i>
-                                </a>
+                                {!! $dataTableButton->viewButton($routePrefix.'receivers.show',$receiver->id) !!}
                             @endcan
                             @can('receiver-edit')
-                                <a href="{{route($routePrefix.'receivers.edit',$receiver->id)}}"
-                                   class="btn btn-primary btn-sm btn-flat">
-                                    <i class="fa fa-edit"></i>
-                                </a>
+                                {!! $dataTableButton->editButton($routePrefix.'receivers.show',$receiver->id) !!}
                             @endcan
                             @can('receiver-delete')
-                                @method('DELETE')
-                                <button type="submit"
-                                        onclick="return confirm('Are You sure to delete ?')"
-                                        class="btn btn-danger btn-sm btn-flat">
-                                    <i class="fa fa-times"></i>
-                                </button>
-
+                                {!! $dataTableButton->deleteButton($routePrefix.'receivers.show',$receiver->id) !!}
                             @endcan
-                            {!! Form::close() !!}
                         </td>
                     </tr>
                 @endforeach

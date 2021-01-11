@@ -65,29 +65,12 @@
                 <li><a href="#services">Services</a></li>
                 <li><a href="#portfolio">Portfolio</a></li>
                 <li><a href="#team">Team</a></li>
-{{--                <li class="drop-down"><a href="">Drop Down</a>--}}
-{{--                    <ul>--}}
-{{--                        <li><a href="#">Drop Down 1</a></li>--}}
-{{--                        <li class="drop-down"><a href="#">Deep Drop Down</a>--}}
-{{--                            <ul>--}}
-{{--                                <li><a href="#">Deep Drop Down 1</a></li>--}}
-{{--                                <li><a href="#">Deep Drop Down 2</a></li>--}}
-{{--                                <li><a href="#">Deep Drop Down 3</a></li>--}}
-{{--                                <li><a href="#">Deep Drop Down 4</a></li>--}}
-{{--                                <li><a href="#">Deep Drop Down 5</a></li>--}}
-{{--                            </ul>--}}
-{{--                        </li>--}}
-{{--                        <li><a href="#">Drop Down 2</a></li>--}}
-{{--                        <li><a href="#">Drop Down 3</a></li>--}}
-{{--                        <li><a href="#">Drop Down 4</a></li>--}}
-{{--                    </ul>--}}
-{{--                </li>--}}
                 <li><a href="#contact">Contact</a></li>
 
             </ul>
         </nav><!-- .nav-menu -->
 
-        <a href="#" class="get-started-btn ">Login</a>
+        <a href="{{route('login')}}" class="get-started-btn ">Login</a>
 
     </div>
 </header><!-- End Header -->
@@ -102,10 +85,10 @@
                 <h1>Better & secure way to send Money</h1>
                 <h2>Fast - Secure - Reliable </h2>
                 <div class="d-lg-flex">
-                    <a href="#" class="btn-get-started ">
-                       Send Money
+                    <a href="{{route('login')}}" class="btn-get-started" target="_blank">
+                        Send Money
                     </a>
-         </div>
+                </div>
             </div>
             <div class="col-lg-6 order-1 order-lg-2 hero-img" data-aos="zoom-in" data-aos-delay="200">
                 <img src="{{asset('/images/hero-img.png')}}" class="img-fluid animated" alt="">
@@ -702,84 +685,59 @@
 
             <div class="section-title">
                 <h2>Frequently Asked Questions</h2>
-                <p>Magnam dolores commodi suscipit. Necessitatibus eius consequatur ex aliquid fuga eum quidem. Sit sint
-                    consectetur velit. Quisquam quos quisquam cupiditate. Et nemo qui impedit suscipit alias ea. Quia
-                    fugiat sit in iste officiis commodi quidem hic quas.</p>
+                {{--                <p>Magnam dolores commodi suscipit. Necessitatibus eius consequatur ex aliquid fuga eum quidem. Sit sint--}}
+                {{--                    consectetur velit. Quisquam quos quisquam cupiditate. Et nemo qui impedit suscipit alias ea. Quia--}}
+                {{--                    fugiat sit in iste officiis commodi quidem hic quas.</p>--}}
             </div>
 
             <div class="faq-list">
                 <ul>
                     <li data-aos="fade-up" data-aos-delay="100">
-                        <i class="bx bx-help-circle icon-help"></i> <a data-toggle="collapse" class="collapse"
-                                                                       href="#faq-list-1">Non consectetur a erat nam at
-                            lectus urna duis? <i class="bx bx-chevron-down icon-show"></i><i
+                        <i class="bx bx-help-circle icon-help"></i>
+                        <a data-toggle="collapse" class="collapse"
+                           href="#faq-list-1">WHAT IS REGISTERED REMIT ? <i class="bx bx-chevron-down icon-show"></i><i
                                 class="bx bx-chevron-up icon-close"></i></a>
                         <div id="faq-list-1" class="collapse show" data-parent=".faq-list">
                             <p>
-                                Feugiat pretium nibh ipsum consequat. Tempus iaculis urna id volutpat lacus laoreet non
-                                curabitur gravida. Venenatis lectus magna fringilla urna porttitor rhoncus dolor purus
-                                non.
+                                Registered Remit is a money transfer service that ensures to provide
+                                a secure way of sending money to Nepal.
                             </p>
                         </div>
                     </li>
 
                     <li data-aos="fade-up" data-aos-delay="200">
-                        <i class="bx bx-help-circle icon-help"></i> <a data-toggle="collapse" href="#faq-list-2"
-                                                                       class="collapsed">Feugiat scelerisque varius
-                            morbi enim nunc? <i class="bx bx-chevron-down icon-show"></i><i
+                        <i class="bx bx-help-circle icon-help"></i>
+                        <a data-toggle="collapse" href="#faq-list-2"
+                           class="collapsed"><i class="bx bx-chevron-down icon-show"></i>
+                            WHY SHOULD I CHOOSE REGISTERED REMIT ?
+                            <i
                                 class="bx bx-chevron-up icon-close"></i></a>
                         <div id="faq-list-2" class="collapse" data-parent=".faq-list">
                             <p>
-                                Dolor sit amet consectetur adipiscing elit pellentesque habitant morbi. Id interdum
-                                velit laoreet id donec ultrices. Fringilla phasellus faucibus scelerisque eleifend donec
-                                pretium. Est pellentesque elit ullamcorper dignissim. Mauris ultrices eros in cursus
-                                turpis massa tincidunt dui.
+                                Registered Remit assures to provide fast, easy and reliable remittance facility. We
+                                offer
+                                attractive exchange rate and two hours payment in Nepal* (Fees and restriction apply.
+                                Please visit our T&C page). More importantly, we believe in providing value and security
+                                to customers. Registered Remit definitely guarantees to be the best choice for sending
+                                money
+                                to your loves ones in Nepal.
                             </p>
                         </div>
                     </li>
 
                     <li data-aos="fade-up" data-aos-delay="300">
-                        <i class="bx bx-help-circle icon-help"></i> <a data-toggle="collapse" href="#faq-list-3"
-                                                                       class="collapsed">Dolor sit amet consectetur
-                            adipiscing elit? <i class="bx bx-chevron-down icon-show"></i><i
+                        <i class="bx bx-help-circle icon-help"></i>
+                        <a data-toggle="collapse" href="#faq-list-3"
+                           class="collapsed">WHAT IS THE COST FOR A MONEY TRANSFER ?
+                            <i class="bx bx-chevron-down icon-show"></i><i
                                 class="bx bx-chevron-up icon-close"></i></a>
                         <div id="faq-list-3" class="collapse" data-parent=".faq-list">
                             <p>
-                                Eleifend mi in nulla posuere sollicitudin aliquam ultrices sagittis orci. Faucibus
-                                pulvinar elementum integer enim. Sem nulla pharetra diam sit amet nisl suscipit. Rutrum
-                                tellus pellentesque eu tincidunt. Lectus urna duis convallis convallis tellus. Urna
-                                molestie at elementum eu facilisis sed odio morbi quis
+                                The standard fee for an online money transfer is AU $10
                             </p>
                         </div>
                     </li>
 
-                    <li data-aos="fade-up" data-aos-delay="400">
-                        <i class="bx bx-help-circle icon-help"></i> <a data-toggle="collapse" href="#faq-list-4"
-                                                                       class="collapsed">Tempus quam pellentesque nec
-                            nam aliquam sem et tortor consequat? <i class="bx bx-chevron-down icon-show"></i><i
-                                class="bx bx-chevron-up icon-close"></i></a>
-                        <div id="faq-list-4" class="collapse" data-parent=".faq-list">
-                            <p>
-                                Molestie a iaculis at erat pellentesque adipiscing commodo. Dignissim suspendisse in est
-                                ante in. Nunc vel risus commodo viverra maecenas accumsan. Sit amet nisl suscipit
-                                adipiscing bibendum est. Purus gravida quis blandit turpis cursus in.
-                            </p>
-                        </div>
-                    </li>
-
-                    <li data-aos="fade-up" data-aos-delay="500">
-                        <i class="bx bx-help-circle icon-help"></i> <a data-toggle="collapse" href="#faq-list-5"
-                                                                       class="collapsed">Tortor vitae purus faucibus
-                            ornare. Varius vel pharetra vel turpis nunc eget lorem dolor? <i
-                                class="bx bx-chevron-down icon-show"></i><i class="bx bx-chevron-up icon-close"></i></a>
-                        <div id="faq-list-5" class="collapse" data-parent=".faq-list">
-                            <p>
-                                Laoreet sit amet cursus sit amet dictum sit amet justo. Mauris vitae ultricies leo
-                                integer malesuada nunc vel. Tincidunt eget nullam non nisi est sit amet. Turpis nunc
-                                eget lorem dolor sed. Ut venenatis tellus in metus vulputate eu scelerisque.
-                            </p>
-                        </div>
-                    </li>
 
                 </ul>
             </div>
@@ -793,9 +751,7 @@
 
             <div class="section-title">
                 <h2>Contact</h2>
-                <p>Magnam dolores commodi suscipit. Necessitatibus eius consequatur ex aliquid fuga eum quidem. Sit sint
-                    consectetur velit. Quisquam quos quisquam cupiditate. Et nemo qui impedit suscipit alias ea. Quia
-                    fugiat sit in iste officiis commodi quidem hic quas.</p>
+                <p>Do you have any queries ? Ask Us .</p>
             </div>
 
             <div class="row">
@@ -820,38 +776,43 @@
                             <p>+1 5589 55488 55s</p>
                         </div>
 
-                        {{--                        <iframe--}}
-                        {{--                            src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d12097.433213460943!2d-74.0062269!3d40.7101282!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0xb89d1fe6bc499443!2sDowntown+Conference+Center!5e0!3m2!1smk!2sbg!4v1539943755621"--}}
-                        {{--                            frameborder="0" style="border:0; width: 100%; height: 290px;" allowfullscreen></iframe>--}}
+                        <iframe
+                            src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d12097.433213460943!2d-74.0062269!3d40.7101282!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0xb89d1fe6bc499443!2sDowntown+Conference+Center!5e0!3m2!1smk!2sbg!4v1539943755621"
+                            frameborder="0" style="border:0; width: 100%; height: 290px;" allowfullscreen></iframe>
                     </div>
 
                 </div>
 
                 <div class="col-lg-7 mt-5 mt-lg-0 d-flex align-items-stretch">
-                    <form action="forms/contact.php" method="post" role="form" class="php-email-form">
+                    <form action="#" method="post" role="form" class="contact_us_form">
                         <div class="form-row">
                             <div class="form-group col-md-6">
                                 <label for="name">Your Name</label>
-                                <input type="text" name="name" class="form-control" id="name" data-rule="minlen:4"
+                                <input type="text" name="name" class="form-control"
+                                       id="name"
+                                       data-rule="minLen:4"
                                        data-msg="Please enter at least 4 chars"/>
                                 <div class="validate"></div>
                             </div>
                             <div class="form-group col-md-6">
                                 <label for="name">Your Email</label>
-                                <input type="email" class="form-control" name="email" id="email" data-rule="email"
+                                <input type="email" class="form-control"
+                                       name="email" id="email" data-rule="email"
                                        data-msg="Please enter a valid email"/>
                                 <div class="validate"></div>
                             </div>
                         </div>
                         <div class="form-group">
                             <label for="name">Subject</label>
-                            <input type="text" class="form-control" name="subject" id="subject" data-rule="minlen:4"
+                            <input type="text" class="form-control"
+                                   name="subject" id="subject" data-rule="minLen:4"
                                    data-msg="Please enter at least 8 chars of subject"/>
                             <div class="validate"></div>
                         </div>
                         <div class="form-group">
                             <label for="name">Message</label>
-                            <textarea class="form-control" name="message" rows="10" data-rule="required"
+                            <textarea class="form-control" name="message"
+                                      rows="10" data-rule="required"
                                       data-msg="Please write something for us"></textarea>
                             <div class="validate"></div>
                         </div>
@@ -880,8 +841,9 @@
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col-lg-6">
-                    <h4>Join Our Newsletter</h4>
-                    <p>Tamen quem nulla quae legam multos aute sint culpa legam noster magna</p>
+                    <h4>Subscribe To Our Newsletter</h4>
+                    <p>Join our subscribers list to get the latest news,
+                        updates and special offers delivered directly in your inbox.</p>
                     <form action="" method="post">
                         <input type="email" name="email"><input type="submit" value="Subscribe">
                     </form>
@@ -895,7 +857,7 @@
             <div class="row">
 
                 <div class="col-lg-3 col-md-6 footer-contact">
-                    <h3>Arsha</h3>
+                    <h3>Registered Remit</h3>
                     <p>
                         A108 Adam Street <br>
                         New York, NY 535022<br>
@@ -917,19 +879,17 @@
                 </div>
 
                 <div class="col-lg-3 col-md-6 footer-links">
-                    <h4>Our Services</h4>
+                    <h4>Our Features</h4>
                     <ul>
-                        <li><i class="bx bx-chevron-right"></i> <a href="#">Web Design</a></li>
-                        <li><i class="bx bx-chevron-right"></i> <a href="#">Web Development</a></li>
-                        <li><i class="bx bx-chevron-right"></i> <a href="#">Product Management</a></li>
-                        <li><i class="bx bx-chevron-right"></i> <a href="#">Marketing</a></li>
-                        <li><i class="bx bx-chevron-right"></i> <a href="#">Graphic Design</a></li>
+                        <li><i class="bx bx-chevron-right"></i> <a href="#">Secure</a></li>
+                        <li><i class="bx bx-chevron-right"></i> <a href="#">Fast</a></li>
+                        <li><i class="bx bx-chevron-right"></i> <a href="#">100% cash back</a></li>
                     </ul>
                 </div>
 
                 <div class="col-lg-3 col-md-6 footer-links">
                     <h4>Our Social Networks</h4>
-                    <p>Cras fermentum odio eu feugiat lide par naso tierra videa magna derita valies</p>
+                    <p>Connect with us in</p>
                     <div class="social-links mt-3">
                         <a href="#" class="twitter"><i class="bx bxl-twitter"></i></a>
                         <a href="#" class="facebook"><i class="bx bxl-facebook"></i></a>
@@ -945,15 +905,9 @@
 
     <div class="container footer-bottom clearfix">
         <div class="copyright">
-            &copy; Copyright <strong><span>Arsha</span></strong>. All Rights Reserved
+            &copy; Copyright <strong><span>Registered Remit</span></strong>. All Rights Reserved
         </div>
-        {{--        <div class="credits">--}}
-        {{--            <!-- All the links in the footer should remain intact. -->--}}
-        {{--            <!-- You can delete the links only if you purchased the pro version. -->--}}
-        {{--            <!-- Licensing information: https://bootstrapmade.com/license/ -->--}}
-        {{--            <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/arsha-free-bootstrap-html-template-corporate/ -->--}}
-        {{--            Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>--}}
-        {{--        </div>--}}
+
     </div>
 </footer><!-- End Footer -->
 
@@ -964,12 +918,13 @@
 <script src="{{asset('vendor/jquery/jquery.min.js')}}"></script>
 <script src="{{asset('vendor/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
 <script src="{{asset('vendor/jquery.easing/jquery.easing.min.js')}}"></script>
-{{--<script src="{{asset('vendor/php-email-form/validate.js')}}"></script>--}}
+{{--<script src="{{asset('vendor/contact_us_form/validate.js')}}"></script>--}}
 <script src="{{asset('vendor/waypoints/jquery.waypoints.min.js')}}"></script>
 <script src="{{asset('vendor/isotope-layout/isotope.pkgd.min.js')}}"></script>
 <script src="{{asset('vendor/venobox/venobox.min.js')}}"></script>
 <script src="{{asset('vendor/owl.carousel/owl.carousel.min.js')}}"></script>
 <script src="{{asset('vendor/aos/aos.js')}}"></script>
+<script src="{{asset('js/contact-us.js')}}"></script>
 
 <!-- Template Main JS File -->
 <script src="{{asset('js/frontend.js')}}"></script>

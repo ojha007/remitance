@@ -6,21 +6,26 @@ namespace Modules\Backend\Http\Services;
 
 class DataTableButton
 {
-    public function editButtonModal($value, $modal_name)
+    public function editButtonModal($value, $modal_name): string
     {
         return '<button data-toggle="modal" title="EDIT" data-target="#' . $modal_name . '"
             value="' . $value . '" class="btn btn-primary edit-button btn-flat btn-sm">
             <i class="fa fa-edit "></i></button>';
     }
 
-    public function viewButton($route, $value)
+    public function viewButton($route, $value): string
     {
         return '<a class="btn btn-default btn-sm btn-flat" data-container="body"
                    title="View"   href="' . route($route, $value) . '">
                    <i class="fa fa-eye "></i></a>&nbsp;';
     }
 
-    public function deleteButton($route, $value)
+    /**
+     * @param $route
+     * @param $value
+     * @return string
+     */
+    public function deleteButton($route, $value): string
     {
         return '<form method="POST" action="' . route($route, $value) . '"
                      onsubmit="return confirm(\'Are you sure you want to delete?\')" style="display: inline;">
@@ -32,7 +37,7 @@ class DataTableButton
                      <i class="fa fa-times"></i></button></form>';
     }
 
-    public function editButton($route, $value)
+    public function editButton($route, $value): string
     {
         return '<a class="btn btn-primary btn-sm btn-flat" data-container="body"
                    title="Edit"   href="' . route($route, $value) . '">

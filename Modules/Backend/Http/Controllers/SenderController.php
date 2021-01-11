@@ -20,6 +20,7 @@ class SenderController extends Controller
     protected $viewPath = 'backend::senders.';
 
     protected $baseRoute = 'admin.senders.';
+    protected $pageLimit = 20;
 
     private $model;
     /**
@@ -42,36 +43,10 @@ class SenderController extends Controller
 
     public function index(Request $request)
     {
-        if ($request->ajax()) {
-            $attributes['limit'] = $request->query('limit');
-            $senders = $this->repository->getIndexPageData($attributes);
-            return $this->dataTableLists($senders);
-        }
-//        dd('g');
-        return view($this->viewPath . 'index');
+        $attributes['limit'] = $request->query('limit');
+        $senders = $this->repository->getIndexPageData($attributes, $this->pageLimit);
+        return view($this->viewPath . 'index', compact('senders'));
     }
-
-    protected function dataTableLists($collection)
-    {
-        $dataTableButton = new DataTableButton();
-        return DataTables::make($collection)
-            ->editColumn('is_active', function ($sender) {
-                return spanByStatus($sender->is_active);
-            })
-            ->addColumn('action', function ($sender) use ($dataTableButton) {
-                $button = '';
-                if (auth()->user()->can('sender-view'))
-                    $button .= $dataTableButton->viewButton($this->baseRoute . 'show', $sender->id);
-                if (auth()->user()->can('sender-edit'))
-                    $button .= $dataTableButton->editButton($this->baseRoute . 'edit', $sender->id);
-                if (auth()->user()->can('sender-delete'))
-                    $button .= $dataTableButton->deleteButton($this->baseRoute . 'destroy', $sender->id);
-                return $button;
-            })
-            ->rawColumns(['is_active', 'action'])
-            ->toJson();
-    }
-
 
     public function create()
     {
@@ -101,7 +76,6 @@ class SenderController extends Controller
 
     }
 
-
     public function show(Request $request, int $id)
     {
         $sender = $this->repository->getAllDetailById($id);
@@ -116,8 +90,7 @@ class SenderController extends Controller
     {
         $sender = $this->repository->getAllDetailById($id);
         $view = view($this->viewPath . 'edit');
-        return $this->repository->getCreateOrEditPage($view)
-            ->with(['sender' => $sender]);
+        return $this->repository->getCreateOrEditPage($view)->with(['sender' => $sender]);
 
     }
 

@@ -12,8 +12,9 @@ Route::group([
     include __DIR__ . '/subRoutes/receivers.php';
     include __DIR__ . '/subRoutes/roles.php';
     include __DIR__ . '/subRoutes/send-money.php';
-    Route::get('/states/country/{country_id}', 'BackendController@getStates');
-    Route::get('/districts/state/{state_id}', 'BackendController@getDistricts');
-    Route::get('/municipalities/district/{district_id}', 'BackendController@getMunicipalities');
-    Route::get('/suburbs/state/{state_id}', 'BackendController@getSuburbs');
+    Route::get('/states/country/{country_id}', 'BackendController@getStates')->name('getStateByCountry');
+    Route::get('/districts/state/{state_id}', 'BackendController@getDistricts')->name('getDistrictByState');
+    Route::get('/municipalities/district/{district_id}', 'BackendController@getMunicipalities')->name('getMunicipalitiesByDistrict');
+    Route::get('/suburbs/state/{state_id}', 'BackendController@getSuburbs')->name('getSuburbsByStates');
+
 });

@@ -104,6 +104,7 @@ class BackendServiceProvider extends ServiceProvider
             $routePrefix = Request::route()->getAction('routePrefix');
             $view->with([
                 'routePrefix' => $routePrefix,
+                'host' => request()->getHttpHost()
             ]);
         });
     }
