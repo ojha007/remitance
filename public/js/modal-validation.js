@@ -78,7 +78,7 @@ $("document").ready(function () {
                 }
                 modal.trigger("reset");
                 let a = modal.find('input[name="reload"]');
-                if (a === 'undefined') {
+                if (typeof a === 'undefined') {
                     window.location.reload();
                 } else {
                     // $(response.dom).html(template(response['data']));

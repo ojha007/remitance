@@ -22,16 +22,15 @@ class ReceiverRequest extends FormRequest
             'last_name' => 'required|string:min:1|max:255',
             'email' => 'nullable|email',
             'sender_id' => 'required|exists:senders,id',
-            'phone_number1' => 'required',
-            'phone_number2' => 'nullable',
+            'phone_number' => 'required|numeric',
             'street' => 'required|string|min:1',
             'state_id' => 'required|exists:states,id',
             'country_id' => 'required|exists:countries,id',
             'identity_type_id' => 'required|exists:identity_types,id',
             'issued_by' => 'required|in:' . implode(',', array_keys(Receiver::getIssuedByArray())),
             'id_number' => 'required|unique:senders,id_number,' . $id,
-            'expiry_date' => 'required|date|gt:date_of_birth',
-            'date_of_birth' => 'required|date',
+            'expiry_date' => 'required|date|after:date_of_birth',
+            'date_of_birth' => 'required|date|before:expiry_date',
             'file' => 'nullable'
         ];
     }
@@ -41,7 +40,7 @@ class ReceiverRequest extends FormRequest
      *
      * @return bool
      */
-    public function authorize()
+    public function authorize(): bool
     {
         return true;
     }

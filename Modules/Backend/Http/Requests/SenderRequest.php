@@ -4,6 +4,7 @@ namespace Modules\Backend\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Modules\Backend\Entities\Receiver;
+use Modules\Backend\Entities\Sender;
 
 class SenderRequest extends FormRequest
 {
@@ -12,7 +13,7 @@ class SenderRequest extends FormRequest
      *
      * @return array
      */
-    public function rules()
+    public function rules(): array
     {
 
         $id = $this->route()->parameter('sender');
@@ -27,10 +28,10 @@ class SenderRequest extends FormRequest
             'post_code' => 'required_with:state_id|numeric',
             'country_id' => 'required|exists:countries,id',
             'identity_type_id' => 'required|exists:identity_types,id',
-            'issued_by' => 'required|in:' . implode(',', array_keys(Receiver::getIssuedByArray())),
+            'issued_by' => 'required|in:' . implode(',', array_keys(Sender::getIssuedByArray())),
             'id_number' => 'required|unique:senders,id_number,' . $id,
-            'expiry_date' => 'required|date',
-            'date_of_birth' => 'required|date',
+            'expiry_date' => 'required|date|after:date_of_birth',
+            'date_of_birth' => 'required|date|before:expiry_date',
             'file' => 'nullable'
         ];
     }
