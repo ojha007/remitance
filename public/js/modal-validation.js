@@ -78,7 +78,6 @@ $("document").ready(function () {
                 }
                 modal.trigger("reset");
                 let a = modal.find('input[name="reload"]');
-                console.log(a)
                 if (a.length === 0) {
                     window.location.reload();
                 } else {

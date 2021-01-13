@@ -58,7 +58,7 @@
                                 <td>
                                     @inject('dataTableButton','\Modules\Backend\Http\Services\DataTableButton')
                                     @can('rate-edit')
-                                        {!! $dataTableButton->editButton($routePrefix.'rates.edit',$rate->id) !!}
+                                        {!! $dataTableButton->editButtonModal($rate->id,'modal-rate') !!}
                                     @endcan
                                     @can('rate-delete')
                                         {!! $dataTableButton->deleteButton($routePrefix.'rates.destroy',$rate->id) !!}

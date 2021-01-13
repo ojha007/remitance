@@ -97,6 +97,7 @@ desired effect
         </section>
         <!-- Main content -->
         <section class="content" id="app">
+            @include('backend::message')
             @yield('content')
         </section>
         <!-- /.content -->
