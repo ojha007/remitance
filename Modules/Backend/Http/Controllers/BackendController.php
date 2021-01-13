@@ -37,8 +37,8 @@ class BackendController extends Controller
         ];
         $widgets['Today Customer Rate'] = [
             'total' => DB::table('rates')
-                ->latest()->first()
-                ->customer_rate,
+                    ->latest()->first()
+                    ->customer_rate ?? '',
             'icon' => 'fa fa-dollar',
             'bg' => 'bg-yellow',
             'url' => route('admin.rates.index')
