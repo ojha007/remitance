@@ -62,7 +62,7 @@ class SenderRepository extends Repository
                 ->pluck('name', 'id')
                 ->toArray();
         });
-        $idTypes = Cache::rememberForever('idTypes', function () {
+        $idTypes = Cache::rememberForever('idTypes_' . $country, function () {
             return DB::table('identity_types')
                 ->pluck('name', 'id')
                 ->toArray();
