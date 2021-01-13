@@ -78,21 +78,19 @@ $("document").ready(function () {
                 }
                 modal.trigger("reset");
                 let a = modal.find('input[name="reload"]');
-                if (typeof a === 'undefined') {
+                console.log(a)
+                if (a.length === 0) {
                     window.location.reload();
                 } else {
-                    // $(response.dom).html(template(response['data']));
                     if ($(response.select).length) {
                         let data = response['options'];
                         $(response.select).find('option[value !=""]').remove();
                         $.each(data, function (value, text) {
-                            console.log(value, text)
                             $(response.select).append($('<option/>', {
                                 value: value,
                                 text: text
                             }));
                         });
-
                         $(response.select).val(response['id']).trigger('change');
                     }
                 }
