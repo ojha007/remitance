@@ -15,7 +15,7 @@
     @php($classPartition ='3')
     <div class="row">
         <div class="col-md-12">
-            {!! Form::open(['url'=>request()->url(),'class'=>'form-horizontal' ,'enctype'=>"multipart/form-data"]) !!}
+            {!! Form::open(['route'=>$routePrefix.'send-money.store','class'=>'form-horizontal' ,'enctype'=>"multipart/form-data"]) !!}
             <div class="box box-default">
                 <div class="box-header with-border">
                     <h3 class="box-title">
@@ -39,7 +39,7 @@
                     'type'=>'select',
                     'options'=>[],
                     'default'=>null])
-                    @include('backend::common.input',['name'=>'date','is_required'=>true,'class'=>'datePicker'])
+                    @include('backend::common.input',['name'=>'date','is_required'=>true,'class'=>'datePicker','defaultValue'=>now()->format('Y-m-d')])
                     @include('backend::common.input',['name'=>'sending_amount','type'=>'number','is_required'=>true,'addOn'=>'AUD'])
                     @include('backend::common.input',['name'=>'rate','type'=>'number','is_required'=>true])
                     @include('backend::common.input',['name'=>'receiving_amount','type'=>'number','is_required'=>true,'addOn'=>'NPR'])
@@ -49,7 +49,7 @@
                     'options'=>$selectPaymentTypes,'default'=>null      ])
                     @include('backend::common.input',
                     ['name'=>'pickup_address','is_required'=>true,
-                    'type'=>'select', 'options'=>[],'default'=>null])
+                    'type'=>'select', 'options'=>$selectPickUpAddress,'default'=>null])
                     @include('backend::common.input',['name'=>'file','type'=>'file','label'=>'Upload File'])
                     @include('backend::common.input',['name'=>'notes','type'=>'textarea'])
 
@@ -124,6 +124,7 @@
                            </div>`
 
         function onSelect2Change(primary, secondary, url) {
+            let res;
             primary.on('change', function () {
                 let val = $(this).val()
                 if (val) {
@@ -134,14 +135,15 @@
                         url: url + '/' + val,
                         method: 'GET',
                         success: function (response) {
-                            secondary.html(template(response))
+                            secondary.html(template(response));
+                            res = response;
                         }
                     });
-
                 } else {
                     secondary.html('');
                     $('input[name="sender_id"]').val('');
                 }
+                return res;
             });
         }
 
@@ -150,8 +152,12 @@
             let senderElement = $('#sender_id');
             let receiverElement = $('#receiver_id');
             onSelect2Change(senderElement, $("#sender-detail"), '{{url('/senders/')}}');
-            onSelect2Change(receiverElement, $("#receiver-detail"), '{{url('/receivers/')}}');
+            let response = onSelect2Change(receiverElement, $("#receiver-detail"), '{{url('/receivers/')}}');
+            console.log(response)
             handleOnSelect2Change(senderElement, receiverElement, '{{url('all-receivers-by/sender')}}');
+            $('#receiver-detail').on('change', function () {
+                $('#pickup_address').val()
+            })
             $('#sending_amount').on('keyup', function () {
                 let rate = parseFloat($('#rate').val());
                 $('#receiving_amount').val($(this).val() * rate);

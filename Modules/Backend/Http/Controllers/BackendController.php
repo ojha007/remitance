@@ -44,7 +44,7 @@ class BackendController extends Controller
             'url' => route('admin.rates.index')
         ];
         $allTransactions = $this->getAllTransactionsWithStatus();
-        $latestTransactions = [];
+        $latestTransactions = $this->getLatestTransaction();
         return view('backend::index', compact('widgets', 'allTransactions', 'latestTransactions'));
     }
 
@@ -96,6 +96,39 @@ class BackendController extends Controller
     protected function getAllTransactionsWithStatus(): array
     {
         return [];
+    }
+
+    public function getLatestTransaction($status = 'all', $limit = 10): \Illuminate\Support\Collection
+    {
+        $latestStatus = $this->getLatestStatusOfTransactions();
+        if (request()->ajax()) {
+        } else {
+            return DB::table('transactions as tr')
+                ->select('tr.code', 'st.name as status', 'tr.id')
+                ->selectRaw('concat(se.first_name, " ", se.last_name) as sender')
+                ->join('senders as se', 'se.id', '=', 'tr.sender_id')
+                ->joinSub($latestStatus, 'ls', function ($q) {
+                    $q->on('tr.id', '=', 'ls.transaction_id');
+                })->join('statuses as st', 'st.id', '=', 'ls.status_id')
+                ->orderByDesc('tr.created_at')
+                ->limit($limit)
+                ->get();
+
+        }
+    }
+
+    public function getLatestStatusOfTransactions(): \Illuminate\Database\Query\Builder
+    {
+
+        $latestStatus = DB::table('transaction_status')
+            ->selectRaw('MAX(id) as id')
+            ->groupBy('transaction_id');
+
+        return DB::table('transaction_status as ts')
+            ->select('transaction_id', 'status_id')
+            ->joinSub($latestStatus, 'ls', function ($q) {
+                $q->on('ts.id', '=', 'ls.id');
+            });
     }
 
 }

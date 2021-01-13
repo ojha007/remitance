@@ -13,9 +13,13 @@ function spanByStatus($status, $withPull = ''): string
             $labelClass = 'bg-yellow';
             $labelName = 'Inactive';
             break;
-        default:
-            $labelClass = 'bg-blue';
+        case 'pending':
+            $labelClass = 'bg-yellow';
             $labelName = 'Pending';
+            break;
+        default:
+            $labelClass = 'bg-red';
+            $labelName = $status;
 
     }
     return '<span style="cursor: default;"

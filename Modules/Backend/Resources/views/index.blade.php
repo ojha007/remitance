@@ -56,9 +56,14 @@
 
                         @forelse($latestTransactions as $transaction)
                             <tr>
-                                <td></td>
-                                <td></td>
-                                <td></td>
+                                <td>
+                                    <a href="{{route($routePrefix.'transactions.show',$transaction->id)}}"
+                                       target="_blank">
+                                        {{$transaction->code}}
+                                    </a>
+                                </td>
+                                <td>{{$transaction->sender}}</td>
+                                <td>{!! spanByStatus($transaction->status) !!}</td>
                             </tr>
                         @empty
                             <tr>

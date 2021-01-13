@@ -41,6 +41,13 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <link rel="stylesheet" href="{{ mix('/css/backend.css') }}">
     <link type="text/css" rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <link rel="https://cdn.datatables.net/1.10.23/css/dataTables.bootstrap.min.css">
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css"
+          integrity="sha512-mSYUmp1HYZDFaVKK//63EcZq4iFWFjxSL+Z3T/aCt4IO9Cejm03q3NKKYN6pFQzY0SBOr8h+eCIAZHPXcpZaNw=="
+          crossorigin="anonymous"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css"
+          integrity="sha512-nMNlpuaDPrqlEls3IX/Q56H36qvBASwb3ipuo3MxeWbsQB1881ox0cRv7UPTgBlriqoynt35KjEwgGUeUXIPnw=="
+          crossorigin="anonymous"/>
     @stack('styles')
 </head>
 
@@ -102,6 +109,12 @@ desired effect
 <script src="{{ mix('/js/backend.js') }}" rel="script"></script>
 <script src="https://cdn.datatables.net/1.10.23/js/jquery.dataTables.min.js"></script>
 <script src="https://cdn.datatables.net/1.10.23/js/dataTables.bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"
+        integrity="sha512-T/tUfKSV1bihCnd+MxKD0Hm1uBBroVYBOYSk1knyvQ9VyZJpc/ALb4P0r6ubwVPSGB2GvjeoMAJJImBG12TiaQ=="
+        crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"
+        integrity="sha512-2ImtlRlf2VVmiGZsjm9bEyhjGW4dU7B6TNwh/hx/iSByxNENtj3WVE6o/9Lj4TJeVXPi4bnOIMXFIJJAeufa0A=="
+        crossorigin="anonymous"></script>
 @stack('scripts')
 
 <script>
@@ -136,26 +149,23 @@ desired effect
     }
 
     // $(document).ready(function () {
-        // $('.datePicker').datepicker({
-        //     format: 'yyyy-mm-dd',
-        //     todayHighlight: true,
-        //     orientation: "auto",
-        //     autoclose: true,
-        // });
-        // $('input').iCheck({
-        //     checkboxClass: 'icheckbox_square-blue',
-        //     radioClass: 'iradio_square-blue',
-        //     increaseArea: '20%' /* optional */
-        // });
-        // $('.modal').on('shown.bs.modal', function () {
-        //     $(this).find('[autofocus]').focus();
-        // });
+    $('.datePicker').datepicker({
+        format: 'yyyy-mm-dd',
+        todayHighlight: true,
+        orientation: "auto",
+        autoclose: true,
+    });
+    // $('input').iCheck({
+    //     checkboxClass: 'icheckbox_square-blue',
+    //     radioClass: 'iradio_square-blue',
+    //     increaseArea: '20%' /* optional */
+    // });
+    // $('.modal').on('shown.bs.modal', function () {
+    //     $(this).find('[autofocus]').focus();
+    // });
 
 
-        // $('.select2').select2({
-        //     theme: "classic"
-        // });
-    // })
+    $('.select2').select2();
 </script>
 </body>
 </html>

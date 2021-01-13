@@ -22,12 +22,18 @@ use Spatie\Permission\Models\Permission;
 class SendMoneyController extends Controller
 {
 
+    /**
+     * @var string
+     */
     protected $viewPath = 'backend::send-money.';
 
-
-    protected $baseRoute = 'admin.send-money.';
     /**
-     * @var Rate
+     * @var string
+     */
+    protected $baseRoute = 'admin.send-money.';
+
+    /**
+     * @var SendMoney
      */
     private $model;
     /**
@@ -55,8 +61,9 @@ class SendMoneyController extends Controller
             ->toArray();
         $receiverAttributes['receivers'] = (new ReceiverRepository(new Receiver()))->getCreateOrEditPage();
         $senderAttributes['senders'] = (new SenderRepository(new Sender()))->getCreateOrEditPage();
+        $selectPickUpAddress = (new ReceiverRepository(new Receiver()))->selectDistricts();
         return view($this->viewPath . 'create', compact('selectSenders',
-            'selectPaymentTypes'))
+            'selectPaymentTypes', 'selectPickUpAddress'))
             ->with($senderAttributes)
             ->with($receiverAttributes);
 
@@ -68,7 +75,7 @@ class SendMoneyController extends Controller
             $attributes = $request->validated();
             DB::beginTransaction();
             $max_id = DB::table('transactions')->max('id');
-            $attributes['code'] = Receiver::CODE . '-' . str_pad($max_id + 1, 4, 0, STR_PAD_LEFT);
+            $attributes['code'] = SendMoney::CODE . '-' . str_pad($max_id + 1, 4, 0, STR_PAD_LEFT);
             $attributes['created_by'] = auth()->id();
             $currency_id = DB::table('currencies')
                 ->where('code', '=', 'NPR')
@@ -97,11 +104,10 @@ class SendMoneyController extends Controller
             foreach ($users as $user) {
                 $user->notify((new TransactionWasCreated($transaction, $url, $message)));
             }
-            return (new SuccessResponse($this->model, $request, 'created'))
+            return (new SuccessResponse($this->model, $request, 'created', $url))
                 ->responseOk();
         } catch (\Exception $exception) {
             DB::rollBack();
-            dd($exception);
             return (new ErrorResponse($this->model, $request, $exception))
                 ->responseError();
         }

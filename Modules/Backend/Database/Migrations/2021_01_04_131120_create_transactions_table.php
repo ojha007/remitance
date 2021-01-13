@@ -53,6 +53,7 @@ class CreateTransactionsTable extends Migration
             (new MigrationHelpers())->setForeignKey($table, 'transactions', 'transaction_id');
             (new MigrationHelpers())->setForeignKey($table, 'users', 'causer_id');
             $table->text('notes')->nullable();
+            $table->timestamps();
         });
     }
 

@@ -12,6 +12,8 @@ Route::group([
     include __DIR__ . '/subRoutes/receivers.php';
     include __DIR__ . '/subRoutes/roles.php';
     include __DIR__ . '/subRoutes/send-money.php';
+    include __DIR__ . '/subRoutes/notifications.php';
+    include __DIR__ . '/subRoutes/transactions.php';
     Route::get('/states/country/{country_id}', 'BackendController@getStates')->name('getStateByCountry');
     Route::get('/districts/state/{state_id}', 'BackendController@getDistricts')->name('getDistrictByState');
     Route::get('/municipalities/district/{district_id}', 'BackendController@getMunicipalities')->name('getMunicipalitiesByDistrict');

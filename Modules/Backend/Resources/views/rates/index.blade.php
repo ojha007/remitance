@@ -79,7 +79,6 @@
             </div>
         </div>
     </div>
-
     @include('backend::rates.partials.modal')
 @stop
 

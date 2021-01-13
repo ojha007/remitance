@@ -9,7 +9,7 @@
         </li>
         @can('send-money-view')
             <li class="{{request()->routeIs($routePrefix.'send-money.create') ? 'active' : ''}}">
-                <a href="{{url('/send-money/create')}}">
+                <a href="{{url('send-money/create')}}">
                     <i class="fa fa-paper-plane"></i>
                     <span>Send Money</span>
                 </a>

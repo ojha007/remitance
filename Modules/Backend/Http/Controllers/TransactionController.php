@@ -20,11 +20,10 @@ use Yajra\DataTables\DataTables;
 class TransactionController extends Controller
 {
 
-    protected $viewPath = 'backend::send-money.';
+    protected $viewPath = 'backend::transactions.';
 
-    protected $modal = 'modal-rate';
 
-    protected $baseRoute = 'admin.send-money.';
+    protected $baseRoute = 'admin.transactions.';
     /**
      * @var Rate
      */
@@ -41,105 +40,43 @@ class TransactionController extends Controller
         $this->repository = new TransactionRepository($sendMoney);
         $this->middleware('auth');
         $this->middleware('permission:admin-permission');
-        $this->middleware(['permission:send-money-view|send-money-create|send-money-edit|send-money-delete'], ['only' => ['index', 'show']]);
-        $this->middleware(['permission:send-money-create'], ['only' => ['create', 'store', 'show']]);
     }
 
-    /**
-     * Display a listing of the resource.
-     * @param Request $request
-     * @return Renderable
-     */
-    public function index(Request $request): Renderable
+
+    public function show($id)
     {
 
-        if ($request->ajax()) {
-            $rates = $this->repository->select('id', 'date', 'customer_rate', 'agent_rate');
-            return $this->dataTableLists($rates);
-        }
-        return view($this->viewPath . 'index')->with(['modal' => $this->modal]);
-    }
-
-    protected function dataTableLists(Collection $collection)
-    {
-        $dataTableButton = new DataTableButton();
-        return DataTables::make($collection)
-            ->addColumn('action', function ($rate) use ($dataTableButton) {
-                $button = '';
-                $button .= $dataTableButton->editButtonModal($rate->id, $this->modal);
-                $button .= $dataTableButton->deleteButton($this->baseRoute . 'destroy', $rate->id);
-                return $button;
-            })
-            ->toJson();
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     * @return Renderable
-     */
-    public function create(): Renderable
-    {
-
-        return view('backend::create');
-    }
-
-    public function store(RateRequest $request)
-    {
-        $attributes = $request->validated();
         try {
-            DB::beginTransaction();
-            $this->repository->create($attributes);
-            DB::commit();
-            return (new SuccessResponse($this->model, $request))->responseOk();
+            $latestStatus = (new BackendController())
+                ->getLatestStatusOfTransactions()
+                ->where('ts.transaction_id', '=', $id);
+            $transaction = DB::table('transactions')
+                ->select('statuses.name as status', 'transactions.*',
+                    'pt.name as payment_type', 'senders.email as s_email',
+                    'senders.phone_number as s_phone_number',
+                    'receivers.email as r_email', 'receivers.phone_number1 as r_phone_number')
+                ->selectRaw('CONCAT(senders.first_name," ", senders.last_name) as sender')
+                ->selectRaw('CONCAT(receivers.first_name," ", receivers.last_name) as receiver')
+                ->join('senders', 'senders.id', '=', 'transactions.sender_id')
+                ->join('receivers', 'receivers.id', '=', 'transactions.receiver_id')
+                ->joinSub($latestStatus, 'ls', function ($join) {
+                    $join->on('ls.transaction_id', '=', 'transactions.id');
+                })->join('statuses', 'statuses.id', '=', 'ls.status_id')
+                ->join('payment_types as pt', 'pt.id', '=', 'transactions.payment_type_id')
+                ->where('transactions.id', '=', $id)
+                ->first();
+            $transactionStatues = DB::table('transaction_status as ts')
+                ->select('s.name as status', 'u.name as causer',
+                    't.date', 't.code')
+                ->join('statuses as s', 's.id', '=', 'ts.status_id')
+                ->join('transactions as t', 't.id', '=', 'ts.transaction_id')
+                ->join('users as u', 'u.id', '=', 'ts.causer_id')
+                ->orderByDesc('ts.id')
+                ->where('t.id', '=', $id)
+                ->get();
+            return view($this->viewPath . 'show', compact('transactionStatues', 'transaction'));
         } catch (\Exception $exception) {
-            DB::rollBack();
-            return (new ErrorResponse($this->model, $request, $exception))->responseError();
-        }
-
-    }
-
-    /**
-     * Show the specified resource.
-     * @param  $id
-     * @return Renderable
-     */
-    public function show($id): Renderable
-    {
-        return view('backend::show');
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     * @param int $id
-     * @return Renderable
-     */
-    public function edit(int $id): Renderable
-    {
-        return view('backend::edit');
-    }
-
-    /**
-     * Update the specified resource in storage.
-     * @param Request $request
-     * @param int $id
-     * @return Renderable
-     */
-    public function update(Request $request, int $id): Renderable
-    {
-        //
-    }
-
-
-    public function destroy(Request $request, $id)
-    {
-        try {
-            DB::beginTransaction();
-            $this->repository->delete($id);
-            DB::commit();
-            return (new SuccessResponse($this->model, $request, 'delete'))->responseOk();
-        } catch (\Exception $exception) {
-            DB::rollBack();
-            return (new ErrorResponse($this->model, $request, $exception, 'delete'))->responseError();
+            dd($exception);
         }
     }
 }

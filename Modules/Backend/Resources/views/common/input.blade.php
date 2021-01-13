@@ -64,6 +64,8 @@
                            value="{{old($name)}}"
                            @elseif(isset($model))
                            value="{{$model->{$name} }}"
+                           @elseif(isset($defaultValue))
+                           value="{{$defaultValue}}"
                            @endif
                            autocomplete="false"
                            id="{{isset($id) ? $id : strtolower($name)}}"
