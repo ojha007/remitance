@@ -37,6 +37,8 @@ class CreateTransactionsTable extends Migration
             $table->float('charge');
             $table->text('notes')->nullable();
             $table->text('file')->nullable();
+            $table->text('acc_number')->nullable();
+            $table->text('branch')->nullable();
             (new MigrationHelpers())->setForeignKey($table, 'currencies', 'currency_id');
             (new MigrationHelpers())->setForeignKey($table, 'payment_types', 'payment_type_id');
             (new MigrationHelpers())->setForeignKey($table, 'receivers', 'receiver_id');
@@ -55,6 +57,11 @@ class CreateTransactionsTable extends Migration
             $table->text('notes')->nullable();
             $table->timestamps();
         });
+        Schema::create('transaction_banks', function (Blueprint $table) {
+            $table->id();
+            (new MigrationHelpers())->setForeignKey($table, 'receiver_banks', 'receiver_bank');
+            (new MigrationHelpers())->setForeignKey($table, 'transactions', 'transaction_id');
+        });
     }
 
     /**
@@ -64,10 +71,11 @@ class CreateTransactionsTable extends Migration
      */
     public function down()
     {
+        Schema::dropIfExists('transaction_status');
+        Schema::dropIfExists('transaction_banks');
         Schema::dropIfExists('transactions');
         Schema::dropIfExists('payment_types');
         Schema::dropIfExists('currencies');
-        Schema::dropIfExists('transaction_status');
         Schema::dropIfExists('statuses');
     }
 }
