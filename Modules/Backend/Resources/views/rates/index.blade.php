@@ -67,8 +67,10 @@
                             </tr>
                         @empty
                             <tr>
-                                <td colspan="4">
-                                    No rates is recorded
+                                <td colspan="4" class="text-center">
+                                    <strong>
+                                        No rates is recorded
+                                    </strong>
                                 </td>
                             </tr>
                         @endforelse
