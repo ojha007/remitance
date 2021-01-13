@@ -62,7 +62,6 @@ class SendMoneyController extends Controller
         $receiverAttributes['receivers'] = (new ReceiverRepository(new Receiver()))->getCreateOrEditPage();
         $senderAttributes['senders'] = (new SenderRepository(new Sender()))->getCreateOrEditPage();
         $selectPickUpAddress = (new ReceiverRepository(new Receiver()))->selectDistricts();
-        dd($receiverAttributes,$senderAttributes);
         return view($this->viewPath . 'create', compact('selectSenders',
             'selectPaymentTypes', 'selectPickUpAddress'))
             ->with($senderAttributes)
