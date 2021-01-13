@@ -14,7 +14,7 @@ class Receiver extends Model
 
     protected $appends = ['name', 'address'];
     protected $fillable = ['first_name', 'last_name', 'middle_name', 'email', 'code', 'is_active',
-        'phone_number1', 'phone_number2',
+        'phone_number',
         'district_id',
         'identity_type_id',
         'issued_by',

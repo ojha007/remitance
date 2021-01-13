@@ -6,5 +6,4 @@ require('./Jquery.slimscroll');
 require('../../../node_modules/icheck');
 require('../../../node_modules/select2');
 require('./bootstrap-datepicker.min')
-require('./modal-validation')
 

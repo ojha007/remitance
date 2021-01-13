@@ -1,4 +1,7 @@
 {
-    "/js/backend.js": "/js/backend.js?id=3c5cce6fdca792a802e0",
-    "/css/backend.css": "/css/backend.css?id=8810264e805781bf1f3a"
+    "/js/backend.js": "/js/backend.js",
+    "/css/backend.css": "/css/backend.css",
+    "/js/modalValidation.js": "/js/modalValidation.js",
+    "/public/js/modalValidation.js": "/public/js/modalValidation.js",
+    "/C:/public/js/modalValidation.js": "/C:/public/js/modalValidation.js"
 }

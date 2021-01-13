@@ -102,6 +102,15 @@ class ReceiverController extends Controller
                 ]);
             $redirectRoute = route($this->baseRoute . 'show', $receiver->id);
             DB::commit();
+            if ($request->has('reload')) {
+                return response()->json([
+                    'id' => $receiver->id,
+                    'status' => 201,
+                    'options' => $this->receiverBySender($receiver->sender_id),
+                    'select' => '#receiver_id',
+                    'dom' => '#receiver-detail'
+                ]);
+            }
             return (new SuccessResponse($this->model, $request, 'created', $redirectRoute))
                 ->responseOk();
         } catch (\Exception $exception) {
@@ -133,6 +142,7 @@ class ReceiverController extends Controller
             ->join('districts as d', 'd.id', '=', 'ra.district_id')
             ->where('r.sender_id', '=', $sender_id)
             ->whereNull('r.deleted_at')
+            ->orderByDesc('id')
             ->get()->mapWithKeys(function ($receiver) {
                 return [
                     $receiver->id => ucwords($receiver->first_name) . ' ' .

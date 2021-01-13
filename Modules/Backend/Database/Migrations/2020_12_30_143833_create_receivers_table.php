@@ -26,14 +26,13 @@ class CreateReceiversTable extends Migration
             $table->string('middle_name')->nullable();
             $table->string('last_name');
             $table->string('email')->nullable();
-            $table->string('phone_number1');
+            $table->string('phone_number');
             (new MigrationHelpers())->setForeignKey($table, 'identity_types', 'identity_type_id');
             (new MigrationHelpers())->setForeignKey($table, 'senders', 'sender_id');
             $table->string('code')->unique();
             $table->boolean('is_active')->default(0);
             $table->string('id_number')->unique();
             $table->enum('issued_by', array_keys(Receiver::getIssuedByArray()));
-            $table->string('phone_number2')->nullable();
             $table->date('expiry_date')->nullable();
             $table->date('date_of_birth')->nullable();
             $table->string('file')->nullable();

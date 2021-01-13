@@ -755,7 +755,7 @@ class StatesSeeder extends Seeder
         $id_types = [
             'Photo ID',
             'Passport',
-            'Citizen Ship',
+            'Citizenship',
             'Driving License',
         ];
         foreach ($id_types as $id) {

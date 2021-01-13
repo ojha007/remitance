@@ -26,7 +26,7 @@
             @include('backend::common.input',['name'=>'country_id','is_required'=>true,
                'type'=>'select',
                'options'=>$selectCountries,
-               'default'=>$modal->country_id ??  null
+               'default'=>$modal->country_id ??  $defaultCountry
                ])
             @include('backend::common.input',['name'=>'state_id',
                 'is_required'=>true,

@@ -107,6 +107,7 @@ desired effect
     <div class="control-sidebar-bg"></div>
 </div>
 <script src="{{ mix('/js/backend.js') }}" rel="script"></script>
+<script src="{{ asset('js/modal-validation.js')}}"></script>
 <script src="https://cdn.datatables.net/1.10.23/js/jquery.dataTables.min.js"></script>
 <script src="https://cdn.datatables.net/1.10.23/js/dataTables.bootstrap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"
@@ -152,7 +153,7 @@ desired effect
     $('.datePicker').datepicker({
         format: 'yyyy-mm-dd',
         todayHighlight: true,
-        orientation: "auto",
+        orientation: "bottom",
         autoclose: true,
     });
     // $('input').iCheck({
@@ -160,9 +161,9 @@ desired effect
     //     radioClass: 'iradio_square-blue',
     //     increaseArea: '20%' /* optional */
     // });
-    // $('.modal').on('shown.bs.modal', function () {
-    //     $(this).find('[autofocus]').focus();
-    // });
+    $('.modal').on('shown.bs.modal', function () {
+        $(this).find('.select2').select2();
+    });
 
 
     $('.select2').select2();

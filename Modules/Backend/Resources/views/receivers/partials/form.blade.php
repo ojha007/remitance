@@ -11,8 +11,7 @@
         @include('backend::common.input',['name'=>'middle_name'])
         @include('backend::common.input',['name'=>'last_name','is_required'=>true])
         @include('backend::common.input',['name'=>'email','type'=>'email'])
-        @include('backend::common.input',['name'=>'phone_number1','is_required'=>true,'type'=>'tel'])
-        @include('backend::common.input',['name'=>'phone_number2','type'=>'tel'])
+        @include('backend::common.input',['name'=>'phone_number','is_required'=>true,'type'=>'tel'])
     </div>
 
 </div>
@@ -26,7 +25,7 @@
         @include('backend::common.input',['name'=>'country_id','is_required'=>true,
             'type'=>'select',
             'options'=>$selectCountries,
-            'default'=> $modal->country_id ??  null
+            'default'=> $modal->country_id ??  $defaultCountry
             ])
 
         @include('backend::common.input',['name'=>'state_id',

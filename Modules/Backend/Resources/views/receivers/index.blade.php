@@ -57,7 +57,7 @@
                         <td>{{$receiver->code}}</td>
                         <td>{{ucwords($receiver->first_name)}} {{ucwords($receiver->middle_name)}} {{ ucwords($receiver->last_name) }}</td>
 
-                        <td>{{$receiver->phone_number1}} {{ $receiver->phone_number2 ? ' ,'.$receiver->phone_number2 : '' }}</td>
+                        <td>{{$receiver->phone_number}}</td>
                         <td>
                             {{ucwords($receiver->district)}}
                             -{{$receiver->ward_number}}, {{ucwords($receiver->street)}}

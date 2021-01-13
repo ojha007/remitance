@@ -41,7 +41,7 @@
                     <strong><i class="fas fa-user mr-1"></i>Personal Information</strong>
                     <br>
                     <span class="text-muted">
-                        Number: {{$receiver[0]->phone_number1  }}  {{$receiver[0]->phone_number2  ? '/'.$receiver[0]->phone_number2 : ''}}
+                        Number: {{$receiver[0]->phone_number  }}
                     </span>
                     <br>
                     <span class="text-muted">

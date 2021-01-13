@@ -65,6 +65,7 @@ $("document").ready(function () {
             // Responses.
         }).always(function (response) {
             // Reset errors.
+
             resetModalFormErrors();
             let modal = $(".bootstrap-modal-form");
             if (response.status === 201) {
@@ -76,7 +77,25 @@ $("document").ready(function () {
                     submit.val(submitOriginal);
                 }
                 modal.trigger("reset");
-                window.location.reload();
+                let a = modal.find('input[name="reload"]');
+                if (a === 'undefined') {
+                    window.location.reload();
+                } else {
+                    // $(response.dom).html(template(response['data']));
+                    if ($(response.select).length) {
+                        let data = response['options'];
+                        $(response.select).find('option[value !=""]').remove();
+                        $.each(data, function (value, text) {
+                            console.log(value, text)
+                            $(response.select).append($('<option/>', {
+                                value: value,
+                                text: text
+                            }));
+                        });
+
+                        $(response.select).val(response['id']).trigger('change');
+                    }
+                }
             }
             // Check for errors.
             if (response.status === 422) {

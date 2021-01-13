@@ -8,6 +8,7 @@
     ])
 @section('sender_form_body')
     <div class="col-md-12">
+        <input type="hidden" value="0" name="reload">
         @include('backend::senders.partials.form',['button'=>false])
     </div>
 @endsection

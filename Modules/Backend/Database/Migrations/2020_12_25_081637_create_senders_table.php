@@ -45,7 +45,7 @@ class CreateSendersTable extends Migration
             $table->string('email');
             $table->string('code')->unique();
             $table->boolean('is_active')->default(0);
-            $table->string('id_number')->unique();
+            $table->string('id_number');
             $table->date('expiry_date');
             $table->date('date_of_birth');
             $table->longText('file')->nullable();

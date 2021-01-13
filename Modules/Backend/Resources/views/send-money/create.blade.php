@@ -47,9 +47,18 @@
                     @include('backend::common.input',
                     ['name'=>'payment_type_id','is_required'=>true,'type'=>'select',
                     'options'=>$selectPaymentTypes,'default'=>null      ])
+
                     @include('backend::common.input',
-                    ['name'=>'pickup_address','is_required'=>true,
+                    ['name'=>'pickup_address','is_required'=>true,'divClass'=>'6 hide',
                     'type'=>'select', 'options'=>$selectPickUpAddress,'default'=>null])
+
+                    @include('backend::common.input',
+                    ['name'=>'bank_id','is_required'=>true,
+                    'divClass'=>'6 hide',
+                    'type'=>'select', 'options'=>[],
+                    'default'=>null])
+                    @include('backend::common.input',['name'=>'branch','type'=>'text','divClass'=>'6 hide'])
+                    @include('backend::common.input',['name'=>'Acc_No','type'=>'number','divClass'=>'6 hide'])
                     @include('backend::common.input',['name'=>'file','type'=>'file','label'=>'Upload File'])
                     @include('backend::common.input',['name'=>'notes','type'=>'textarea'])
 
@@ -74,6 +83,7 @@
             'senders'=>true,
             'divClass'=>'12',
             'classPartition'=>'2',
+            'defaultCountry'=>$senders['defaultCountry'],
             'selectIdentityTypes'=>$senders['selectIdentityTypes'],
             'selectIssuedBy'=>$senders['selectIssuedBy']])
     @endcomponent
@@ -88,6 +98,7 @@
             'selectIdentityTypes'=>$receivers['selectIdentityTypes'],
             'selectIssuedBy'=>$receivers['selectIssuedBy'],
             'banks'=>null,
+            'defaultCountry'=>$receivers['defaultCountry'],
             'divClass'=>'12',
             'classPartition'=>'2'
 
@@ -124,7 +135,6 @@
                            </div>`
 
         function onSelect2Change(primary, secondary, url) {
-            let res;
             primary.on('change', function () {
                 let val = $(this).val()
                 if (val) {
@@ -136,14 +146,12 @@
                         method: 'GET',
                         success: function (response) {
                             secondary.html(template(response));
-                            res = response;
                         }
                     });
                 } else {
                     secondary.html('');
                     $('input[name="sender_id"]').val('');
                 }
-                return res;
             });
         }
 
@@ -152,8 +160,8 @@
             let senderElement = $('#sender_id');
             let receiverElement = $('#receiver_id');
             onSelect2Change(senderElement, $("#sender-detail"), '{{url('/senders/')}}');
-            let response = onSelect2Change(receiverElement, $("#receiver-detail"), '{{url('/receivers/')}}');
-            console.log(response)
+            onSelect2Change(receiverElement, $("#receiver-detail"), '{{url('/receivers/')}}');
+
             handleOnSelect2Change(senderElement, receiverElement, '{{url('all-receivers-by/sender')}}');
             $('#receiver-detail').on('change', function () {
                 $('#pickup_address').val()
@@ -168,7 +176,30 @@
                 $('#sending_amount').val($(this).val() / rate);
                 $('#total').val($(this).val());
             });
-
+            $('#payment_type_id').on('change', function () {
+                if ($('#sender_id').val() === '') {
+                    alert('Receiver should be select before payment type?');
+                    return false;
+                } else {
+                    let value = parseInt($(this).val());
+                    let pickupDiv = $('label[for="pickup_address"]').parent('.form-group');
+                    let bankDiv = $('label[for="bank_id"]').parent('.form-group');
+                    let branchDiv = $('label[for="branch"]').parent('.form-group');
+                    let accNoDiv = $('label[for="acc_no"]').parent('.form-group');
+                    if (value === 1) {
+                        pickupDiv.removeClass('hide');
+                        bankDiv.addClass('hide');
+                        branchDiv.addClass('hide');
+                        accNoDiv.addClass('hide');
+                    }
+                    if (value === 2) {
+                        bankDiv.removeClass('hide');
+                        accNoDiv.removeClass('hide');
+                        branchDiv.removeClass('hide');
+                        pickupDiv.addClass('hide');
+                    }
+                }
+            });
             $('input[name="rate"]').on('keyup', function () {
                 let a = parseFloat($('#sending_amount').val());
                 $('#receiving_amount').val($(this).val() * a);
@@ -177,10 +208,11 @@
             $('#charge').on('change', function () {
                 $('#total_charge').val($(this).val())
             });
-            @if(old())
+            @if(old('sender_id'))
             $('#sender_id').val('{{old('sender_id')}}').trigger('change');
             @endif
             handleOnSelect2Change($('#country_id'), $("#state_id"), '{{url('/states/country/')}}');
             handleOnSelect2Change($('#sender_form #state_id'), $("#sender_form #suburb_id"), '{{url('/suburbs/state')}}');
-        })</script>
+        })
+    </script>
 @endpush

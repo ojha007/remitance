@@ -26,7 +26,7 @@ class ReceiverRepository extends Repository
     {
         $name = $request->get('name');
         return DB::table('receivers as r')
-            ->select('code', 'email', 'phone_number1', 'phone_number2', 'r.id',
+            ->select('code', 'email', 'phone_number', 'r.id',
                 'first_name', 'middle_name', 'last_name', 'd.name as district', 'ward_number', 'street')
             ->join('receiver_address as ra', 'ra.receiver_id', '=', 'r.id')
             ->join('districts as d', 'd.id', '=', 'ra.district_id')
@@ -50,11 +50,15 @@ class ReceiverRepository extends Repository
                 ->toArray();
         });
         $selectDistricts = $this->selectDistricts();
+        $defaultCountry = DB::table('countries')->select('id')
+            ->where('name', '=', 'Nepal')
+            ->first()->id;
         $data = array_merge(['selectIssuedBy' => $issuedBy,
             'selectDistricts' => $selectDistricts,
             'selectBanks' => $selectBanks,
             'selectMps' => [],
             'banks' => null,
+            'defaultCountry' => $defaultCountry
         ], $attributes);
 
         if ($view) {

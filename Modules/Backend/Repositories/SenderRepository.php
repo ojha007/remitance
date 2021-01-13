@@ -41,7 +41,11 @@ class SenderRepository extends Repository
                 ->toArray();
         });
         $issuedBy = Sender::getIssuedByArray();
-        $senderAttributes = ['selectSuburbs' => $suburbs, 'selectIssuedBy' => $issuedBy];
+        $defaultCountry = DB::table('countries')
+            ->select('id')
+            ->where('name', '=', 'Australia')
+            ->first()->id;
+        $senderAttributes = ['selectSuburbs' => $suburbs, 'selectIssuedBy' => $issuedBy, 'defaultCountry' => $defaultCountry];
         $viewAttributes = array_merge($senderAttributes, $this->getCommonViewPageData('Australia'));
         if ($view)
             return $view->with($viewAttributes)->with(['button' => true]);
@@ -104,6 +108,7 @@ class SenderRepository extends Repository
             ->join('suburbs as su', 'su.id', '=', 'se.suburb_id')
             ->join('states as st', 'st.id', '=', 'su.state_id')
             ->whereNull('deleted_at')
+            ->orderByDesc('id')
             ->get()->mapWithKeys(function ($sender) {
                 return [
                     $sender->id => ucwords($sender->name) . ' [' . $sender->contact . '|' . ucwords($sender->address) . ']'
