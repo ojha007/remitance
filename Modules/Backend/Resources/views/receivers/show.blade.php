@@ -27,7 +27,7 @@
                     <div class="text-center">
                         {!! spanByStatus($receiver[0]->is_active) !!}
                     </div>
-                    <p class="text-muted text-center">{{$receiver[0]->email}}</p>
+{{--                    <p class="text-muted text-center">{{$receiver[0]->email}}</p>--}}
 
                 </div>
                 <!-- /.box-body -->
@@ -56,7 +56,7 @@
                     <strong><i class="fa fa-map-marker"></i> Location</strong>
 
                     <p class="text-muted">
-                        Ward NO: {{ucwords($receiver[0]->ward_number)}}<br>
+{{--                        Ward NO: {{ucwords($receiver[0]->ward_number)}}<br>--}}
                         Street : {{ucwords($receiver[0]->street)}}<br>
                         District : {{ucwords($receiver[0]->district)}}<br>
                         State : {{ucwords($receiver[0]->state)}}<br>
