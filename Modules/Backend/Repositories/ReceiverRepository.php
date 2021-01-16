@@ -26,7 +26,7 @@ class ReceiverRepository extends Repository
     {
         $name = $request->get('name');
         return DB::table('receivers as r')
-            ->select('code', 'email',
+            ->select('code',
                 'phone_number', 'r.id', 'r.name', 'd.name as district',
                 'street')
             ->join('receiver_address as ra', 'ra.receiver_id', '=', 'r.id')
@@ -80,7 +80,7 @@ class ReceiverRepository extends Repository
 
         return DB::table('receivers as r')
             ->select('r.id', 'r.name', 'code',
-                'id_number', 'issued_by', 'is_active', 'email', 'street',
+                'id_number', 'issued_by', 'is_active',  'street',
                 'phone_number', 'is_default',
                 'b.name as bank_name', 'branch', 'account_number', 'expiry_date', 'account_name',
                 'd.name as district', 's.name as state', 'c.name as country',
@@ -101,7 +101,7 @@ class ReceiverRepository extends Repository
     public function getAllDetailById($id)
     {
         return DB::table('receivers as re')
-            ->select('re.id', 'email', 'phone_number', 'id_number',
+            ->select('re.id', 'phone_number', 'id_number',
                 'street', 'date_of_birth', 'issued_by', 're.name',
                 'state_id', 'country_id', 'ward_number', 'file',
                 'district_id', 'identity_type_id',
