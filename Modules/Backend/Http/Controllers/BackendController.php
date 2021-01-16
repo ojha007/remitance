@@ -71,10 +71,11 @@ class BackendController extends Controller
                 $q->where('name', 'like', '%' . $query . '%');
             })
             ->get()->mapToGroups(function ($suburb) {
-                return ['results' => [
-                    'id' => $suburb->id,
-                    'text' => $suburb->name,
-                ]];
+                return [
+                    'results' => [
+                        'id' => $suburb->id,
+                        'text' => $suburb->name,
+                    ]];
             })
             ->toArray();
 

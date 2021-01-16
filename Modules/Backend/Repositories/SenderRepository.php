@@ -35,7 +35,7 @@ class SenderRepository extends Repository
 
     public function getCreateOrEditPage($view = null)
     {
-        $suburbs = Cache::rememberForever('Suburbs', function () {
+        $suburbs = Cache::rememberForever('suburbs', function () {
             return DB::table('suburbs')
                 ->orderBy('name')
                 ->pluck('name', 'id')
@@ -71,9 +71,12 @@ class SenderRepository extends Repository
         });
         $selectStates = Cache::rememberForever('states_' . $country, function () use ($country) {
             return DB::table('states')
+                ->select('states.id', 'states.name')
                 ->join('countries', 'states.country_id', '=', 'countries.id')
                 ->where('countries.name', '=', $country)
-                ->pluck('states.name', 'states.id')
+                ->get()->mapWithKeys(function ($state) {
+                    return [$state->id => $state->name];
+                })
                 ->toArray();
         });
         return [
