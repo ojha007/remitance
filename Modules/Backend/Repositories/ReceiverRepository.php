@@ -80,10 +80,14 @@ class ReceiverRepository extends Repository
 
         return DB::table('receivers as r')
             ->select('r.id', 'r.name', 'code',
-                'id_number', 'issued_by', 'is_active',  'street',
+                'id_number', 'issued_by', 'is_active', 'street',
                 'phone_number', 'is_default',
-                'b.name as bank_name', 'branch', 'account_number', 'expiry_date', 'account_name',
-                'd.name as district', 's.name as state', 'c.name as country',
+                'b.name as bank_name', 'branch',
+                'account_number', 'expiry_date',
+                'account_name',
+                'd.name as district',
+                's.name as state',
+                'c.name as country',
                 'date_of_birth', 'file', 'it.name as identity_type')
             ->join('identity_types as it', 'it.id', '=', 'r.identity_type_id')
             ->join('receiver_banks as rb', 'rb.receiver_id', '=', 'r.id')
@@ -101,11 +105,16 @@ class ReceiverRepository extends Repository
     public function getAllDetailById($id)
     {
         return DB::table('receivers as re')
-            ->select('re.id', 'phone_number', 'id_number',
-                'street', 'date_of_birth', 'issued_by', 're.name',
-                'state_id', 'country_id', 'ward_number', 'file',
-                'district_id', 'identity_type_id',
-                'expiry_date', 'is_active', 'it.name as identity_type')
+            ->select('re.id',
+                'phone_number', 'id_number',
+                'street', 'date_of_birth',
+                'issued_by', 're.name',
+                'state_id', 'country_id',
+                'file',
+                'district_id',
+                'identity_type_id',
+                'expiry_date', 'is_active',
+                'it.name as identity_type')
             ->join('receiver_address as ra', 're.id', '=', 'ra.receiver_id')
             ->join('districts as d', 'd.id', '=', 'ra.district_id')
             ->join('states as st', 'st.id', '=', 'dt.state_id')
