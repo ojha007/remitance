@@ -105,7 +105,7 @@ desired effect
     </div>
     <!-- /.content-wrapper -->
 
-    {{--    @include('backend::partial.footer')--}}
+        @include('backend::partial.footer')
     <div class="control-sidebar-bg"></div>
 </div>
 <script src="{{ mix('/js/backend.js') }}" rel="script"></script>
