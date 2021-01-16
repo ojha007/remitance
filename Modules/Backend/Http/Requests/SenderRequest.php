@@ -18,8 +18,7 @@ class SenderRequest extends FormRequest
 
         $id = $this->route()->parameter('sender');
         return [
-            'first_name' => 'required|string:min:1|max:255',
-            'last_name' => 'required|string:min:1|max:255',
+            'name' => 'required|string:min:1|max:255',
             'email' => 'required|email',
             'phone_number' => 'required',
             'street' => 'required|string|min:1',

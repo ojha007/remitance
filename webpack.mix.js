@@ -1,5 +1,5 @@
 const mix = require('laravel-mix');
-
+// require('laravel-mix-merge-manifest');
 /*
  |--------------------------------------------------------------------------
  | Mix Asset Management
@@ -11,6 +11,6 @@ const mix = require('laravel-mix');
  |
  */
 
-// mix.js('resources/js/main.js', 'public/js/frontend.js')
-//     .css('resources/css/style.css', 'public/css/frontend.css')
+mix.js('resources/js/main.js', 'public/js/frontend.js')
+    .css('resources/css/style.css', 'public/css/frontend.css');
 

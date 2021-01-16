@@ -2,6 +2,7 @@
 
 namespace Modules\Backend\Http\Controllers;
 
+use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\DB;
 
@@ -59,13 +60,22 @@ class BackendController extends Controller
 
     }
 
-    public function getSuburbs($state_id): array
+    public function getSuburbs(Request $request, $state_id): array
     {
 
+        $query = $request->get('q');
         return DB::table('suburbs')
             ->when($state_id, function ($q) use ($state_id) {
                 $q->where('state_id', '=', $state_id);
-            })->pluck('name', 'id')
+            })->when($query, function ($q) use ($query) {
+                $q->where('name', 'like', '%' . $query . '%');
+            })
+            ->get()->mapToGroups(function ($suburb) {
+                return ['results' => [
+                    'id' => $suburb->id,
+                    'text' => $suburb->name,
+                ]];
+            })
             ->toArray();
 
     }
@@ -93,9 +103,20 @@ class BackendController extends Controller
 
     }
 
-    protected function getAllTransactionsWithStatus(): array
+    protected function getAllTransactionsWithStatus(): \Illuminate\Support\Collection
     {
-        return [];
+        $latestStatus = $this->getLatestStatusOfTransactions();
+        return DB::table('statuses as s')
+            ->select('s.name as status','s.id as status_id')
+            ->selectRaw('count(transaction_id) as no_of_orders')
+            ->selectRaw('SUM(t.sending_amount) as aud')
+            ->selectRaw('SUM(t.receiving_amount) as npr')
+            ->leftJoinSub($latestStatus, 'ts', function ($join) {
+                $join->on('ts.status_id', '=', 's.id');
+            })->leftJoin('transactions as t', 't.id', '=', 'ts.transaction_id')
+            ->groupBy('s.id')
+            ->get();
+
     }
 
     public function getLatestTransaction($status = 'all', $limit = 10): \Illuminate\Support\Collection
@@ -104,8 +125,7 @@ class BackendController extends Controller
         if (request()->ajax()) {
         } else {
             return DB::table('transactions as tr')
-                ->select('tr.code', 'st.name as status', 'tr.id')
-                ->selectRaw('concat(se.first_name, " ", se.last_name) as sender')
+                ->select('tr.code', 'st.name as status', 'tr.id', 'se.name as sender')
                 ->join('senders as se', 'se.id', '=', 'tr.sender_id')
                 ->joinSub($latestStatus, 'ls', function ($q) {
                     $q->on('tr.id', '=', 'ls.transaction_id');
@@ -129,6 +149,20 @@ class BackendController extends Controller
             ->joinSub($latestStatus, 'ls', function ($q) {
                 $q->on('ts.id', '=', 'ls.id');
             });
+    }
+
+    public function getPostalCodeBySuburbs($id): \Illuminate\Http\JsonResponse
+    {
+        $postCode = '';
+        if ($id) {
+            $data = DB::table('suburbs')
+                ->select('post_code')
+                ->where('id', $id)
+                ->first();
+            $postCode = $data->post_code ?? '';
+
+        }
+        return response()->json(['value' => $postCode, 'status' => 201]);
     }
 
 }

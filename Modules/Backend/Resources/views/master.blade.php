@@ -49,6 +49,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
           integrity="sha512-nMNlpuaDPrqlEls3IX/Q56H36qvBASwb3ipuo3MxeWbsQB1881ox0cRv7UPTgBlriqoynt35KjEwgGUeUXIPnw=="
           crossorigin="anonymous"/>
     @stack('styles')
+
 </head>
 
 <!--
@@ -117,7 +118,7 @@ desired effect
 <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"
         integrity="sha512-2ImtlRlf2VVmiGZsjm9bEyhjGW4dU7B6TNwh/hx/iSByxNENtj3WVE6o/9Lj4TJeVXPi4bnOIMXFIJJAeufa0A=="
         crossorigin="anonymous"></script>
-@stack('scripts')
+
 
 <script>
     // var pusher = new Pusher('2a143b33c6eaa5154772', {
@@ -133,17 +134,35 @@ desired effect
 <script>
     function handleOnSelect2Change(primary, secondary, url) {
         primary.on('change', function () {
-            secondary.find('option').not(':first').remove();
+            let isSelect = secondary.find('option').length;
+            if (isSelect) {
+                secondary.find('option').not(':first').remove();
+            }
             $.ajax({
                 url: url + '/' + $(this).val(),
                 method: 'GET',
                 success: function (response) {
-                    $.each(response, function (value, text) {
-                        secondary.append($('<option/>', {
-                            value: value,
-                            text: text
-                        }));
-                    })
+                    console.log(response);
+                    if (isSelect) {
+                        if (response['results']) {
+                            $.each(response['results'], function (index,result) {
+                                secondary.append($('<option/>', {
+                                    value: result.id,
+                                    text: result.text
+                                }));
+                            })
+                        } else {
+                            $.each(response, function (value, text) {
+                                secondary.append($('<option/>', {
+                                    value: value,
+                                    text: text
+                                }));
+                            })
+                        }
+
+                    } else {
+                        secondary.val(response['value']).attr('readonly');
+                    }
 
                 }
             });
@@ -169,6 +188,7 @@ desired effect
 
     $('.select2').select2();
 </script>
+@stack('scripts')
 </body>
 </html>
 

@@ -80,6 +80,7 @@ class SenderController extends Controller
                     ->responseOk();
         } catch (\Exception $exception) {
             DB::rollBack();
+
             return (new ErrorResponse($this->model, $request, $exception))
                 ->responseError();
         }
@@ -151,4 +152,6 @@ class SenderController extends Controller
         }
 
     }
+
+
 }

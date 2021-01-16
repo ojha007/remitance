@@ -4,7 +4,7 @@
 @section('subHeader') Select Senders @endsection
 @section('content')
     @php($classPartition =3)
-    @php($divClass='col-md-10')
+    @php($divClass='10')
     <div class="box box-default">
         <div class="box-header with-border">
             <h3 class="box-title">

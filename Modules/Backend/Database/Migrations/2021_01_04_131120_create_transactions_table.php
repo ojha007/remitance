@@ -37,14 +37,12 @@ class CreateTransactionsTable extends Migration
             $table->float('charge');
             $table->text('notes')->nullable();
             $table->text('file')->nullable();
-            $table->text('acc_number')->nullable();
-            $table->text('branch')->nullable();
             (new MigrationHelpers())->setForeignKey($table, 'currencies', 'currency_id');
             (new MigrationHelpers())->setForeignKey($table, 'payment_types', 'payment_type_id');
             (new MigrationHelpers())->setForeignKey($table, 'receivers', 'receiver_id');
             (new MigrationHelpers())->setForeignKey($table, 'senders', 'sender_id');
             (new MigrationHelpers())->setForeignKey($table, 'users', 'updated_by', true);
-            (new MigrationHelpers())->setForeignKey($table, 'receiver_banks', 'receiver_bank_id');
+            (new MigrationHelpers())->setForeignKey($table, 'receiver_banks', 'receiver_bank_id', true);
             (new MigrationHelpers())->setForeignKey($table, 'users', 'created_by');
             $table->timestamps();
         });
@@ -55,12 +53,6 @@ class CreateTransactionsTable extends Migration
             (new MigrationHelpers())->setForeignKey($table, 'transactions', 'transaction_id');
             (new MigrationHelpers())->setForeignKey($table, 'users', 'causer_id');
             $table->text('notes')->nullable();
-            $table->timestamps();
-        });
-        Schema::create('transaction_banks', function (Blueprint $table) {
-            $table->id();
-            (new MigrationHelpers())->setForeignKey($table, 'receiver_banks', 'receiver_bank');
-            (new MigrationHelpers())->setForeignKey($table, 'transactions', 'transaction_id');
         });
     }
 
@@ -72,7 +64,6 @@ class CreateTransactionsTable extends Migration
     public function down()
     {
         Schema::dropIfExists('transaction_status');
-        Schema::dropIfExists('transaction_banks');
         Schema::dropIfExists('transactions');
         Schema::dropIfExists('payment_types');
         Schema::dropIfExists('currencies');

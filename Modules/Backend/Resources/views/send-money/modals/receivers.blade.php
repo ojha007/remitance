@@ -1,3 +1,4 @@
+
 @can('receiver-create')
     @extends('backend::common.modal',[
             'id'=>'receiver_form',

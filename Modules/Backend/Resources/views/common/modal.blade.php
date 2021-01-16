@@ -1,4 +1,4 @@
-<div class="modal fade " id="{{$id ?? ''}}" aria-modal="true" role="dialog">
+<div class="modal fade " id="{{$id ?? ''}}" aria-modal="true" role="dialog" >
     <div class="modal-dialog modal-lg">
         @isset($route)
             {!!  Form::open(['route'=>$route,'class'=>$formClass ?? ''])!!}

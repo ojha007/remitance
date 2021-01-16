@@ -3,6 +3,10 @@
 namespace Modules\Backend\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\DB;
+use Modules\Backend\Database\Seeders\PaymentTypeSeeder;
+use Modules\Backend\Database\Seeders\StatesSeeder;
+use Modules\Backend\Rules\RequiredIf;
 
 class SendMoneyRequest extends FormRequest
 {
@@ -14,6 +18,11 @@ class SendMoneyRequest extends FormRequest
     public function rules(): array
     {
 
+        $requiredIf = null;
+        $pickupTypes = DB::table('payment_types')->where('id', $this->get('payment_type_id'))->first();
+        if ($pickupTypes) {
+            $requiredIf = $pickupTypes->name;
+        }
         return [
             'receiver_id' => 'required|exists:receivers,id',
             'sender_id' => 'required|exists:senders,id',
@@ -22,9 +31,11 @@ class SendMoneyRequest extends FormRequest
             'rate' => 'required|numeric',
             'receiving_amount' => 'required|numeric',
             'payment_type_id' => 'required|exists:payment_types,id',
-            'charge' => 'nullable|numeric',
+            'charge' => 'required|numeric',
             'notes' => 'nullable',
             'file' => 'nullable',
+            'pickup_address' => new RequiredIf($requiredIf,PaymentTypeSeeder::LOCAL_REMIT),
+
 
         ];
     }

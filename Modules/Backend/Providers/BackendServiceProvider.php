@@ -124,7 +124,7 @@ class BackendServiceProvider extends ServiceProvider
      *
      * @return array
      */
-    public function provides()
+    public function provides(): array
     {
         return [];
     }
@@ -144,7 +144,7 @@ class BackendServiceProvider extends ServiceProvider
 
     }
 
-    private function getCteQuery()
+    private function getCteQuery(): string
     {
         return "
         WITH RECURSIVE menu_items

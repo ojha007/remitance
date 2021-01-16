@@ -24,8 +24,8 @@ class SenderRepository extends Repository
     public function getIndexPageData($attributes, $limit): \Illuminate\Contracts\Pagination\LengthAwarePaginator
     {
         return DB::table('senders as se')
-            ->select('se.id', 'se.code', 'se.is_active', 'su.name as suburb', 'co.name as country', 'st.name as states', 'se.street')
-            ->selectRaw('CONCAT(se.first_name," ",se.last_name) as name')
+            ->select('se.id', 'se.code', 'se.name', 'se.is_active',
+                'su.name as suburb', 'co.name as country', 'st.name as states', 'se.street')
             ->join('suburbs as su', 'se.suburb_id', '=', 'su.id')
             ->join('states as st', 'su.state_id', '=', 'st.id')
             ->join('countries as co', 'co.id', '=', 'st.country_id')
@@ -35,11 +35,13 @@ class SenderRepository extends Repository
 
     public function getCreateOrEditPage($view = null)
     {
-        $suburbs = Cache::rememberForever('suburbs', function () {
+        $suburbs = Cache::rememberForever('Suburbs', function () {
             return DB::table('suburbs')
+                ->orderBy('name')
                 ->pluck('name', 'id')
                 ->toArray();
         });
+        $suburbs =[];
         $issuedBy = Sender::getIssuedByArray();
         $defaultCountry = DB::table('countries')
             ->select('id')
@@ -86,7 +88,7 @@ class SenderRepository extends Repository
         return DB::table('senders as se')
             ->select('se.id', 'email', 'phone_number', 'code', 'id_number', 'file',
                 'street', 'date_of_birth', 'co.name as country', 'su.name as suburb',
-                'issued_by', 'se.first_name', 'se.last_name', 'state_id', 'country_id',
+                'issued_by', 'se.name', 'state_id', 'country_id',
                 'suburb_id', 'identity_type_id',
                 'st.name as state', 'post_code', 'expiry_date', 'is_active', 'it.name as identity_type')
             ->join('suburbs as su', 'su.id', '=', 'se.suburb_id')
@@ -101,8 +103,7 @@ class SenderRepository extends Repository
     public function selectSenders(): array
     {
         return DB::table('senders as se')
-            ->select('se.id', 'code')
-            ->selectRaw('CONCAT(first_name," " ,last_name) as name')
+            ->select('se.id', 'code', 'se.name')
             ->selectRaw('CONCAT(phone_number," | " ,email) as contact')
             ->selectRaw('CONCAT(su.name," | " ,st.name) as address')
             ->join('suburbs as su', 'su.id', '=', 'se.suburb_id')

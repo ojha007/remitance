@@ -77,6 +77,7 @@ class SendMoneyController extends Controller
             $max_id = DB::table('transactions')->max('id');
             $attributes['code'] = SendMoney::CODE . '-' . str_pad($max_id + 1, 4, 0, STR_PAD_LEFT);
             $attributes['created_by'] = auth()->id();
+            $attributes['receiver_bank_id'] = $request->get('bank_id');
             $currency_id = DB::table('currencies')
                 ->where('code', '=', 'NPR')
                 ->first()->id;
@@ -93,7 +94,7 @@ class SendMoneyController extends Controller
                     'status_id' => $status_id,
                     'transaction_id' => $transaction->id,
                     'causer_id' => $attributes['created_by'],
-                    'notes' => null,
+                    'notes' => $request->get('notes'),
                 ]);
             DB::commit();
             $users = Permission::findByName('send-money-create', 'admin')->users;
@@ -113,12 +114,10 @@ class SendMoneyController extends Controller
         }
     }
 
-    /**
-     * @param int $id
-     */
+
     public function show(int $id)
     {
-
+        return (new TransactionController(new SendMoney()))->show($id);
     }
 
 }

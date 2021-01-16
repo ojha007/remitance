@@ -18,5 +18,7 @@ Route::group([
     Route::get('/districts/state/{state_id}', 'BackendController@getDistricts')->name('getDistrictByState');
     Route::get('/municipalities/district/{district_id}', 'BackendController@getMunicipalities')->name('getMunicipalitiesByDistrict');
     Route::get('/suburbs/state/{state_id}', 'BackendController@getSuburbs')->name('getSuburbsByStates');
+    Route::get('/postalCode/suburbs/{suburb_id}', 'BackendController@getPostalCodeBySuburbs')->name('getPostalCodeBySuburbs');
+
 
 });

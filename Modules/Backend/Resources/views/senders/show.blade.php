@@ -22,7 +22,7 @@
                     </div>
                     {{--                    @dd($sender)--}}
                     <h3 class="profile-username text-center">
-                        {{ucwords($sender->first_name)}} {{ucwords($sender->last_name)}}
+                        {{ucwords($sender->name)}}
                     </h3>
                     <p class="text-muted text-center">{{$sender->code}}</p>
                     <div class="text-center">
@@ -50,7 +50,7 @@
             <!-- About Me Box -->
             <div class="box box-primary">
                 <div class="box-header">
-                    <h3 class="box-title">About {{$sender->first_name}}</h3>
+                    <h3 class="box-title">About {{$sender->name}}</h3>
                 </div>
                 <!-- /.card-header -->
                 <div class="box-body">

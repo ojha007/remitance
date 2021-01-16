@@ -14,7 +14,7 @@ class Sender extends Model
 
     protected $appends = ['name', 'address'];
 
-    protected $fillable = ['first_name', 'last_name', 'email', 'code', 'is_active',
+    protected $fillable = ['name',  'email', 'code', 'is_active',
         'phone_number', 'street', 'suburb_id', 'identity_type_id', 'issued_by', 'id_number',
         'issued_date', 'date_of_birth', 'file', 'expiry_date', 'created_by', 'updated_by'];
 

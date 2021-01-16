@@ -39,8 +39,7 @@ class CreateSendersTable extends Migration
         });
         Schema::create('senders', function (Blueprint $table) {
             $table->id();
-            $table->string('first_name');
-            $table->string('last_name');
+            $table->string('name');
             $table->string('phone_number');
             $table->string('email');
             $table->string('code')->unique();

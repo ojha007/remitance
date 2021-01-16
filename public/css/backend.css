@@ -133,3 +133,15 @@
   height: 34px !important;
 }
 
+input {
+  height: 37px !important;
+}
+
+.form-group {
+  min-height: 37px !important;
+}
+
+.form-group.hide {
+  min-height: 0;
+}
+

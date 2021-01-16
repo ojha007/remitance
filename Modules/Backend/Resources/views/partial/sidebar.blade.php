@@ -24,7 +24,7 @@
             </li>
         @endcan
         @can(['sender-view','sender-create'])
-            <li class="treeview {{request()->routeIs($routePrefix.'senders.index',$routePrefix.'senders.create') ? 'active': ''}}">
+            <li class="treeview {{request()->routeIs($routePrefix.'senders.index',$routePrefix.'senders.create',$routePrefix.'senders.show') ? 'active': ''}}">
                 <a href="#">
                     <i class="fa fa-user-plus"></i>
                     <span>Manage Senders</span>

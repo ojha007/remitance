@@ -9,6 +9,7 @@
     List of Receivers
 @endsection
 @section('breadcrumb')
+    {!! \Diglactic\Breadcrumbs\Breadcrumbs::render('admin.receivers.index') !!}
 @endsection
 @section('content')
     @include('backend::common.filterBox',
@@ -17,7 +18,6 @@
                    ['name'=>'name'],
                ]
              ])
-
     <div class="box-header">
         <a href="{{route($routePrefix.'receivers.create')}}"
            class="btn btn-primary btn-flat pull-right">
@@ -55,11 +55,11 @@
                 @foreach($receivers as $receiver)
                     <tr>
                         <td>{{$receiver->code}}</td>
-                        <td>{{ucwords($receiver->first_name)}} {{ucwords($receiver->middle_name)}} {{ ucwords($receiver->last_name) }}</td>
+                        <td>{{ucwords($receiver->name)}}</td>
 
                         <td>{{$receiver->phone_number}}</td>
                         <td>
-                            {{ucwords($receiver->district)}}
+{{--                            {{ucwords($receiver->district)}}--}}
                             -{{$receiver->ward_number}}, {{ucwords($receiver->street)}}
 
                         </td>

@@ -1,24 +1,27 @@
-@extends('adminlte::page')
-@section('title', 'Senders')
-
-@section('content_header')
-    <h1>Sender</h1>
+@extends('backend::master')
+@section('title_postfix', ' | Receiver')
+@section('header')
+    Receiver
 @stop
+@section('subHeader')
+    Receiver details
+@endsection
+@section('breadcrumb')
+    {!! \Diglactic\Breadcrumbs\Breadcrumbs::render('admin.receivers.show',$receiver[0]) !!}
+@endsection
 @section('content')
     <div class="row">
         <div class="col-md-3">
             <!-- Profile Image -->
-            <div class="card card-primary card-outline">
-                <div class="card-body box-profile">
+            <div class="box box-primary box-outline">
+                <div class="box-body box-profile">
                     <div class="text-center">
                         <img class="profile-user-img img-fluid img-circle"
                              src="{{$receiver[0]->file ??  asset('backend/images/user-128x128.png')}}"
                              alt="User profile picture">
                     </div>
                     <h3 class="profile-username text-center">
-                        {{ucwords($receiver[0]->first_name)}}
-                        {{ucwords($receiver[0]->middle_name)}}
-                        {{ucwords($receiver[0]->last_name)}}
+                        {{ucwords($receiver[0]->name)}}
                     </h3>
                     <p class="text-muted text-center">{{$receiver[0]->code}}</p>
                     <div class="text-center">
@@ -27,18 +30,18 @@
                     <p class="text-muted text-center">{{$receiver[0]->email}}</p>
 
                 </div>
-                <!-- /.card-body -->
+                <!-- /.box-body -->
             </div>
-            <!-- /.card -->
+            <!-- /.box -->
 
             <!-- About Me Box -->
-            <div class="card ">
-                <div class="card-header">
-                    <h3 class="card-title">About {{ucwords($receiver[0]->first_name)}}</h3>
+            <div class="box ">
+                <div class="box-header">
+                    <h3 class="box-title">About {{ucwords($receiver[0]->name)}}</h3>
                 </div>
-                <!-- /.card-header -->
-                <div class="card-body">
-                    <strong><i class="fas fa-user mr-1"></i>Personal Information</strong>
+                <!-- /.box-header -->
+                <div class="box-body">
+                    <strong><i class="fa fa-user"></i>Personal Information</strong>
                     <br>
                     <span class="text-muted">
                         Number: {{$receiver[0]->phone_number  }}
@@ -50,7 +53,7 @@
 
                     <hr>
 
-                    <strong><i class="fas fa-map-marker-alt mr-1"></i> Location</strong>
+                    <strong><i class="fa fa-map-marker"></i> Location</strong>
 
                     <p class="text-muted">
                         Ward NO: {{ucwords($receiver[0]->ward_number)}}<br>
@@ -63,7 +66,7 @@
 
                     <hr>
                     <strong>
-                        <i class="far fa-file-alt mr-1"></i>
+                        <i class="fa fa-file"></i>
                         Identification
                     </strong>
                     <br>
@@ -83,24 +86,23 @@
                         Expiry date : {{$receiver[0]->expiry_date}}
                     </span>
                 </div>
-                <!-- /.card-body -->
+                <!-- /.box-body -->
 
 
-                <div class="card-footer">
-
+                <div class="box-footer">
                     @can('receiver-delete')
                         {!! Form::open(['route'=>[$routePrefix.'receivers.destroy',$receiver[0]->id]]) !!}
                         @method('DELETE')
                         <button type="submit"
                                 onclick="confirm('Are You sure to delete the receiver ?')"
-                                class="btn btn-flat btn-danger float-right">
+                                class="btn btn-flat btn-danger pull-right">
                             <i class="fa fa-trash"></i> Delete
                         </button>
                         {!! Form::close() !!}
                     @endcan
                     @can('receiver-edit')
                         <a href="{{route($routePrefix.'receivers.edit',$receiver[0]->id)}}"
-                           class="btn btn-primary  float-left btn-flat"
+                           class="btn btn-primary  pull-left btn-flat"
                            type="submit">
                             <i class="fa fa-edit"></i> Edit
                         </a>
@@ -109,12 +111,12 @@
 
 
             </div>
-            <!-- /.card -->
+            <!-- /.box -->
         </div>
         <!-- /.col -->
         <div class="col-md-9">
-            <div class="card">
-                <div class="card-header p-2">
+            <div class="box">
+                <div class="box-header p-2">
                     <ul class="nav nav-pills">
                         <li class="nav-item">
                             <a class="nav-link active" href="#activity" data-toggle="tab">Activity</a></li>
@@ -122,8 +124,8 @@
                             <a class="nav-link " href="#banks" data-toggle="tab">Banks Details</a>
                         </li>
                     </ul>
-                </div><!-- /.card-header -->
-                <div class="card-body">
+                </div><!-- /.box-header -->
+                <div class="box-body">
                     <div class="tab-content">
                         <div class="tab-pane active" id="activity">
                             <!-- Post -->
@@ -278,7 +280,7 @@
                         <!-- /.tab-pane -->
                     </div>
                     <!-- /.tab-content -->
-                </div><!-- /.card-body -->
+                </div><!-- /.box-body -->
             </div>
             <!-- /.nav-tabs-custom -->
         </div>

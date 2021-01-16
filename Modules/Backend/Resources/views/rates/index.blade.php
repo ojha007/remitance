@@ -10,6 +10,7 @@
 @endsection
 
 @section('breadcrumb')
+    {!! \Diglactic\Breadcrumbs\Breadcrumbs::render('admin.rates.index') !!}
 @endsection
 @section('content')
     @php($button ='Save')

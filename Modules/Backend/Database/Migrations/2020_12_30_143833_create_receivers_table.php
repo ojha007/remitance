@@ -22,16 +22,13 @@ class CreateReceiversTable extends Migration
         });
         Schema::create('receivers', function (Blueprint $table) {
             $table->id();
-            $table->string('first_name');
-            $table->string('middle_name')->nullable();
-            $table->string('last_name');
-            $table->string('email')->nullable();
+            $table->string('name');
             $table->string('phone_number');
             (new MigrationHelpers())->setForeignKey($table, 'identity_types', 'identity_type_id');
             (new MigrationHelpers())->setForeignKey($table, 'senders', 'sender_id');
             $table->string('code')->unique();
             $table->boolean('is_active')->default(0);
-            $table->string('id_number')->unique();
+            $table->string('id_number');
             $table->enum('issued_by', array_keys(Receiver::getIssuedByArray()));
             $table->date('expiry_date')->nullable();
             $table->date('date_of_birth')->nullable();
@@ -57,21 +54,18 @@ class CreateReceiversTable extends Migration
             $table->id();
             (new MigrationHelpers())->setForeignKey($table, 'states', 'state_id');
             $table->string('name');
-//            $table->integer('post_code');
         });
-        Schema::create('municipalities', function (Blueprint $table) {
-            $table->id();
-            (new MigrationHelpers())->setForeignKey($table, 'districts', 'district_id');
-            $table->string('name');
-        });
+//        Schema::create('municipalities', function (Blueprint $table) {
+//            $table->id();
+//            (new MigrationHelpers())->setForeignKey($table, 'districts', 'district_id');
+//            $table->string('name');
+//        });
+
         Schema::create('receiver_address', function (Blueprint $table) {
             $table->id();
             (new MigrationHelpers())->setForeignKey($table, 'districts', 'district_id');
             (new MigrationHelpers())->setForeignKey($table, 'receivers', 'receiver_id');
-            $table->integer('ward_number');
             $table->string('street')->nullable();
-            $table->integer('tole_number')->nullable();
-
         });
 
     }
@@ -84,7 +78,7 @@ class CreateReceiversTable extends Migration
     public function down()
     {
         Schema::dropIfExists('receiver_address');
-        Schema::dropIfExists('municipalities');
+//        Schema::dropIfExists('municipalities');
         Schema::dropIfExists('districts');
         Schema::dropIfExists('receiver_banks');
         Schema::dropIfExists('receivers');

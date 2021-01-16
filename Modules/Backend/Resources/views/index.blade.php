@@ -47,7 +47,7 @@
                     <table class="table table-bordered">
                         <thead>
                         <tr>
-                            <th>S.No</th>
+                            <th>Transaction</th>
                             <th>Sender</th>
                             <th>Status</th>
                         </tr>
@@ -129,13 +129,16 @@
                         </tr>
                         </thead>
                         <tbody>
-                        @forelse($latestTransactions as $transaction)
+                        @forelse($allTransactions as $transaction)
                             <tr>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
+                                <td>
+                                    <a href="{{route($routePrefix.'transactions.index',['status'=>$transaction->status_id])}}">
+                                        {{$transaction->status}}
+                                    </a>
+                                </td>
+                                <td>{{$transaction->no_of_orders}}</td>
+                                <td>{{number_format($transaction->aud,2)}}</td>
+                                <td>{{number_format($transaction->npr,2)}}</td>
                             </tr>
                         @empty
                             <tr>

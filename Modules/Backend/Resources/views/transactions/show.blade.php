@@ -7,12 +7,21 @@
     Transaction detail
 @endsection
 @section('breadcrumb')
+{{--    {!! \Diglactic\Breadcrumbs\Breadcrumbs::render('admin.transactions.show',$transaction->id) !!}--}}
 @endsection
 
 @section('content')
     <div class="box-header " style="padding: 15px;">
         <h3 class="box-title"></h3>
         <div class="box-tools pull-right float-right ">
+            <div class="btn-group">
+                <button type="button" title="Change Status"
+                        data-toggle="modal"
+                        data-target="#changeStatus"
+                        class="btn btn-default btn-flat">
+                    Change Status
+                </button>
+            </div>
             <div class="btn-group">
                 <button type="button" title="Print" class="btn btn-default btn-flat">
                     <i class="fa fa-print"></i>
@@ -23,7 +32,9 @@
                 <button type="button" title="Download PDF" class="btn btn-default btn-flat">
                     <i class="fa fa-download"></i>
                 </button>
+
             </div>
+
         </div>
     </div>
     <section class="invoice" style="margin: 0">
@@ -43,28 +54,28 @@
                 From
                 <address>
                     <strong>{{$transaction->sender}}</strong><br>
-                    795 Folsom Ave, Suite 600<br>
-                    San Francisco, CA 94107<br>
+                    {{$transaction->s_suburb}} - {{$transaction->post_code}}<br>
+                    {{$transaction->s_state}}, {{$transaction->s_country}}<br>
                     {!! $transaction->s_phone_number ? 'Phone: '.$transaction->s_phone_number .'<br>' : '' !!}
                     {{$transaction->s_email ? 'Email: '.$transaction->s_email : ''}}
                 </address>
             </div>
+
             <!-- /.col -->
             <div class="col-sm-4 invoice-col">
                 To
                 <address>
                     <strong>{{$transaction->receiver}}</strong><br>
-                    795 Folsom Ave, Suite 600<br>
-                    San Francisco, CA 94107<br>
+                    {{$transaction->r_state}}<br>
+                    {{$transaction->r_district}},{{$transaction->r_country}}<br>
                     {!! $transaction->r_phone_number ? 'Phone: '.$transaction->r_phone_number .'<br>' : '' !!}
-                    {{$transaction->r_email ? 'Email: '.$transaction->r_email : ''}}
                 </address>
             </div>
             <!-- /.col -->
             <div class="col-sm-4 invoice-col">
                 <b>Invoice: #{{$transaction->code}}</b><br>
                 <br>
-                <b>Transaction Status:</b> {{$transaction->status}}<br>
+                <b>Transaction Status:</b> {!! spanByStatus($transaction->status) !!}<br>
                 <b>Payment Type:</b> {{$transaction->payment_type}}<br>
             </div>
             <!-- /.col -->
@@ -73,31 +84,33 @@
     <!-- /.row -->
 
         <!-- Table row -->
-        <div class="row">
-            <div class="col-xs-12 table-responsive">
-                <table class="table table-striped">
-                    <thead>
-                    <tr>
-                        <th>S.No</th>
-                        <th>Bank</th>
-                        <th>Branch</th>
-                        <th>Acc Number</th>
-                        <th>Receiving Amount (NPR)</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr>
-                        <td>1</td>
-                        <td>Call of Duty</td>
-                        <td>455-981-221</td>
-                        <td>El snort testosterone trophy driving gloves handsome</td>
-                        <td>{{number_format($transaction->receiving_amount)}}</td>
-                    </tr>
-                    </tbody>
-                </table>
+        @if($transaction->payment_type == \Modules\Backend\Database\Seeders\PaymentTypeSeeder::BANK_TRANSFER)
+            <div class="row">
+                <div class="col-xs-12 ">
+                    <table class="table table-bordered">
+                        <thead>
+                        <tr>
+                            <th>S.No</th>
+                            <th>Bank</th>
+                            <th>Branch</th>
+                            <th>Account Number</th>
+                            <th>Receiving Amount (NPR)</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td>1</td>
+                            <td>{{$transaction->bank}}</td>
+                            <td>{{$transaction->branch}}</td>
+                            <td>{{$transaction->account_number}}</td>
+                            <td>{{number_format($transaction->receiving_amount)}}</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <!-- /.col -->
             </div>
-            <!-- /.col -->
-        </div>
+    @endif
     {{--        @dd($transaction)--}}
     <!-- /.row -->
 
@@ -131,18 +144,15 @@
             <div class="row">
                 <div class="col-md-6">
                     <div class="notes">
-                        Notes : {{$transaction->notes}}
+                        <strong>Notes :</strong> {{$transaction->notes}}
                     </div>
                 </div>
                 <div class="col-md-6">
-                    ........................................
-                    <br>
-                    <strong>Created By :</strong>
+                    <strong>Created By :</strong> {{$transaction->created_by}}
                 </div>
             </div>
         </div>
-
         <!-- /.row -->
-
     </section>
+    @include('backend::transactions.changeStatus')
 @endsection

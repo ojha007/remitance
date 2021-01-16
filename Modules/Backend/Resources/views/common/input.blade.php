@@ -10,8 +10,8 @@
         @endisset
 
     </label>
-    <div class="col-sm-{{isset($classPartition) ? 12 - $classPartition : 8}}
-    {{ $errors->has($name) ? ' is-invalid': '' }}">
+    <div
+        class="col-sm-{{isset($classPartition) ? 12 - $classPartition : 8}}    {{ $errors->has($name) ? ' is-invalid': '' }}">
         @if(isset($type) && $type==='checkbox')
             <input type="hidden" name="{{$name}}" value="0">
             <input name="{{$name}}" value="1"
@@ -24,28 +24,19 @@
                 array(
                 "placeholder"=> isset($placeHolder) ? $placeHolder : 'Select '. ucwords(str_replace('id','',str_replace('_',' ',$name))),
                 'class' => 'form-control select2',
-                'id'=> isset($id) ? $id : strtolower($name),
+                'id'=> isset($id) ? $id .'_'.strtolower($name): strtolower($name),
                 'style'=>'width:100%;')) !!}
         @elseif(isset($type) && $type=='textarea')
-            <textarea
-                class="rounded-0 form-control
-                   {{$class ?? ''}}"
-                name="{{$name}}"
-                rows="5"
-                id="{{isset($id) ? $id : strtolower($name)}}">
-                @if(old($name))
-                    {{old($name)}}
-                @elseif(isset($model))
-                    {{$model->{$name} }}
-                @endif
-            </textarea>
+            <textarea class="rounded-0 form-control {{$class ?? ''}}"
+                      name="{{$name}}" rows="2"
+                      id="{{isset($id) ? $id.'_'.strtolower($name) : strtolower($name)}}
+                          ">@if(old($name)){{old($name)}} @elseif(isset($model)) {{$model->{$name} }}@endif</textarea>
         @else
             @isset($addOn)
                 <div class="input-group">
                     <div class="input-group-addon">
                     <span class="input-group-text">
                         {!! $addOn !!}
-                        {{--                        <i class="fas fa-envelope"></i>--}}
                     </span>
                     </div>
                     @endisset
@@ -68,7 +59,7 @@
                            value="{{$defaultValue}}"
                            @endif
                            autocomplete="false"
-                           id="{{isset($id) ? $id : strtolower($name)}}"
+                           id="{{isset($id) ? $id.'_'.strtolower($name) : strtolower($name)}}"
                            placeholder="{{isset($placeHolder) ? $placeHolder : 'Enter ' . ucwords(str_replace('_',' ',$name))}}">
                     @isset($addOn)
                 </div>

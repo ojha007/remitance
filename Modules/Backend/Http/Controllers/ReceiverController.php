@@ -96,8 +96,6 @@ class ReceiverController extends Controller
                 ->insert([
                     'district_id' => $request->get('district_id'),
                     'receiver_id' => $receiver->id,
-                    'ward_number' => $request->get('ward_number'),
-                    'tole_number' => $request->get('tole_number'),
                     'street' => $request->get('street'),
                 ]);
             $redirectRoute = route($this->baseRoute . 'show', $receiver->id);
@@ -126,7 +124,9 @@ class ReceiverController extends Controller
         $receiver = $this->repository->getAllDetailById($id);
         $banks = DB::table('receiver_banks')
             ->select('bank_id', 'branch', 'account_name', 'account_number', 'is_default')
-            ->get()->toArray();
+            ->where('receiver_id', '=', $id)
+            ->get()
+            ->toArray();
         $view = view($this->viewPath . 'edit');
         return $this->repository->getCreateOrEditPage($view)
             ->with(['receiver' => $receiver, 'banks' => $banks]);
@@ -136,8 +136,8 @@ class ReceiverController extends Controller
     public function receiverBySender($sender_id): \Illuminate\Support\Collection
     {
         return DB::table('receivers as r')
-            ->select('r.id', 'first_name', 'last_name', 'middle_name',
-                'email', 'phone_number1')
+            ->select('r.id', 'r.name',
+                'phone_number', 'd.name as district')
             ->join('receiver_address as ra', 'ra.receiver_id', '=', 'r.id')
             ->join('districts as d', 'd.id', '=', 'ra.district_id')
             ->where('r.sender_id', '=', $sender_id)
@@ -145,13 +145,34 @@ class ReceiverController extends Controller
             ->orderByDesc('id')
             ->get()->mapWithKeys(function ($receiver) {
                 return [
-                    $receiver->id => ucwords($receiver->first_name) . ' ' .
-                        ucwords($receiver->middle_name) . ' ' .
-                        ucwords($receiver->last_name) . ' ' .
-                        '[' . $receiver->phone_number1 . ' | ' . $receiver->email . ']'
+                    $receiver->id => ucwords($receiver->name) . ' ' .
+                        '[' . $receiver->phone_number . ' | ' . $receiver->district . ']'
                 ];
             });
     }
 
+    public function getReceiverBankDetails($id): \Illuminate\Http\JsonResponse
+    {
+        $data = DB::table('receiver_banks as rb')
+            ->where('receiver_id', '=', $id);
+        $banks = DB::table('banks')
+            ->joinSub($data, 'data', function ($join) {
+                $join->on('data.bank_id', '=', 'banks.id');
+            })->get()->mapWithKeys(function ($bank) {
+                return [
+                    $bank->id => [
+                        'bank_id' => $bank->bank_id,
+                        'name' => $bank->name,
+                        'account_number' => $bank->account_number,
+                        'branch' => $bank->branch,
+                        'account_name' => $bank->account_name,
+                        'is_default' => $bank->is_default,
 
+                    ]
+                ];
+            })->toArray();
+        return response()->json([
+            'banks' => $banks,
+        ]);
+    }
 }

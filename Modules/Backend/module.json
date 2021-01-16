@@ -5,9 +5,12 @@
     "keywords": [],
     "priority": 0,
     "providers": [
-        "Modules\\Backend\\Providers\\BackendServiceProvider"
+        "Modules\\Backend\\Providers\\BackendServiceProvider",
+        "Modules\\Backend\\Providers\\ResourceBreadCrumbsProvider"
     ],
     "aliases": {},
-    "files": [],
+    "files": [
+        "Routes\\breadcrumbs.php"
+    ],
     "requires": []
 }

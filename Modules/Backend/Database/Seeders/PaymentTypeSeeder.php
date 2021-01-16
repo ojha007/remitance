@@ -9,12 +9,17 @@ use Modules\Backend\Entities\SendMoney;
 class PaymentTypeSeeder extends Seeder
 {
 
+    const LOCAL_REMIT = 'Local Remit';
+    const BANK_TRANSFER = 'Bank Transfer';
+    const CASH_ON_HAND = 'Cash On Hand';
+
     public function run()
     {
         $paymentTypes = [
-            'Local Remit',
-            'Bank Transfer',
-            'Cash On Hand',
+            self::LOCAL_REMIT,
+            self::BANK_TRANSFER,
+            self::CASH_ON_HAND,
+
         ];
         foreach ($paymentTypes as $paymentType) {
             DB::table('payment_types')

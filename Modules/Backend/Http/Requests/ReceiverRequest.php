@@ -17,9 +17,7 @@ class ReceiverRequest extends FormRequest
 
         $id = $this->route()->parameter('receiver');
         return [
-            'first_name' => 'required|string:min:1|max:255',
-            'middle_name' => 'nullable|string:min:1|max:255',
-            'last_name' => 'required|string:min:1|max:255',
+            'name' => 'required|string:min:1|max:255',
             'email' => 'nullable|email',
             'sender_id' => 'required|exists:senders,id',
             'phone_number' => 'required|numeric',

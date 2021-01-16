@@ -13,7 +13,9 @@ class Receiver extends Model
     const CODE = 'RE';
 
     protected $appends = ['name', 'address'];
-    protected $fillable = ['first_name', 'last_name', 'middle_name', 'email', 'code', 'is_active',
+    protected $fillable = ['name',
+        'code',
+        'is_active',
         'phone_number',
         'district_id',
         'identity_type_id',
@@ -21,9 +23,12 @@ class Receiver extends Model
         'id_number',
         'sender_id',
         'issued_date',
-        'date_of_birth', 'file',
+        'date_of_birth',
+        'file',
         'expiry_date',
-        'created_by', 'updated_by'];
+        'created_by',
+        'updated_by'
+    ];
 
     public static function getIssuedByArray(): array
     {
