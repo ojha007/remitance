@@ -117,7 +117,7 @@ class ReceiverRepository extends Repository
                 'it.name as identity_type')
             ->join('receiver_address as ra', 're.id', '=', 'ra.receiver_id')
             ->join('districts as d', 'd.id', '=', 'ra.district_id')
-            ->join('states as st', 'st.id', '=', 'dt.state_id')
+            ->join('states as st', 'st.id', '=', 'd.state_id')
             ->join('countries as co', 'co.id', '=', 'st.country_id')
             ->join('identity_types as it', 'it.id', '=', 're.identity_type_id')
             ->where('re.id', '=', $id)
