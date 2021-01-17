@@ -25,11 +25,20 @@ class NotificationController extends Controller
     {
         $notifications = $this->getAllNotifications()
             ->limit($this->notification_drop_menu_count)
-            ->get();
-        return view($this->viewPath, compact('notifications'));
+            ->get()->map(function ($notification) {
+                $i = json_decode($notification->data);
+                return [
+                    'id' => $notification->id,
+                    'route' => $i->path,
+                    'message' => $i->message,
+                    'icon' => $i->icon,
+                    'read_at'=>$notification->read_at
+                ];
+            });
+        return view($this->viewPath . 'bell-notification', compact('notifications'));
     }
 
-    private function getAllNotifications(): \Illuminate\Database\Query\Builder
+    public function getAllNotifications(): \Illuminate\Database\Query\Builder
     {
         return DB::table('notifications')
             ->select('id', 'data', 'read_at')
@@ -37,7 +46,7 @@ class NotificationController extends Controller
             ->orderBy('created_at', 'desc');
     }
 
-    public function getNotificationCount(): int
+    public function getUnReadNotificationCount(): int
     {
         return $this->getAllNotifications()
             ->whereNull('read_at')
@@ -63,7 +72,6 @@ class NotificationController extends Controller
     public function index()
     {
         $notifications = $this->getAllNotifications()->paginate();
-//        dd($notifications);
         return view($this->viewPath . 'index', compact('notifications'));
     }
 

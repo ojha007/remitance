@@ -2,20 +2,17 @@
 
 namespace Modules\Backend\Http\Controllers;
 
-use Illuminate\Contracts\Support\Renderable;
-use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 use Modules\Backend\Entities\Rate;
 use Modules\Backend\Entities\SendMoney;
-use Modules\Backend\Http\Requests\RateRequest;
-use Modules\Backend\Http\Response\ErrorResponse;
+use Modules\Backend\Events\TransactionEvent;
 use Modules\Backend\Http\Response\SuccessResponse;
-use Modules\Backend\Http\Services\DataTableButton;
 use Modules\Backend\Repositories\RateRepository;
 use Modules\Backend\Repositories\TransactionRepository;
-use Yajra\DataTables\DataTables;
+use Swift_TransportException;
 
 class TransactionController extends Controller
 {
@@ -143,6 +140,15 @@ class TransactionController extends Controller
                     'causer_id' => auth()->id()
                 ]);
             DB::commit();
+            $transaction = $this->repository->getById($id);
+            $status = DB::table('statuses')
+                ->find($request->get('status_id'));
+            $url = route($this->baseRoute . 'show', $transaction->id);
+            $message = 'Status Changed of  <b>' . $transaction['code'] . ' </b> to ' . $status->name;
+            event(new TransactionEvent($transaction, $message,$url));
+            return (new SuccessResponse('Transactions', $request, 'status changed'))->responseOk();
+        } catch (Swift_TransportException $transportException) {
+            Log::error($transportException->getTraceAsString() . '-' . $transportException->getMessage());
             return (new SuccessResponse('Transactions', $request, 'status changed'))->responseOk();
         } catch (\Exception $exception) {
             DB::rollBack();

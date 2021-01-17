@@ -2,22 +2,21 @@
 
 namespace Modules\Backend\Http\Controllers;
 
-use App\Models\User;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\DB;
-use Modules\Backend\Entities\Rate;
+use Illuminate\Support\Facades\Log;
 use Modules\Backend\Entities\Receiver;
 use Modules\Backend\Entities\Sender;
 use Modules\Backend\Entities\SendMoney;
+use Modules\Backend\Events\TransactionEvent;
 use Modules\Backend\Http\Requests\SendMoneyRequest;
 use Modules\Backend\Http\Response\ErrorResponse;
 use Modules\Backend\Http\Response\SuccessResponse;
-use Modules\Backend\Notifications\TransactionWasCreated;
 use Modules\Backend\Repositories\RateRepository;
 use Modules\Backend\Repositories\ReceiverRepository;
 use Modules\Backend\Repositories\SenderRepository;
 use Modules\Backend\Repositories\TransactionRepository;
-use Spatie\Permission\Models\Permission;
+use Swift_TransportException;
 
 class SendMoneyController extends Controller
 {
@@ -97,20 +96,21 @@ class SendMoneyController extends Controller
                     'notes' => $request->get('notes'),
                 ]);
             DB::commit();
-            $users = Permission::findByName('send-money-create', 'admin')->users;
-            if (count($users) == 0)
-                $users = User::where('is_super', true)->get();
             $url = route($this->baseRoute . 'show', $transaction->id);
-            $message = 'Transaction With Code <b>' . $transaction['code'] . '</b> was created';
-            foreach ($users as $user) {
-                $user->notify((new TransactionWasCreated($transaction, $url, $message)));
-            }
+            $message = 'Transaction With Code <b>' . $transaction['code'] . ' </b> was created';
+            event(new TransactionEvent($transaction, $message, $url));
+            return (new SuccessResponse($this->model, $request, 'created', $url))
+                ->responseOk();
+        } catch (Swift_TransportException $transportException) {
+            Log::error($transportException->getTraceAsString() . '-' . $transportException->getMessage());
             return (new SuccessResponse($this->model, $request, 'created', $url))
                 ->responseOk();
         } catch (\Exception $exception) {
             DB::rollBack();
+            Log::error($exception->getTraceAsString() . '-' . $exception->getMessage());
             return (new ErrorResponse($this->model, $request, $exception))
                 ->responseError();
+
         }
     }
 

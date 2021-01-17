@@ -5,5 +5,16 @@ require('./AdminLTE');
 require('./Jquery.slimscroll');
 require('../../../node_modules/icheck');
 require('../../../node_modules/select2');
-require('./bootstrap-datepicker.min')
+require('axios');
+
+import Echo from "laravel-echo";
+
+window.Pusher = require('pusher-js');
+window.Echo = new Echo({
+    broadcaster: 'pusher',
+    key: '2a143b33c6eaa5154772',
+    cluster: 'ap2',
+    encrypted: true
+});
+
 

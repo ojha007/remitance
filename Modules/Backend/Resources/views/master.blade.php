@@ -188,6 +188,7 @@ desired effect
 
     $('.select2').select2();
 </script>
+@include('backend::partial.notifications.scripts')
 @stack('scripts')
 </body>
 </html>

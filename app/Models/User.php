@@ -44,12 +44,12 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function isSuper()
+    public function isSuper(): bool
     {
         return $this->getAttribute('is_super') == 1;
     }
 
-    public function assignRole($roles, string $guard = null)
+    public function assignRole($roles, string $guard = null): User
     {
         $roles = is_string($roles) ? [$roles] : $roles;
         $guard = $guard ?: $this->getDefaultGuardName();
@@ -112,20 +112,5 @@ class User extends Authenticatable
         }
 
         return false;
-    }
-
-    public function adminlte_image()
-    {
-        return 'https://picsum.photos/300/300';
-    }
-
-    public function adminlte_desc()
-    {
-        return 'That\'s a nice guy';
-    }
-
-    public function adminlte_profile_url()
-    {
-        return 'profile/username';
     }
 }

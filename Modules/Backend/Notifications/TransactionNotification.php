@@ -7,10 +7,9 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 
-class TransactionWasCreated extends Notification implements ShouldQueue
+class TransactionNotification extends Notification implements ShouldQueue
 {
     use Queueable;
-
 
     /**
      * @var
@@ -44,8 +43,7 @@ class TransactionWasCreated extends Notification implements ShouldQueue
      */
     public function via($notifiable): array
     {
-//        return ['mail'];
-        return ['broadcast', 'database'];
+        return ['broadcast', 'database', 'mail'];
     }
 
     /**

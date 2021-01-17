@@ -6,7 +6,8 @@
     "priority": 0,
     "providers": [
         "Modules\\Backend\\Providers\\BackendServiceProvider",
-        "Modules\\Backend\\Providers\\ResourceBreadCrumbsProvider"
+        "Modules\\Backend\\Providers\\ResourceBreadCrumbsProvider",
+        "Modules\\Backend\\Providers\\EventServiceProvider"
     ],
     "aliases": {},
     "files": [

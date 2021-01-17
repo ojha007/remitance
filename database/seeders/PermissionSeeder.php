@@ -18,12 +18,13 @@ class PermissionSeeder extends Seeder
     {
         $guard = 'admin';
         $permissions = (new GlobalServices())->getAllPermissions();
-        Permission::findOrCreate('admin-permission', 'web');
+        Permission::firstOrCreate(['name' => 'admin-permission', 'guard_name' => 'web']);
+        Permission::firstOrCreate(['name' => 'transaction-notification', 'guard_name' => $guard]);
+        Permission::firstOrCreate(['name' => 'admin-permission', 'guard_name' => $guard]);
         foreach ($permissions as $permission) {
-            Permission::findOrCreate($permission['name'], $guard);
+            Permission::firstOrCreate(['name' => $permission['name'], 'guard_name' => $guard]);
 
         }
-        Permission::findOrCreate('admin-permission', $guard);
         $role = Role::firstOrCreate(['name' => 'Administrator', 'guard_name' => $guard]);
         $permissions = Permission::where('guard_name', '=', $guard)->get();
         $role->syncPermissions($permissions);
