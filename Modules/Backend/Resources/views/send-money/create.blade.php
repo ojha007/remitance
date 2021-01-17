@@ -185,9 +185,13 @@
             });
             @if(old('sender_id'))
             $('#sender_id').val('{{old('sender_id')}}').trigger('change');
-            payment_type_id.val('{{old('payment_type_id')}}').trigger('change');
             bank_id.val('{{old('bank_id')}}').trigger('change');
             @endif
+
+            @if(old('payment_type_id'))
+            payment_type_id.val('{{old('payment_type_id')}}').trigger('change');
+            @endif
+
             handleOnSelect2Change($('#sender_form #receiver_id'), $("#sender_form #bank_id"), '{{url('/sender/bank/')}}');
             handleOnSelect2Change($('#sender_form #sender_state_id'), $("#sender_form #sender_suburb_id"), '{{url('/suburbs/state/')}}');
 
@@ -232,7 +236,6 @@
             });
             bank_id.on('change', function () {
                 let id = $(this).val();
-                console.log(bankDetails)
                 if (id) {
                     let bankTemplate = (bank) => `<div class="col-md-3"></div>
                                         <div class="col-md-9">

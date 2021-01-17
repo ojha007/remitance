@@ -33,9 +33,9 @@ class RequiredIf implements Rule
     public function passes($attribute, $value): bool
     {
         if ($this->condition == $this->check) {
-            return false;
+            return true;
         }
-        return true;
+        return false;
     }
 
     /**

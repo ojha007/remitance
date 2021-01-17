@@ -59,9 +59,7 @@
 
                         <td>{{$receiver->phone_number}}</td>
                         <td>
-{{--                            {{ucwords($receiver->district)}}--}}
-                            -{{$receiver->ward_number}}, {{ucwords($receiver->street)}}
-
+                            {{$receiver->district}}, {{ucwords($receiver->street)}}
                         </td>
                         <td>
                             @inject('dataTableButton','\Modules\Backend\Http\Services\DataTableButton')
