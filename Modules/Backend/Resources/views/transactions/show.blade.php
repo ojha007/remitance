@@ -7,7 +7,7 @@
     Transaction detail
 @endsection
 @section('breadcrumb')
-{{--    {!! \Diglactic\Breadcrumbs\Breadcrumbs::render('admin.transactions.show',$transaction->id) !!}--}}
+    {!! \Diglactic\Breadcrumbs\Breadcrumbs::render('admin.transactions.show',$transaction) !!}
 @endsection
 
 @section('content')

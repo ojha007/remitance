@@ -46,7 +46,6 @@ class TransactionController extends Controller
 
     public function show($id)
     {
-
         try {
             $oldStatusId = DB::table('transaction_status as ts')
                 ->where('transaction_id', '=', $id)
@@ -99,8 +98,8 @@ class TransactionController extends Controller
                 ->join('suburbs as ss', 'ss.id', '=', 'senders.suburb_id')
                 ->join('states as sst', 'sst.id', '=', 'ss.state_id')
                 ->join('countries as sc', 'sc.id', '=', 'sst.country_id')
-                ->join('receiver_banks as rb', 'rb.id', '=', 'tr.receiver_bank_id')
-                ->join('banks as b', 'b.id', '=', 'rb.bank_id')
+                ->leftJoin('receiver_banks as rb', 'rb.id', '=', 'tr.receiver_bank_id')
+                ->leftJoin('banks as b', 'b.id', '=', 'rb.bank_id')
                 ->join('users as u', 'u.id', '=', 'tr.created_by')
                 ->joinSub($latestStatus, 'ls', function ($join) {
                     $join->on('ls.transaction_id', '=', 'tr.id');
@@ -144,8 +143,8 @@ class TransactionController extends Controller
             $status = DB::table('statuses')
                 ->find($request->get('status_id'));
             $url = route($this->baseRoute . 'show', $transaction->id);
-            $message = 'Status Changed of  <b>' . $transaction['code'] . ' </b> to ' . $status->name;
-            event(new TransactionEvent($transaction, $message,$url));
+            $message = 'Status Changed of ' . $transaction['code'] . ' to ' . $status->name;
+            event(new TransactionEvent($transaction, $message, $url));
             return (new SuccessResponse('Transactions', $request, 'status changed'))->responseOk();
         } catch (Swift_TransportException $transportException) {
             Log::error($transportException->getTraceAsString() . '-' . $transportException->getMessage());

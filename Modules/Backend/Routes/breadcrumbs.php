@@ -7,4 +7,5 @@ Breadcrumbs::for('dashboard', function ($trail) {
 });
 Breadcrumbs::resource('admin.rates', 'Rates');
 Breadcrumbs::resource('admin.receivers', 'Receiver');
+Breadcrumbs::resource('admin.transactions', 'Transactions');
 

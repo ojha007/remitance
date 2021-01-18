@@ -71,7 +71,7 @@ class NotificationController extends Controller
 
     public function index()
     {
-        $notifications = $this->getAllNotifications()->paginate();
+        $notifications = $this->getAllNotifications()->paginate(4);
         return view($this->viewPath . 'index', compact('notifications'));
     }
 

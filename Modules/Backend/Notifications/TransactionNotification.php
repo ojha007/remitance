@@ -4,12 +4,15 @@ namespace Modules\Backend\Notifications;
 
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
+use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
+use Illuminate\Queue\InteractsWithQueue;
+use Illuminate\Queue\SerializesModels;
 
 class TransactionNotification extends Notification implements ShouldQueue
 {
-    use Queueable;
+    use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
     /**
      * @var
@@ -69,7 +72,7 @@ class TransactionNotification extends Notification implements ShouldQueue
         return [
             'url' => $this->url,
             'message' => $this->message,
-            'icon' => 'fa fa-newspaper-o',  //fa-icons
+            'icon' => 'fa fa-money',  //fa-icons
         ];
     }
 
@@ -82,7 +85,7 @@ class TransactionNotification extends Notification implements ShouldQueue
         return [
             'path' => $this->url,
             'message' => $this->message,
-            'icon' => 'fa fa-newspaper-o',  //fa-icons
+            'icon' => 'fa fa-money',  //fa-icons
         ];
     }
 }

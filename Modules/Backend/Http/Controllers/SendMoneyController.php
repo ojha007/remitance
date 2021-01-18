@@ -117,6 +117,8 @@ class SendMoneyController extends Controller
 
     public function show(int $id)
     {
+//        dd($id);
+
         return (new TransactionController(new SendMoney()))->show($id);
     }
 

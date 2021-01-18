@@ -169,24 +169,18 @@ desired effect
         });
     }
 
-    // $(document).ready(function () {
-    $('.datePicker').datepicker({
-        format: 'yyyy-mm-dd',
-        todayHighlight: true,
-        orientation: "bottom",
-        autoclose: true,
-    });
-    // $('input').iCheck({
-    //     checkboxClass: 'icheckbox_square-blue',
-    //     radioClass: 'iradio_square-blue',
-    //     increaseArea: '20%' /* optional */
-    // });
-    $('.modal').on('shown.bs.modal', function () {
-        $(this).find('.select2').select2();
-    });
+    $(document).ready(function () {
+        $('input').iCheck({
+            checkboxClass: 'icheckbox_square-blue',
+            radioClass: 'iradio_square-blue',
+            increaseArea: '20%' /* optional */
+        });
+        $('.modal').on('shown.bs.modal', function () {
+            $(this).find('.select2').select2();
+        });
 
-
-    $('.select2').select2();
+        $('.select2').select2();
+    })
 </script>
 @include('backend::partial.notifications.scripts')
 @stack('scripts')

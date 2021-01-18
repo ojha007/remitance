@@ -60,5 +60,9 @@ class SendMoney extends Model
             self::PROCESSING_TO_NEPAL,
         ];
     }
+    public function sender(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+    {
+        return $this->belongsTo(Sender::class);
+    }
 
 }
