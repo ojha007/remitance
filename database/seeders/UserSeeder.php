@@ -16,7 +16,7 @@ class UserSeeder extends Seeder
     public function run()
     {
         $superUser = User::updateOrCreate(
-            ['email' => 'admin@gmail.com'],
+            ['email' => 'admin@registeredremit.com.au'],
             ['name' => 'Admin',
                 'password' => Hash::make('admin@1997'),
                 'is_super' => true,
