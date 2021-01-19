@@ -46,6 +46,7 @@ class TransactionController extends Controller
 
     public function show($id)
     {
+
         try {
             $oldStatusId = DB::table('transaction_status as ts')
                 ->where('transaction_id', '=', $id)

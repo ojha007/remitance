@@ -5,6 +5,7 @@ namespace Modules\Backend\Entities;
 
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\DB;
 use Modules\Backend\Http\Controllers\BackendController;
 
 class SendMoney extends Model
@@ -93,4 +94,14 @@ class SendMoney extends Model
             ->first()->status;
     }
 
+
+    public function receiverBank()
+    {
+        return DB::table('transactions as t')
+            ->select('b.name as bank', 'rb.account_number', 'rb.branch')
+            ->join('receiver_banks as rb', 't.receiver_bank_id', '=', 'rb.id')
+            ->join('banks as b', 'rb.bank_id', '=', 'b.id')
+            ->where('t.id', '=', $this->getAttribute('id'))
+            ->first();
+    }
 }

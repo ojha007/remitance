@@ -84,7 +84,7 @@
     <!-- /.row -->
 
         <!-- Table row -->
-        @if($transaction->payment_type == \Modules\Backend\Database\Seeders\PaymentTypeSeeder::BANK_TRANSFER)
+        @if($transaction->payment_type == \Modules\Backend\Entities\PaymentType::BANK_TRANSFER)
             <div class="row">
                 <div class="col-xs-12 ">
                     <table class="table table-bordered">

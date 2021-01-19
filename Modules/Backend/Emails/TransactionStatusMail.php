@@ -38,9 +38,11 @@ class TransactionStatusMail extends Mailable
      */
     public function build(): TransactionStatusMail
     {
+
         if ($this->type == 'CREATED') {
             return $this->view('backend::emails.transactions.created');
         }
-        return $this->view('backend::emails.transactions.statusChanged');
+        return $this->view('backend::emails.transactions.statusChanged')
+            ->subject("Transaction " . $this->transaction->getStatusAttribute() ?? '');
     }
 }

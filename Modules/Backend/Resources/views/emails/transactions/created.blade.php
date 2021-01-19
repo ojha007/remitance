@@ -32,6 +32,21 @@
             <th class="text-left pull-left">Payment Type:</th>
             <td>{{$transaction->paymentType->name}}</td>
         </tr>
+        @if($transaction->paymentType->name == \Modules\Backend\Entities\PaymentType::BANK_TRANSFER)
+            <tr>
+                @php($bank = $transaction->receiverBank())
+                <th>Bank Name:</th>
+                <td>{{$bank->name ?? ''}}</td>
+            </tr>
+            <tr>
+                <th>Account Number :</th>
+                <td>{{$bank->account_number}}</td>
+            </tr>
+            <tr>
+                <th>Branch</th>
+                <td>{{$bank->branch}}</td>
+            </tr>
+        @endif
     </table>
     <p>Note :</p>
     <ul style="list-style-type:'🔔';">
