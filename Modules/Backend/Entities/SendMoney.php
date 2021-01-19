@@ -30,6 +30,8 @@ class SendMoney extends Model
 
     protected $table = 'transactions';
 
+    protected $with = ['sender', 'receiver', 'paymentType'];
+
     protected $fillable = [
         'sending_amount',
         'receiver_bank_id', 'receiving_amount',
@@ -60,9 +62,20 @@ class SendMoney extends Model
             self::PROCESSING_TO_NEPAL,
         ];
     }
+
     public function sender(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo(Sender::class);
+    }
+
+    public function receiver(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+    {
+        return $this->belongsTo(Receiver::class);
+    }
+
+    public function paymentType(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+    {
+        return $this->belongsTo(PaymentType::class);
     }
 
 }

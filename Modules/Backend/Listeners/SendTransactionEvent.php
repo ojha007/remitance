@@ -32,8 +32,8 @@ class SendTransactionEvent
     {
 
         $mailUser = $event->transaction->sender->email;
-        Mail::to($mailUser)
-            ->send(new TransactionStatusMail($event->transaction));
+        $type= $event->eventType;
+        Mail::to($mailUser)->send(new TransactionStatusMail($event->transaction,$type));
         $users = Permission::findByName('transaction-notification', 'admin')->users;
         if (count($users) < 1) $users = User::where('is_super', true)->get();
         Notification::send($users, new TransactionNotification($event->transaction, $event->url, $event->message));

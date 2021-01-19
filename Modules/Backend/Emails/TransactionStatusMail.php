@@ -17,15 +17,18 @@ class TransactionStatusMail extends Mailable
      * @var SendMoney
      */
     public $transaction;
+    public $type;
 
     /**
      * Create a new message instance.
      *
      * @param SendMoney $transaction
+     * @param $type
      */
-    public function __construct(SendMoney $transaction)
+    public function __construct(SendMoney $transaction, $type)
     {
-        $this->transaction =$transaction;
+        $this->transaction = $transaction;
+        $this->type = $type;
     }
 
     /**
@@ -35,6 +38,9 @@ class TransactionStatusMail extends Mailable
      */
     public function build(): TransactionStatusMail
     {
-        return $this->view('backend::emails.transactionStatusChanged');
+        if ($this->type == 'CREATED') {
+            return $this->view('backend::emails.transactions.created');
+        }
+        return $this->view('backend::emails.transactions.statusChanged');
     }
 }

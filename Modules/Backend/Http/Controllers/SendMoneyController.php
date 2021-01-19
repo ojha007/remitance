@@ -98,7 +98,7 @@ class SendMoneyController extends Controller
             DB::commit();
             $url = route($this->baseRoute . 'show', $transaction->id);
             $message = 'Transaction With Code <b>' . $transaction['code'] . ' </b> was created';
-            event(new TransactionEvent($transaction, $message, $url));
+            event(new TransactionEvent($transaction, $message, $url, 'CREATED'));
             return (new SuccessResponse($this->model, $request, 'created', $url))
                 ->responseOk();
         } catch (Swift_TransportException $transportException) {
@@ -117,8 +117,6 @@ class SendMoneyController extends Controller
 
     public function show(int $id)
     {
-//        dd($id);
-
         return (new TransactionController(new SendMoney()))->show($id);
     }
 
