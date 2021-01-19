@@ -40,6 +40,6 @@
     }
 </style>
 <body>
-<h1>Hello{{ $transaction->sender->name }}</h1>
+<h1>Hello {{ $transaction->sender->name }}</h1>
 </body>
 </html>

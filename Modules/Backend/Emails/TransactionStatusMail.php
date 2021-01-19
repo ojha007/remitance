@@ -9,7 +9,7 @@ use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
 use Modules\Backend\Entities\SendMoney;
 
-class SendTransactionStatusMail extends Mailable
+class TransactionStatusMail extends Mailable
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
@@ -33,7 +33,7 @@ class SendTransactionStatusMail extends Mailable
      *
      * @return $this
      */
-    public function build(): SendTransactionStatusMail
+    public function build(): TransactionStatusMail
     {
         return $this->view('backend::emails.transactionStatusChanged');
     }

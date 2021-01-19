@@ -143,7 +143,7 @@ class TransactionController extends Controller
             $status = DB::table('statuses')
                 ->find($request->get('status_id'));
             $url = route($this->baseRoute . 'show', $transaction->id);
-            $message = 'Status of transaction   ' . $transaction['code'] . ' changed to ' . $status->name;
+            $message = 'Status of transaction ' . $transaction['code'] . ' changed to ' . $status->name;
             event(new TransactionEvent($transaction, $message, $url));
             return (new SuccessResponse('Transactions', $request, 'status changed'))->responseOk();
         } catch (Swift_TransportException $transportException) {
