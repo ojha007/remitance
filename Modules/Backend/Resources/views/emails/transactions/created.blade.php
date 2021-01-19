@@ -50,6 +50,6 @@
     <p>Registered Remit</p>
     <p>>0481007296</p>
     <a href="{{config('app.domain')}}">
-        Visit us for any quries
+        Visit us for any queries.
     </a>
 </div>
