@@ -5,6 +5,7 @@ namespace Modules\Backend\Entities;
 
 
 use Illuminate\Database\Eloquent\Model;
+use Modules\Backend\Http\Controllers\BackendController;
 
 class SendMoney extends Model
 {
@@ -31,6 +32,7 @@ class SendMoney extends Model
     protected $table = 'transactions';
 
     protected $with = ['sender', 'receiver', 'paymentType'];
+    protected $appends = ['status'];
 
     protected $fillable = [
         'sending_amount',
@@ -76,6 +78,19 @@ class SendMoney extends Model
     public function paymentType(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo(PaymentType::class);
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getStatusAttribute()
+    {
+        return (new BackendController())
+            ->getLatestStatusOfTransactions()
+            ->select('s.name as status')
+            ->join('statuses as s', 's.id', 'ts.status_id')
+            ->where('ts.transaction_id', '=', $this->getAttribute('id'))
+            ->first()->status;
     }
 
 }

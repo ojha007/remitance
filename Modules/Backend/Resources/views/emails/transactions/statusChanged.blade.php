@@ -12,19 +12,23 @@
 <body>
 <div class="container">
     <h2>Dear {{$transaction->sender->name}}</h2>
-    Your Order ID : <strong> {{$transaction->code}}</strong> with us has been successfully paid in Nepal.
+    Your Order ID : <strong> {{$transaction->code}}</strong>
+    @if($transaction->status == \Modules\Backend\Entities\SendMoney::PAID )
+        has been successfully paid in Nepal.
+    @else
+        has been {{$transaction->status}} .
+    @endif
     <p>
         Thank you for your business with us.
         Please recommend your friends and families to use our service.
-        And hope you had a great day.
     </p>
-    <p>
-        Thank You
-        Regards
-        Registered Remit
-        0481007296
-    </p>
+    <p>And hope you had a great day.</p>
+    <p>Thank You</p>
+    <p>Regards</p>
+    <p>Registered Remit</p>
+    <p>0481007296</p>
+
     <a href="{{config('app.domain')}}">
-        Visit us
+        Visit us for any queries
     </a>
 </div>
