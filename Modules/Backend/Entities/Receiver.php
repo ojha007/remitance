@@ -11,9 +11,8 @@ class Receiver extends Model
 
 
     const CODE = 'RE';
-
-    protected $appends = ['name', 'address'];
-    protected $fillable = ['name',
+    protected $fillable = [
+        'name',
         'code',
         'is_active',
         'phone_number',
