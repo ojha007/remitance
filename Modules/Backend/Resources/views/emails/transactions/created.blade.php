@@ -17,37 +17,39 @@
     <b>Receiver Details:</b>
     <table class="table table-bordered">
         <tr>
-            <th>Name:</th>
+            <th class="text-left pull-left">Name:</th>
             <td>{{$transaction->receiver->name}}</td>
         </tr>
         <tr>
-            <th>Telephone:</th>
+            <th class="text-left pull-left">Telephone:</th>
             <td>{{$transaction->receiver->phone_number}}</td>
         </tr>
         <tr>
-            <th>Payment Amount:</th>
-            <td>NPR {{$transaction->receiving_amount}}</td>
+            <th class="text-left pull-left">Payment Amount:</th>
+            <td>NPR {{number_format($transaction->receiving_amount,2)}}</td>
         </tr>
         <tr>
-            <th>Payment Type:</th>
+            <th class="text-left pull-left">Payment Type:</th>
             <td>{{$transaction->paymentType->name}}</td>
         </tr>
     </table>
-    <p>
-        Note :
-        # All amount below NPR 1,00,000 will be local Remitted and Remit Charge will be deducted from the receivable
-        amount.
-        # All amount above NPR 1,00,000 will be bank deposit and any charges by Bank like ABBS charge will be deducted
-        from
-        receivable amount.
-        # Transaction will be completed within 1-2 working days.
-    </p>
-
-    <p>Thank You
-        Regards
-        Registered Remit
-        0481007296</p>
+    <p>Note :</p>
+    <ul style="list-style-type:'🔔';">
+        <li>
+            All amount below NPR 1,00,000 will be local Remitted and Remit Charge will be deducted from the receivable
+            amount.
+        </li>
+        <li>All amount above NPR 1,00,000 will be bank deposit and any charges by Bank like ABBS charge will be deducted
+            from
+            receivable amount.
+        </li>
+        <li>Transaction will be completed within 1-2 working days.</li>
+    </ul>
+    <p>Thank You</p>
+    <p>Regards</p>
+    <p>Registered Remit</p>
+    <p>>0481007296</p>
     <a href="{{config('app.domain')}}">
-        Visit us
+        Visit us for any quries
     </a>
 </div>
