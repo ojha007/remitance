@@ -30,6 +30,7 @@ class SendTransactionEvent
      */
     public function handle(TransactionEvent $event)
     {
+
         $mailUser = $event->transaction->sender->email;
         Mail::to($mailUser)
             ->send(new SendTransactionStatusMail($event->transaction));

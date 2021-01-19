@@ -19,6 +19,5 @@ Route::group([
     Route::get('/municipalities/district/{district_id}', 'BackendController@getMunicipalities')->name('getMunicipalitiesByDistrict');
     Route::get('/suburbs/state/{state_id}', 'BackendController@getSuburbs')->name('getSuburbsByStates');
     Route::get('/postalCode/suburbs/{suburb_id}', 'BackendController@getPostalCodeBySuburbs')->name('getPostalCodeBySuburbs');
-
-
+    Route::get('logs', '\Rap2hpoutre\LaravelLogViewer\LogViewerController@index');
 });

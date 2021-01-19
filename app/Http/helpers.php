@@ -1,5 +1,7 @@
 <?php
-use \Modules\Backend\Entities\SendMoney;
+
+use Modules\Backend\Entities\SendMoney;
+
 function spanByStatus($status, $withPull = ''): string
 {
 
@@ -32,7 +34,7 @@ function spanByStatus($status, $withPull = ''): string
             $labelName = $status;
             break;
         default:
-            $labelClass = 'bg-red';
+            $labelClass = 'bg-blue';
             $labelName = $status;
 
     }

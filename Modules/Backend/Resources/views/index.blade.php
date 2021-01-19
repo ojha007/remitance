@@ -57,8 +57,7 @@
                         @forelse($latestTransactions as $transaction)
                             <tr>
                                 <td>
-                                    <a href="{{route($routePrefix.'transactions.show',$transaction->id)}}"
-                                       target="_blank">
+                                    <a href="{{route($routePrefix.'transactions.show',$transaction->id)}}">
                                         {{$transaction->code}}
                                     </a>
                                 </td>
