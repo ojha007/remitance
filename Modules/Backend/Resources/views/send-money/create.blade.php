@@ -213,7 +213,7 @@
                     }
                 }
                 let text = $(this).find("option:selected").html();
-                if (text == '{{\Modules\Backend\Database\Seeders\PaymentTypeSeeder::BANK_TRANSFER}}') {
+                if (text == '{{\Modules\Backend\Entities\PaymentType::BANK_TRANSFER}}') {
                     $.ajax({
                         url: '{{url('banks-details/receiver/')}}' + '/' + $('#receiver_id').val(),
                         method: 'GET',
