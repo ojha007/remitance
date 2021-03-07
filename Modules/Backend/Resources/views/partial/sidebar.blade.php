@@ -9,7 +9,7 @@
         </li>
         @can('send-money-view')
             <li class="{{request()->routeIs($routePrefix.'send-money.create') ? 'active' : ''}}">
-                <a href="{{url('send-money/create')}}">
+                <a href="{{url('admin/send-money/create')}}">
                     <i class="fa fa-paper-plane"></i>
                     <span>Send Money</span>
                 </a>
@@ -17,7 +17,7 @@
         @endcan
         @can('rate-view')
             <li class="{{request()->routeIs($routePrefix.'rates.index') ? 'active': ''}}">
-                <a href="{{url('/rates')}}">
+                <a href="{{url('admin/rates')}}">
                     <i class="fa fa-dollar"></i>
                     <span>Rates</span>
                 </a>
@@ -35,13 +35,13 @@
                 <ul class="treeview-menu">
                     @can('sender-view')
                         <li class="{{request()->routeIs($routePrefix.'senders.index') ? 'active': ''}}">
-                            <a href="{{url('/senders')}}">
+                            <a href="{{url('admin/senders')}}">
                                 <i class="fa fa-circle-o"></i>All Senders</a>
                         </li>
                     @endcan
                     @can('sender-create')
                         <li class="{{request()->routeIs($routePrefix.'senders.create') ? 'active': ''}}">
-                            <a href="{{url('/senders/create')}}">
+                            <a href="{{url('admin/senders/create')}}">
                                 <i class="fa fa-circle-o"></i>Add Senders</a>
                         </li>
                     @endcan
@@ -60,7 +60,7 @@
                 <ul class="treeview-menu">
                     @can('receiver-create')
                         <li class="{{request()->routeIs($routePrefix.'receivers.create') ? 'active': ''}}">
-                            <a href="{{url('/receivers')}}">
+                            <a href="{{url('admin/receivers')}}">
                                 <i class="fa fa-circle-o"></i>Add Receivers</a>
                         </li>
                     @endcan
@@ -79,12 +79,12 @@
                 </a>
                 <ul class="treeview-menu">
                     @can('user-view')
-                        <li><a href="{{url('/users')}}">
+                        <li><a href="{{url('admin/users')}}">
                                 <i class="fa fa-circle-o"></i>Users</a>
                         </li>
                     @endcan
                     @can('role-view')
-                        <li><a href="{{url('/roles')}}">
+                        <li><a href="{{url('admin/roles')}}">
                                 <i class="fa fa-circle-o"></i>Roles</a>
                         </li>
                     @endcan
@@ -93,7 +93,7 @@
         @endcan
         <li class="header">SETTINGS</li>
         <li>
-            <a href="{{url('/profile')}}">
+            <a href="{{url('admin/profile')}}">
                 <i class="fa fa-cogs"></i>
                 <span>Profile</span>
             </a>

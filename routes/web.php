@@ -20,9 +20,5 @@ Route::group([
 
 });
 
-Route::group([
-    'domain' => config('app.admin_domain'),
-], function () {
     Auth::routes();
-});
 

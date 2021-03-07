@@ -39,9 +39,7 @@ class AuthServiceProvider extends ServiceProvider
                 $guard = $this->getCurrentGuard(Auth::guard()->getName());
                 try {
                     return $user->hasPermissionTo($permission->name, $guard);
-                } catch (PermissionDoesNotExist $permissionDoesNotExist) {
-                    return false;
-                } catch (Exception $ex) {
+                } catch (PermissionDoesNotExist | \Exception $permissionDoesNotExist) {
                     return false;
                 }
             });

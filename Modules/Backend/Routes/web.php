@@ -1,9 +1,9 @@
 <?php
 
 Route::group([
-    'domain' => config('app.admin_domain'),
     'as' => 'admin.',
     'middleware' => 'auth',
+    'prefix' => 'admin',
     'routePrefix' => 'admin.'], function () {
     Route::get('/', 'BackendController@index')->name('index');
     Route::get('/dashboard', 'BackendController@index')->name('dashboard');

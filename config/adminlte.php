@@ -231,18 +231,18 @@ return [
         ],
         [
             'text' => 'Dashboard',
-            'url' => 'dashboard',
+            'url' => 'admin/dashboard',
             'icon' => 'fa fa-dashboard',
         ],
         [
             'text' => 'Send Money',
-            'url' => 'send-money',
+            'url' => 'admin/send-money',
             'icon' => 'fa fa-paper-plane',
             'can' => 'send-money-view'
         ],
         [
             'text' => 'Rates',
-            'url' => 'rates',
+            'url' => 'admin/rates',
             'icon' => 'fa fa-dollar',
             'can' => 'rate-view'
         ],
@@ -252,12 +252,12 @@ return [
             'submenu' => [
                 [
                     'text' => 'All Senders',
-                    'url' => 'senders',
+                    'url' => 'admin/senders',
                     'can' => 'sender-view'
                 ],
                 [
                     'text' => 'Add Senders',
-                    'url' => 'senders/create',
+                    'url' => 'admin/senders/create',
                     'can' => 'sender-create'
                 ],
             ],
@@ -268,7 +268,7 @@ return [
             'submenu' => [
                 [
                     'text' => 'All Receivers',
-                    'url' => 'receivers',
+                    'url' => 'admin/receivers',
                     'can' => 'receiver-view'
                 ],
             ],
@@ -280,12 +280,12 @@ return [
             'submenu' => [
                 [
                     'text' => 'Users',
-                    'url' => 'users',
+                    'url' => 'admin/users',
                     'can' => 'user-view'
                 ],
                 [
                     'text' => 'Roles',
-                    'url' => 'roles',
+                    'url' => 'admin/roles',
                     'can' => 'role-view'
                 ],
             ],
@@ -293,7 +293,7 @@ return [
         ['header' => 'SETTINGS'],
         [
             'text' => 'profile',
-            'url' => 'settings',
+            'url' => 'admin/settings',
             'icon' => 'fa fa-user',
         ],
 
